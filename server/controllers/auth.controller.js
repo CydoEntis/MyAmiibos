@@ -15,7 +15,7 @@ const register = async (req, res) => {
 		throw new BadRequestError('User with this email already exists');
 	}
 
-	const user = await userModel.create({name, email, password});
+	const user = await userModel.create({username, email, password});
 
 	// Add JWT
 
