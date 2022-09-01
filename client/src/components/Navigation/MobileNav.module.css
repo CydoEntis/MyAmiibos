@@ -1,0 +1,22 @@
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 0%;
+  min-height: 100vh;
+  display: block;
+  background: white;
+  color: #333;
+  z-index: 98;
+  transition: all 0.4s;
+}
+
+.mobile-nav.is-active {
+  width: 100%;
+}
+
+@media only screen and (min-width: 1024px) {
+  .mobile-nav {
+    display: none;
+  }
+}

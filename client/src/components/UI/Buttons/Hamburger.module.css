@@ -38,22 +38,8 @@
   transform: rotate(45deg) translate(-15px, -8px);
 }
 
-/* .hamburger {
-  color: #009BEB;
-  height: 50px;
-  width: 50px;
-  margin: 0 1rem;
-  transition: all 250ms ease-in-out;
-  cursor: pointer;
-}
-
-.hamburger:hover {
-  color: #008ed5;
-  transform: scale(1.1);
-}
-
 @media only screen and (min-width: 1024px) {
-  .hamburger {
+  .hamburger{ 
     display: none;
   }
-} */
+}

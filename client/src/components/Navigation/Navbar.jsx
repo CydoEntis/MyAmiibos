@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Hamburger from '../UI/Buttons/Hamburger';
+import MobileNav from "./MobileNav";
 
 import classes from './Navbar.module.css';
 import Logo from '../Logo/Logo';
@@ -12,10 +13,6 @@ const Navbar = () => {
 		setToggleMenu((prevState) => !prevState);
 	};
 
-	const mobileNavClasses = toggleMenu
-		? `${classes['mobile-nav']} ${classes['is-active']}`
-		: `${classes['mobile-nav']}`;
-
 	return (
 		<nav>
 			<ul>
@@ -25,11 +22,8 @@ const Navbar = () => {
 						toggleMenu={toggleMenu}
 						onClick={toggleMenuHandler}
 					/>
-					{toggleMenu && (
-						<div className={mobileNavClasses}>
-							<h1>Mobile Menu</h1>
-						</div>
-					)}
+          <MobileNav toggle={toggleMenu} />
+
 				</div>
 			</ul>
 		</nav>
