@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Hamburger from '../UI/Buttons/Hamburger';
 
@@ -6,18 +6,30 @@ import classes from './Navbar.module.css';
 import Logo from '../Logo/Logo';
 
 const Navbar = () => {
+	const [toggleMenu, setToggleMenu] = useState(false);
+
+	const toggleMenuHandler = () => {
+		setToggleMenu((prevState) => !prevState);
+	};
+
+	const mobileNavClasses = toggleMenu
+		? `${classes['mobile-nav']} ${classes['is-active']}`
+		: `${classes['mobile-nav']}`;
+
 	return (
 		<nav>
 			<ul>
-				<Logo className={classes["nav-logo"]}/>
+				<Logo className={classes['nav-logo']} />
 				<div>
-					{/* <li>
-          <Link to="/login" >Login</Link>
-        </li>
-        <li>
-          <Link to="/logout" >Logout</Link>
-        </li> */}
-					<Hamburger />
+					<Hamburger
+						toggleMenu={toggleMenu}
+						onClick={toggleMenuHandler}
+					/>
+					{toggleMenu && (
+						<div className={mobileNavClasses}>
+							<h1>Mobile Menu</h1>
+						</div>
+					)}
 				</div>
 			</ul>
 		</nav>
