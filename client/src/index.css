@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
-
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -11,4 +9,21 @@
 
 body {
   background-color: #F2F2F2;
+}
+
+.alert {
+  padding: 0.375rem 0.75rem;
+  margin-bottom: 1rem;
+  border-color: transparent;
+  border-radius: .4rem;
+  text-align: center;
+}
+
+.alert-danger {
+  color: #E60012;
+  background: #f6d3d6;
+}
+.alert-success {
+  color: rgb(10, 151, 10);
+  background: rgb(168, 254, 168);
 }

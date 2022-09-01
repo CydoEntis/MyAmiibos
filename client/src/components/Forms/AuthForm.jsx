@@ -6,6 +6,8 @@ import FormRow from './FormRow';
 
 import classes from './AuthForm.module.css';
 import Logo from '../Logo/Logo';
+import { useAppContext } from '../../context/appContext.js';
+import Alert from '../Alerts/Alert';
 
 const initialState = {
 	username: '',
@@ -15,6 +17,7 @@ const initialState = {
 };
 
 const AuthForm = () => {
+	const { isLoading, showAlert, displayAlert } = useAppContext();
 	const [values, setValues] = useState(initialState);
 
 	const onChangeHandler = (e) => {
@@ -31,6 +34,11 @@ const AuthForm = () => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
+		const { username, email, password, isMember } = values;
+		if (!email || !password || (!isMember && !username)) {
+			displayAlert();
+			return;
+		}
 		console.log(values);
 	};
 
@@ -41,8 +49,9 @@ const AuthForm = () => {
 
 	return (
 		<Card className={classes['auth-card']}>
-		<Logo />
+			<Logo />
 			<form onSubmit={submitHandler}>
+				{showAlert && <Alert />}
 				<FormRow
 					name='email'
 					type='email'
