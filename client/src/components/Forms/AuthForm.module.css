@@ -4,6 +4,10 @@
   margin-top: 100px;
 }
 
+.logo {
+  margin: 1rem auto;
+}
+
 .btn {
   color: #FFF;
   margin: .5rem auto;

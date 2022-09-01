@@ -49,7 +49,7 @@ const AuthForm = () => {
 
 	return (
 		<Card className={classes['auth-card']}>
-			<Logo />
+			<Logo className={classes.logo}/>
 			<form onSubmit={submitHandler}>
 				{showAlert && <Alert />}
 				<FormRow

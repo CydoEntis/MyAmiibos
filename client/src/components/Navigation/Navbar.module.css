@@ -10,10 +10,16 @@ nav ul {
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   list-style: none;
 }
+
+nav .nav-logo {
+  height: 50px;
+  margin: 0 1rem;
+}
+
 
 nav ul li {
   margin: 0 .5rem;

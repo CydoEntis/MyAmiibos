@@ -3,10 +3,11 @@ import logo from "../../assets/images/logo.png"
 
 import classes from "./Logo.module.css";
 
-const Logo = () => {
+const Logo = ({className}) => {
+  const logoClasses = `${className} ${classes["logo-container"]}`;
   return (
-    <div className={classes["logo-container"]}>
-      <img className={classes["logo-img"]} src={logo} alt="" />
+    <div className={logoClasses}>
+      <img className={classes["logo-img"]} src={logo} alt="my amiibos logo" />
     </div>
   )
 }
