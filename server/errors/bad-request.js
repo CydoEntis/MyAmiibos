@@ -1,4 +1,4 @@
-import CustomError from "./custom-error";
+import CustomError from "./custom-error.js";
 import { StatusCodes } from "http-status-codes";
 
 class BadRequestError extends CustomError {
@@ -7,3 +7,5 @@ class BadRequestError extends CustomError {
     this.statusCode = StatusCodes.BAD_REQUEST;
   }
 }
+
+export default BadRequestError;
