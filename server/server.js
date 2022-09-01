@@ -2,8 +2,13 @@ import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 
+// Database connection
+import connectToDB from './db/connect.js';
+
 // Routers
 import authRouter from "./routes/auth.routes.js";
+
+//Middleware
 import notFoundMiddleware from './middleware/not-found.middleware.js';
 
 const app = express();
