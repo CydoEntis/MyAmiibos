@@ -1,0 +1,26 @@
+.form-row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: .75rem
+}
+
+.form-row label {
+  padding: .5rem 0;
+  font-size: 1.25rem;
+}
+
+.form-row input {
+  height: 3rem;
+  border: 2px solid #BBB;
+  border-radius: .4rem;
+  padding: .75rem;
+  font-size: 1.25rem;
+}
+
+.form-row input:focus,
+.form-row input:active {
+  border-color: #009BEB;
+  outline: 1px solid #009BEB;
+}
+
