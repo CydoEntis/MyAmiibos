@@ -1,12 +1,18 @@
-const register = (req, res) => {
-	res.send('Register User');
+const register = async (req, res) => {
+	const {username, email, password } = req.body;
+
+	if(!username || !email ||!password) {
+		throw new Error("please privde all values");
+	}
+
+	// const userAlreadyExists = await 
 };
 
-const login = (req, res) => {
+const login = async (req, res) => {
 	res.send('Login User');
 };
 
-const updateUser = (req, res) => {
+const updateUser = async (req, res) => {
 	res.send('Update User');
 };
 
