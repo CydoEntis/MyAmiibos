@@ -1,11 +1,20 @@
-import React from 'react'
-import AuthForm from '../components/Forms/AuthForm'
-import Card from '../components/UI/Card'
+import React from 'react';
+import Footer from '../components/Footer/Footer';
+import AuthForm from '../components/Forms/AuthForm';
+import Navbar from '../components/Navigation/Navbar';
+
+import classes from "./Auth.module.css"
 
 const Auth = () => {
-  return (
-    <AuthForm />
-  )
-}
+	return (
+		<>
+			<Navbar />
+			<main className={classes.main}>
+				<AuthForm />
+			</main>
+			<Footer />
+		</>
+	);
+};
 
-export default Auth
+export default Auth;

@@ -3,10 +3,5 @@
   background-color: #FFF;
   border: 1px solid #dfdfdf;
   margin: 0 auto;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
   padding: .85rem;
 }

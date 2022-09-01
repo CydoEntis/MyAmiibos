@@ -1,0 +1,13 @@
+button {
+  padding: .75rem;
+  margin: 1rem 0;
+  min-width: 100px;
+  background: transparent;
+  text-align: center;
+  font-size: 1.05rem;
+  border-radius: 2rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all ease-in-out 300ms;
+}

@@ -1,0 +1,41 @@
+.auth-card {
+  max-width: 650px;
+  width: 95%;
+  margin-top: 100px;
+}
+
+.btn {
+  color: #FFF;
+  margin: .5rem auto;
+  max-width: 300px;
+  min-width: 250px;
+}
+
+.btn:hover,
+.btn:focus {
+  opacity: .85;
+  transform: scale(1.1);
+}
+
+.btn-login {
+  background: #009BEB;
+}
+
+.btn-register {
+  background: #E60012;
+}
+
+.btn-alt {
+  min-width: 225px;
+  border: 1px solid #C8C8C8;
+  color: #333;
+  display: block;
+  margin: 1rem auto;
+}
+
+.btn-alt:hover {
+  background: #C8C8C8;
+}
+
+.form-controls {
+}
