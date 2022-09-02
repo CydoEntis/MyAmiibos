@@ -18,12 +18,14 @@ const register = async (req, res) => {
 	const user = await userModel.create({username, email, password});
 
 	// Add JWT
+	const token = user.createJWT();
 
 	res.status(StatusCodes.OK).json({
 		user: {
 			username: user.username,
 			email: user.email,
-		}
+		},
+		token
 	})
 };
 
