@@ -34,4 +34,6 @@ UserSchema.pre('save', async function () {
   console.log(this.password);
 })
 
+// TODO: Add JWT.
+
 export default mongoose.model('User', UserSchema);

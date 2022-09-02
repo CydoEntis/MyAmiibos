@@ -28,6 +28,7 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
+	// TODO: Add login functionality
 	res.send('Login User');
 };
 
