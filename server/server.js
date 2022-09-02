@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
+import errors from "express-async-errors";
 
 // Database connection
 import connectToDB from './db/connect.js';
@@ -10,6 +11,7 @@ import authRouter from './routes/auth.routes.js';
 
 //Middleware
 import notFoundMiddleware from './middleware/not-found.middleware.js';
+import errorHandlerMiddleware from './middleware/error-handler.middleware.js';
 
 const app = express();
 
@@ -22,6 +24,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1/auth', authRouter);
 
 app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 5000;
 
