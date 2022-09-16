@@ -35,11 +35,15 @@ UserSchema.pre('save', async function () {
 	console.log(this.password);
 });
 
-// TODO: Add JWT.
 UserSchema.methods.createJWT = function () {
 	return jwt.sign({ userId: this._id }, process.env.JWT_SECRET, {
 		expiresIn: process.env.JWT_LIFETIME,
 	});
 };
+
+UserSchema.methods.comparePassword = async function (userPassword) {
+	const doesMatch = await bcrypt.compare(userPassword, this.password);
+	return doesMatch;
+}
 
 export default mongoose.model('User', UserSchema);
