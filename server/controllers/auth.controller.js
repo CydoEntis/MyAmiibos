@@ -1,6 +1,6 @@
 import User from '../models/user.model.js';
 import { BadRequestError } from '../errors/index.js';
-import { StatusCodes } from "http-status-codes";
+import { StatusCodes } from 'http-status-codes';
 
 const register = async (req, res) => {
 	const { username, email, password } = req.body;
@@ -15,7 +15,7 @@ const register = async (req, res) => {
 		throw new BadRequestError('User with this email already exists');
 	}
 
-	const user = await User.create({username, email, password});
+	const user = await User.create({ username, email, password });
 
 	// Add JWT
 	const token = user.createJWT();
@@ -25,26 +25,26 @@ const register = async (req, res) => {
 			username: user.username,
 			email: user.email,
 		},
-		token
-	})
+		token,
+	});
 };
 
 const login = async (req, res) => {
-	const { email, password} = req.body;
+	const { email, password } = req.body;
 
-	if(!email || !password) {
-		throw new BadRequestError("Please provide all values");
+	if (!email || !password) {
+		throw new BadRequestError('Please provide all values');
 	}
 
-	const user = await User.findOne({ email: email}).select('+password');
+	const user = await User.findOne({ email: email }).select('+password');
 
-	if(!user) {
+	if (!user) {
 		throw new UnauthenticatedError('Invalid credentials');
 	}
 
 	const isCorrectPassword = await user.comparePassword(password);
 
-	if(!isCorrectPassword) {
+	if (!isCorrectPassword) {
 		throw new UnauthenticatedError('Invalid credentials');
 	}
 
@@ -53,11 +53,10 @@ const login = async (req, res) => {
 
 	res.status(StatusCodes.OK).json({
 		user,
-		token
+		token,
 		// Todo add Amiibo Collection.
-	})
+	});
 };
-
 
 const updateUser = async (req, res) => {
 	res.send('Update User');

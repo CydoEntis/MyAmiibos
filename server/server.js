@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
-import errors from "express-async-errors";
+import errors from 'express-async-errors';
 
 // Database connection
 import connectToDB from './db/connect.js';
@@ -19,6 +19,10 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
 	res.send('Welcome');
+});
+
+app.get('/api/v1', (req, res) => {
+	res.json({ msg: 'API' });
 });
 
 app.use('/api/v1/auth', authRouter);

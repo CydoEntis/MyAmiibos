@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../UI/Buttons/Button';
 import Card from '../UI/Cards/Card';
 import FormRow from './FormRow';
@@ -17,8 +18,10 @@ const initialState = {
 };
 
 const AuthForm = () => {
-	const { isLoading, showAlert, displayAlert } = useAppContext();
+	const { isLoading, showAlert, displayAlert, user, userAuth } =
+		useAppContext();
 	const [values, setValues] = useState(initialState);
+	const navigate = useNavigate();
 
 	const onChangeHandler = (e) => {
 		const { name, value } = e.target;
@@ -39,8 +42,38 @@ const AuthForm = () => {
 			displayAlert();
 			return;
 		}
-		console.log(values);
+
+		const currentUser = {
+			username,
+			email,
+			password,
+		};
+
+		if (values.isMember) {
+
+			console.log(currentUser);
+
+			userAuth({
+				currentUser,
+				endPoint: 'login',
+				alertText: 'Login Successful! Redirecting...',
+			});
+		} else {
+			userAuth({
+				currentUser,
+				endPoint: 'register',
+				alertText: 'User created! Redirecting...',
+			});
+		}
 	};
+
+	useEffect(() => {
+		setTimeout(() => {
+			if (user) {
+				navigate('/');
+			}
+		}, 3000);
+	}, [user, navigate]);
 
 	const btnText = values.isMember ? 'Login' : 'Sign Up';
 
@@ -49,7 +82,7 @@ const AuthForm = () => {
 
 	return (
 		<Card className={classes['auth-card']}>
-			<Logo className={classes.logo}/>
+			<Logo className={classes.logo} />
 			<form onSubmit={submitHandler}>
 				{showAlert && <Alert />}
 				<FormRow
