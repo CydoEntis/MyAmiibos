@@ -1,64 +1,70 @@
 import axios from 'axios';
 import React from 'react';
 import { useState, useEffect, useCallback } from 'react';
+import AmiiboCard from '../components/Amiibo/AmiiboCard';
+import classes from './Dashboard.module.css';
 import Card from '../components/UI/Cards/Card';
 
 const Dashboard = () => {
-	const [amiibosLoaded, setAmiibosLoaded] = useState(false);
-	const [allAmiibos, setAllAmiibos] = useState([]);
-	const [currentAmiibos, setCurrentAmiibos] = useState([]);
-  const [startIndex, setStartIndex] = useState(0);
-  const [endIndex, setEndIndex] = useState(10);
+	const limit = 25;
+	const [page, setPage] = useState(0);
+	const [allAmiibos, setAllAmiibos] = useState(null);
+	const [pages, setPages] = useState([]);
 
 	useEffect(() => {
+		let cancelled = false;
 		const getAmiibos = async () => {
-			setAmiibosLoaded(false);
 			const { data } = await axios.get(
 				'https://www.amiiboapi.com/api/amiibo'
 			);
-			setAllAmiibos(data.amiibo);
-			setCurrentAmiibos(data.amiibo.slice(startIndex, endIndex));
+			if (!cancelled) {
+				setAllAmiibos(data.amiibo);
+				const numOfPages = Math.ceil(allAmiibos?.length / limit);
 
-			setAmiibosLoaded(true);
+				const pages = Array.from({ length: numOfPages }, (_, index) => {
+					return index + 1;
+				});
+
+				setPages(pages);
+			}
 		};
 
 		getAmiibos();
-	}, [startIndex, endIndex]);
+		return () => {
+			cancelled = true;
+		};
+	}, []);
 
-  if(amiibosLoaded) {
-    console.log(currentAmiibos)
-    console.log(allAmiibos);
-  }
+	console.log(pages);
 
 	const nextPage = () => {
-    setStartIndex(endIndex);
-    setEndIndex(prevState => prevState + 10)
-		// setPage((prevState) => (prevState + 1));
-		// setSkip(page * limit);
-
-
-
-		setCurrentAmiibos(allAmiibos.slice(startIndex, endIndex));
+		setPage((prevState) => prevState + 1);
 	};
 
+	const skip = page * limit;
+	const currentAmiibos = allAmiibos?.slice?.(skip, skip + limit) ?? [];
+
+	console.log(pages);
+
 	return (
-		<div>
-			<button type='button' onClick={nextPage}>
-				Next
-			</button>
-			{amiibosLoaded && (
-				<div>
-					{currentAmiibos.map((amiibo) => (
-						<Card key={amiibo.head + amiibo.tail}>
-							<img src={amiibo.image} alt={amiibo.name} />
-							<p>{amiibo.amiiboSeries}</p>
-							<h3>{amiibo.name}</h3>
-						</Card>
+		<div className={classes.list}>
+			<div className={classes.pages}>
+				{pages.map((page) => (
+					<button>{page}</button>
+				))}
+			</div>
+			{allAmiibos !== null && (
+				<div className={classes.list}>
+					{currentAmiibos.map((amiibo, index) => (
+						<AmiiboCard
+							amiibo={amiibo}
+							index={index}
+							key={amiibo.head + amiibo.tail}
+						/>
 					))}
 				</div>
 			)}
 		</div>
 	);
 };
-
 export default Dashboard;
