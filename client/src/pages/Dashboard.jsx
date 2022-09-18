@@ -4,12 +4,20 @@ import { useState, useEffect, useCallback } from 'react';
 import AmiiboCard from '../components/Amiibo/AmiiboCard';
 import classes from './Dashboard.module.css';
 import Card from '../components/UI/Cards/Card';
+import Pagination from '../components/Pagination/Pagination';
 
 const Dashboard = () => {
 	const limit = 25;
-	const [page, setPage] = useState(0);
-	const [allAmiibos, setAllAmiibos] = useState(null);
-	const [pages, setPages] = useState([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [allAmiibos, setAllAmiibos] = useState([]);
+	// const [pages, setPages] = useState([]);
+	const indexOfLastAmiibo = currentPage * limit;
+	const indexOfFirstAmiibo = indexOfLastAmiibo - limit;
+	const currentAmiibos = allAmiibos.slice(
+		indexOfFirstAmiibo,
+		indexOfLastAmiibo
+	);
+	const numOfPages = Math.ceil(allAmiibos.length / limit);
 
 	useEffect(() => {
 		let cancelled = false;
@@ -19,40 +27,31 @@ const Dashboard = () => {
 			);
 			if (!cancelled) {
 				setAllAmiibos(data.amiibo);
-				const numOfPages = Math.ceil(allAmiibos?.length / limit);
-
-				const pages = Array.from({ length: numOfPages }, (_, index) => {
-					return index + 1;
-				});
-
-				setPages(pages);
 			}
 		};
 
 		getAmiibos();
+
 		return () => {
 			cancelled = true;
 		};
 	}, []);
 
-	console.log(pages);
+	// const nextPage = () => {
+	// 	setPage((prevState) => prevState + 1);
+	// };
 
-	const nextPage = () => {
-		setPage((prevState) => prevState + 1);
-	};
-
-	const skip = page * limit;
-	const currentAmiibos = allAmiibos?.slice?.(skip, skip + limit) ?? [];
-
-	console.log(pages);
+	// const skip = (page - 1) * limit;
+	// const currentAmiibos = allAmiibos?.slice?.(skip, skip + limit) ?? [];
 
 	return (
 		<div className={classes.list}>
-			<div className={classes.pages}>
-				{pages.map((page) => (
-					<button>{page}</button>
-				))}
-			</div>
+			<Pagination
+				numOfPages={numOfPages}
+				maxPages={4}
+				currentPage={currentPage}
+				setCurrentPage={setCurrentPage}
+			/>
 			{allAmiibos !== null && (
 				<div className={classes.list}>
 					{currentAmiibos.map((amiibo, index) => (
