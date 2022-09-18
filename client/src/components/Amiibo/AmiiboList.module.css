@@ -1,0 +1,22 @@
+.amiibo--list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.pagination--wrapper {
+  border-top: 1px solid #bcbcbc;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  height: 65px;
+  width: 100%;
+}
