@@ -14,9 +14,9 @@ const Navbar = () => {
 	};
 
 	return (
-		<nav>
+		<nav className={classes['nav--main']}>
 			<ul>
-				<Logo className={classes['nav-logo']} />
+				<Logo className={classes['nav--logo']} />
 				<div>
 					<Hamburger
 						toggleMenu={toggleMenu}
