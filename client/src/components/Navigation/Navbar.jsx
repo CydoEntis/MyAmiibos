@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Hamburger from '../UI/Buttons/Hamburger';
-import MobileNav from "./MobileNav";
+import MobileNav from './MobileNav';
 
 import classes from './Navbar.module.css';
 import Logo from '../Logo/Logo';
@@ -22,8 +22,9 @@ const Navbar = () => {
 						toggleMenu={toggleMenu}
 						onClick={toggleMenuHandler}
 					/>
-          <MobileNav toggle={toggleMenu} />
-
+					<MobileNav toggle={toggleMenu} />
+					{/* <Link to='/amiibos'>All Amiibos</Link>
+					<Link to='/amiibos/collected'>My Amiibos</Link> */}
 				</div>
 			</ul>
 		</nav>

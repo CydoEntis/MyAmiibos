@@ -1,0 +1,44 @@
+
+
+.filter-options {
+  padding: .25rem 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  color: #FFF;
+  margin: .25rem;
+}
+
+.btn--search {
+  background: #f58f00;
+  width: 100%;
+}
+
+.btn--all {
+  background: #009BEB;
+}
+
+.btn--figures {
+  background: #E6001E;
+}
+
+.btn--cards {
+  background: #F5AA00;
+}
+
+.btn--yarn {
+  background: #E62D8C;
+}
+
+.btn--series {
+  background: #B3D139;
+}
+
+.btn--name {
+  background: #3DAD9E;
+}
