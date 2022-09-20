@@ -14,13 +14,15 @@ const Amiibos = () => {
 		isLoading,
 		allAmiibos,
 		fetchAmiibos,
+		currentPage,
+		limit,
+		numOfPages,
 	} = useAppContext();
 
-	const limit = 25;
-	const [currentPage, setCurrentPage] = useState(1);
-	const [search, setSearch] = useState('');
+	// const limit = 25;
+	// const [currentPage, setCurrentPage] = useState(1);
 
-	const numOfPages = Math.ceil(allAmiibos.length / limit);
+	// const numOfPages = Math.ceil(allAmiibos.length / limit);
 
 	useEffect(() => {
 		fetchAmiibos({ type: 'all' });
@@ -28,9 +30,11 @@ const Amiibos = () => {
 
 	const indexOfLastAmiibo = currentPage * limit;
 	const indexOfFirstAmiibo = indexOfLastAmiibo - limit;
-	const currentAmiibos = allAmiibos.slice(indexOfFirstAmiibo, indexOfLastAmiibo);
+	const currentAmiibos = allAmiibos.slice(
+		indexOfFirstAmiibo,
+		indexOfLastAmiibo
+	);
 
-	console.log(search);
 	return (
 		<>
 			<Navbar />
@@ -40,12 +44,7 @@ const Amiibos = () => {
 				{!isLoading && (
 					<>
 						<AmiiboList currentAmiibos={currentAmiibos} />
-						<Pagination
-							numOfPages={numOfPages}
-							maxPages={4}
-							currentPage={currentPage}
-							setCurrentPage={setCurrentPage}
-						/>
+						{numOfPages > 1 && <Pagination />}
 					</>
 				)}
 			</MainWrapper>

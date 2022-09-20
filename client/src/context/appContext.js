@@ -10,6 +10,9 @@ import {
 	GET_AMIIBOS_LOADING,
 	GET_AMIIBOS_SUCCESS,
 	GET_AMIIBOS_ERROR,
+	GO_TO_PAGE,
+	NEXT_PAGE,
+	PREV_PAGE,
 	ADD_TO_COLLECTION_LOADING,
 	ADD_TO_COLLECTION_SUCCESS,
 	ADD_TO_COLLECTION_ERROR,
@@ -35,6 +38,10 @@ const initialState = {
 	collectedAmiibos: 0,
 	page: 1,
 	numOfPages: 1,
+	currentPage: 1,
+	maxPages: 4,
+	pageNumbers: [],
+	limit: 25,
 };
 
 const AppContext = React.createContext();
@@ -136,13 +143,13 @@ const AppProvider = ({ children }) => {
 		let endPoint = '';
 
 		if (type === 'all') {
-			endPoint = ''
+			endPoint = '';
 		} else if (type === 'figure') {
-			endPoint = "/?type=figure";
+			endPoint = '/?type=figure';
 		} else if (type === 'card') {
-			endPoint = "/?type=card";
+			endPoint = '/?type=card';
 		} else if (type === 'yarn') {
-			endPoint = "/?type=yarn";
+			endPoint = '/?type=yarn';
 		}
 
 		try {
@@ -151,6 +158,12 @@ const AppProvider = ({ children }) => {
 				type: GET_AMIIBOS_SUCCESS,
 				payload: {
 					allAmiibos: data.amiibo,
+					numOfPages: Math.ceil(data.amiibo.length / state.limit),
+					pageNumbers: [
+						...Array(
+							Math.ceil(data.amiibo.length / state.limit) + 1
+						).keys(),
+					].slice(1),
 				},
 			});
 		} catch (error) {
@@ -159,6 +172,24 @@ const AppProvider = ({ children }) => {
 				payload: { msg: error.response.data.msg },
 			});
 		}
+	};
+
+	const goToPage = (newPage) => {
+		console.log(newPage);
+		dispatch({
+			type: GO_TO_PAGE,
+			payload: {
+				currentPage: newPage,
+			},
+		});
+	};
+
+	const nextPage = () => {
+		dispatch({ type: NEXT_PAGE });
+	};
+
+	const prevPage = () => {
+		dispatch({ type: PREV_PAGE });
 	};
 
 	const addAmiiboToCollection = () => {};
@@ -170,7 +201,10 @@ const AppProvider = ({ children }) => {
 		displayAlert,
 		userAuth,
 		logout,
-		fetchAmiibos
+		fetchAmiibos,
+		goToPage,
+		nextPage,
+		prevPage,
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './Paginiation.module.css';
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go';
+import { useAppContext } from '../../context/appContext';
+
+// TODO Reset pages every time the filter is changed.
 
 const getPages = (currentPage, maxPages, pageNumbers) => {
 	let startingPage;
@@ -34,19 +37,28 @@ const getPages = (currentPage, maxPages, pageNumbers) => {
 	return pageNumbers.slice(startingPage, endingPage);
 };
 
-const Pagination = ({ numOfPages, currentPage, setCurrentPage, maxPages }) => {
-	const pageNumbers = [...Array(numOfPages + 1).keys()].slice(1);
+const Pagination = () => {
+	const {
+		numOfPages,
+		currentPage,
+		maxPages,
+		goToPage,
+		nextPage,
+		prevPage,
+		pageNumbers,
+	} = useAppContext();
+
 	let currentPages = getPages(currentPage, maxPages, pageNumbers);
 
-	const prevPage = () => {
+	const goToPrevPage = () => {
 		if (currentPage !== 1) {
-			setCurrentPage(currentPage - 1);
+			prevPage();
 		}
 	};
 
-	const nextPage = () => {
+	const goToNextPage = () => {
 		if (currentPage !== numOfPages) {
-			setCurrentPage(currentPage + 1);
+			nextPage();
 		}
 	};
 
@@ -61,7 +73,7 @@ const Pagination = ({ numOfPages, currentPage, setCurrentPage, maxPages }) => {
 					<button
 						type='button'
 						className={classes['page--link']}
-						onClick={prevPage}
+						onClick={goToPrevPage}
 					>
 						<GoChevronLeft />
 					</button>
@@ -80,7 +92,7 @@ const Pagination = ({ numOfPages, currentPage, setCurrentPage, maxPages }) => {
 									? classes['active']
 									: ''
 							}`}
-							onClick={() => setCurrentPage(pageNumber)}
+							onClick={() => goToPage(pageNumber)}
 						>
 							{pageNumber}
 						</button>
@@ -92,7 +104,7 @@ const Pagination = ({ numOfPages, currentPage, setCurrentPage, maxPages }) => {
 					<button
 						type='button'
 						className={classes['page--link']}
-						onClick={nextPage}
+						onClick={goToNextPage}
 					>
 						<GoChevronRight />
 					</button>

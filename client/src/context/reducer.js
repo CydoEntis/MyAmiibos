@@ -8,6 +8,9 @@ import {
 	GET_AMIIBOS_LOADING,
 	GET_AMIIBOS_SUCCESS,
 	GET_AMIIBOS_ERROR,
+	GO_TO_PAGE,
+	NEXT_PAGE,
+	PREV_PAGE,
 	ADD_TO_COLLECTION_LOADING,
 	ADD_TO_COLLECTION_SUCCESS,
 	ADD_TO_COLLECTION_ERROR,
@@ -62,6 +65,9 @@ const reducer = (state, action) => {
 				...state,
 				isLoading: false,
 				allAmiibos: action.payload.allAmiibos,
+				numOfPages: action.payload.numOfPages,
+				pageNumbers: action.payload.pageNumbers,
+				currentPage: 1
 				// Add collected amiibos
 			};
 		case GET_AMIIBOS_ERROR:
@@ -70,6 +76,21 @@ const reducer = (state, action) => {
 				isLoading: false,
 				// TODO: Add error alerts
 			};
+		case GO_TO_PAGE:
+			return {
+				...state,
+				currentPage: action.payload.currentPage
+			}
+		case NEXT_PAGE:
+			return {
+				...state,
+				currentPage: state.currentPage + 1
+			}
+		case PREV_PAGE: 
+			return {
+				...state,
+				currentPage: state.currentPage - 1
+			}
 		case ADD_TO_COLLECTION_LOADING:
 			return {};
 		case ADD_TO_COLLECTION_SUCCESS:
