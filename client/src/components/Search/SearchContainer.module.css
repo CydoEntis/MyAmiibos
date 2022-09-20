@@ -12,11 +12,24 @@
 .btn {
   color: #FFF;
   margin: .25rem;
+  border-radius: .4rem;
+  min-width: 75px;
+  font-size: .90rem;
+  transition: all ease-in-out 250ms;
+  cursor: pointer;
 }
 
 .btn--search {
-  background: #f58f00;
+  background: #009BEB;
   width: 100%;
+  max-width: 75px;
+  border-radius: 0 .4rem .4rem 0;
+  height: 50px;
+  margin: 0;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn--all {

@@ -19,11 +19,6 @@ const Amiibos = () => {
 		numOfPages,
 	} = useAppContext();
 
-	// const limit = 25;
-	// const [currentPage, setCurrentPage] = useState(1);
-
-	// const numOfPages = Math.ceil(allAmiibos.length / limit);
-
 	useEffect(() => {
 		fetchAmiibos({ type: 'all' });
 	}, []);

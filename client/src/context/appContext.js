@@ -137,7 +137,7 @@ const AppProvider = ({ children }) => {
 		removeUserFromLocalStorage();
 	};
 
-	const fetchAmiibos = async ({ type }) => {
+	const fetchAmiibos = async ({ type, charName = '' }) => {
 		dispatch({ type: GET_AMIIBOS_LOADING });
 
 		let endPoint = '';
@@ -150,6 +150,8 @@ const AppProvider = ({ children }) => {
 			endPoint = '/?type=card';
 		} else if (type === 'yarn') {
 			endPoint = '/?type=yarn';
+		} else if (type === 'search') {
+			endPoint = '/?name=' + charName
 		}
 
 		try {
