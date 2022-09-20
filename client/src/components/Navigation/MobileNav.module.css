@@ -15,6 +15,37 @@
   width: 100%;
 }
 
+.mobile-nav ul {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile-nav ul li {
+  border: none;
+  margin: 1rem 0;
+  padding: .5rem;
+  text-align: center;
+  border: 1px solid #009BEB;
+  border-radius: .4rem;
+  width: 250px;
+}
+
+.mobile-nav ul li a {
+  border: none;
+  font-size: 1.75rem;
+  color: #009BEB;
+  border-radius: .4rem;
+  width: 250px;
+}
+
+.active {
+  color: #fff !important;
+  background: #009BEB;
+}
+
 @media only screen and (min-width: 1024px) {
   .mobile-nav {
     display: none;

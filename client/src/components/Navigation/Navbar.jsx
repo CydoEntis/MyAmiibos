@@ -15,9 +15,9 @@ const Navbar = () => {
 
 	return (
 		<nav className={classes['nav--main']}>
-			<ul>
+			<ul className={classes['nav--list']}>
 				<Logo className={classes['nav--logo']} />
-				<div>
+				<div className={classes['nav--options']}>
 					<Hamburger
 						toggleMenu={toggleMenu}
 						onClick={toggleMenuHandler}

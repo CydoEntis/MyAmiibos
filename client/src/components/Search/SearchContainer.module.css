@@ -1,57 +1,63 @@
-
-
 .filter-options {
-  padding: .25rem 1rem;
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
+	padding: 0.25rem 1rem;
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
 }
 
 .btn {
-  color: #FFF;
-  margin: .25rem;
-  border-radius: .4rem;
-  min-width: 75px;
-  font-size: .90rem;
-  transition: all ease-in-out 250ms;
-  cursor: pointer;
+	color: #fff;
+	margin: 0.25rem;
+	border-radius: 0.4rem;
+	min-width: 75px;
+	font-size: 0.9rem;
+	transition: all ease-in-out 250ms;
+	cursor: pointer;
 }
 
 .btn--search {
-  background: #009BEB;
-  width: 100%;
-  max-width: 75px;
-  border-radius: 0 .4rem .4rem 0;
-  height: 50px;
-  margin: 0;
-  font-size: 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	background: #009beb;
+	width: 100%;
+	max-width: 100%;
+	border-radius: .4rem;
+	height: 50px;
+	margin: 0;
+	font-size: 1.25rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .btn--all {
-  background: #009BEB;
+	background: #009beb;
 }
 
 .btn--figures {
-  background: #E6001E;
+	background: #e6001e;
 }
 
 .btn--cards {
-  background: #F5AA00;
+	background: #f5aa00;
 }
 
 .btn--yarn {
-  background: #E62D8C;
+	background: #e62d8c;
 }
 
 .btn--series {
-  background: #B3D139;
+	background: #b3d139;
 }
 
 .btn--name {
-  background: #3DAD9E;
+	background: #3dad9e;
+}
+
+@media only screen and (min-width: 460px) {
+	.btn--search {
+		max-width: 75px;
+		border-radius: 0 0.4rem 0.4rem 0;
+		height: 50px;
+	}
 }

@@ -8,6 +8,9 @@
 		rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   transition: all 300ms ease-in-out;
 	background: #fff;
+	cursor: pointer;
+	border: none;
+	outline: none;
 }
 
 .card:hover {
@@ -48,7 +51,11 @@
 	transition: ease-in-out all 300ms;
 }
 
-.card--icon:hover {
+.card:hover .card--icon {
+	filter: brightness(85%);
+}
+
+.card--icon-collected {
 	color: #e60012;
 }
 

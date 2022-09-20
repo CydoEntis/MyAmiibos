@@ -1,14 +1,17 @@
 import React from 'react';
 import classes from './AmiiboCard.module.css';
-import { FaHeart } from "react-icons/fa";
-
+import { FaHeart } from 'react-icons/fa';
 
 const AmiiboCard = ({ amiibo, index }) => {
 	return (
-		<div className={classes.card}>
+		<button className={classes.card}>
 			<header className={classes['card--header']}>
 				<h3 className={classes['amiibo--name']}>{amiibo.name}</h3>
-				<FaHeart className={classes['card--icon']} />
+				<FaHeart
+					className={`${classes['card--icon']} ${
+						amiibo.collected ? classes['card--icon-collected'] : ''
+					}`}
+				/>
 			</header>
 			<section className={classes['card--body']}>
 				<div className={classes['image-container']}>
@@ -23,7 +26,7 @@ const AmiiboCard = ({ amiibo, index }) => {
 					Available: {amiibo.release.na}
 				</p>
 			</div>
-		</div>
+		</button>
 	);
 };
 

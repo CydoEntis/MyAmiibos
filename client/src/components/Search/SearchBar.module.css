@@ -12,11 +12,11 @@
 	width: 100%;
 	max-width: 500px;
 	height: 50px;
-	border-radius: .4rem 0 0 .4rem;
+	border-radius: .4rem;
 	border: 2px solid #ccc;
-	border-right: none;
 	padding: .5rem;
 	font-size: 1.075rem;
+	margin: .5rem 0;
 }
 
 .searchbar:focus {
@@ -24,8 +24,20 @@
 	outline: #009BEB;
 }
 
-@media screen and (min-width: 464px) {
+@media screen and (min-width: 460px) {
 	.search {
 		flex-direction: row;
+	}
+
+	.searchbar {
+		width: 100%;
+		max-width: 500px;
+		height: 50px;
+		border-radius: .4rem 0 0 .4rem;
+		border: 2px solid #ccc;
+		border-right: none;
+		padding: .5rem;
+		font-size: 1.075rem;
+		margin: 0;
 	}
 }

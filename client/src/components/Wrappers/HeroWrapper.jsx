@@ -20,6 +20,7 @@ const amiibos = [
 		release: {
 			na: '2014-11-21',
 		},
+    collected: false
 	},
 	{
 		id: 2,
@@ -29,6 +30,7 @@ const amiibos = [
 		release: {
 			na: '2014-12-14',
 		},
+    collected: true,
 	},
 	{
 		id: 3,
@@ -38,6 +40,7 @@ const amiibos = [
 		release: {
 			na: '2014-11-21',
 		},
+    collected: true
 	},
 ];
 
