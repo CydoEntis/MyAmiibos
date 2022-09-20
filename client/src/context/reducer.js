@@ -1,9 +1,19 @@
 import {
-	CLEAR_ALERT,
 	DISPLAY_ALERT,
+	CLEAR_ALERT,
 	USER_AUTH_BEGIN,
-	USER_AUTH_ERROR,
 	USER_AUTH_SUCCESS,
+	USER_AUTH_ERROR,
+	LOGOUT_USER,
+	GET_AMIIBOS_LOADING,
+	GET_AMIIBOS_SUCCESS,
+	GET_AMIIBOS_ERROR,
+	ADD_TO_COLLECTION_LOADING,
+	ADD_TO_COLLECTION_SUCCESS,
+	ADD_TO_COLLECTION_ERROR,
+	REMOVE_FROM_COLLECTION_LOADING,
+	REMOVE_FROM_COLLECTION_SUCCESS,
+	REMOVE_FROM_COLLECTION_ERROR,
 } from './actions';
 
 const reducer = (state, action) => {
@@ -42,6 +52,36 @@ const reducer = (state, action) => {
 				alertType: 'danger',
 				alertText: action.payload.msg,
 			};
+		case GET_AMIIBOS_LOADING:
+			return {
+				...state,
+				isLoading: true,
+			};
+		case GET_AMIIBOS_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				allAmiibos: action.payload.allAmiibos,
+				// Add collected amiibos
+			};
+		case GET_AMIIBOS_ERROR:
+			return {
+				...state,
+				isLoading: false,
+				// TODO: Add error alerts
+			};
+		case ADD_TO_COLLECTION_LOADING:
+			return {};
+		case ADD_TO_COLLECTION_SUCCESS:
+			return {};
+		case ADD_TO_COLLECTION_ERROR:
+			return {};
+		case REMOVE_FROM_COLLECTION_LOADING:
+			return {};
+		case REMOVE_FROM_COLLECTION_SUCCESS:
+			return {};
+		case REMOVE_FROM_COLLECTION_ERROR:
+			return {};
 		default:
 			throw new Error(`no such action : ${action.type}`);
 	}
