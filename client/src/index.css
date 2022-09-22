@@ -27,3 +27,12 @@ body {
   color: rgb(10, 151, 10);
   background: rgb(168, 254, 168);
 }
+
+.active {
+	color: #fff !important;
+	background: #009beb !important;
+}
+
+.main-nav {
+  display: none;
+}

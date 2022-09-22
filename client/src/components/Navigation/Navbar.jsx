@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Hamburger from '../UI/Buttons/Hamburger';
 import MobileNav from './MobileNav';
 
@@ -23,8 +23,24 @@ const Navbar = () => {
 						onClick={toggleMenuHandler}
 					/>
 					<MobileNav toggle={toggleMenu} />
-					{/* <Link to='/amiibos'>All Amiibos</Link>
-					<Link to='/amiibos/collected'>My Amiibos</Link> */}
+					<div className="main-nav">
+						<NavLink
+							className={({ isActive }) =>
+								isActive ? 'active' : ''
+							}
+							to='/amiibos'
+						>
+							All Amiibos
+						</NavLink>
+						<NavLink
+							className={({ isActive }) =>
+								isActive ? 'active' : ''
+							}
+							to='/amiibos/collected'
+						>
+							My Amiibos
+						</NavLink>
+					</div>
 				</div>
 			</ul>
 		</nav>
