@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo';
+import Button from '../UI/Buttons/Button';
 
 import classes from './MobileNav.module.css';
 
@@ -10,34 +11,40 @@ const MobileNav = ({ toggle }) => {
 		: `${classes['mobile-nav']}`;
 
 	return (
-		<nav className={mobileNavClasses}>
+		<>
 			{toggle && (
-				<ul>
-					<Logo />
-					<li>
-						<NavLink
-							className={({ isActive }) =>
-								isActive ? classes.active : ''
-							}
-							to='/amiibos'
-						>
-							Amiibos
-						</NavLink>
-					</li>
-					<li>
-						<NavLink
-							className={({ isActive }) =>
-								isActive ? classes.active : ''
-							}
-							to='/amiibos/my-collection'
-						>
-							My Collection
-						</NavLink>
-					</li>
-					<button className={classes['btn--logout']}>Logout</button>
-				</ul>
+				<nav className={mobileNavClasses}>
+					<Logo className={classes.logo} />
+					<ul>
+						<li>
+							<NavLink
+								className={({ isActive }) =>
+									isActive ? classes.active : ''
+								}
+								to='/amiibos'
+							>
+								Amiibos
+							</NavLink>
+						</li>
+						<li>
+							<NavLink
+								className={({ isActive }) =>
+									isActive ? classes.active : ''
+								}
+								to='/amiibos/my-collection'
+							>
+								My Collection
+							</NavLink>
+						</li>
+						<li>
+							<Button className={classes['btn--logout']}>
+								Logout
+							</Button>
+						</li>
+					</ul>
+				</nav>
 			)}
-		</nav>
+		</>
 	);
 };
 

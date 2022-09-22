@@ -1,53 +1,92 @@
 .mobile-nav {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 0%;
-  min-height: 100vh;
-  display: block;
-  background: white;
-  color: #333;
-  z-index: 98;
-  transition: all 0.4s;
+	position: fixed;
+	top: 0;
+	right: 0;
+  bottom: 0;
+  left: 0;
+	width: 100%;
+	height: 100vh;
+	/* display: block; */
+  background: url('http://i.imgur.com/NGTcZ55.jpg');
+  background-size: contain;
+	/* background: white; */
+	color: #333;
+	/* z-index: 98; */
+	transition: all 0.4s;
+	overflow-y: hidden;
 }
 
 .mobile-nav.is-active {
-  width: 100%;
+	width: 100%;
 }
 
 .mobile-nav ul {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	height: 100vh;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	align-items: center;
+	list-style: none;
 }
 
 .mobile-nav ul li {
-  border: none;
-  margin: 1rem 0;
-  padding: .5rem;
-  text-align: center;
-  border: 1px solid #009BEB;
-  border-radius: .4rem;
-  width: 250px;
+	margin: 0 auto;
+	border: none;
+	margin: 1rem 0;
+	text-align: center;
+	border: 1px solid #009beb;
+	border-radius: 0.4rem;
+	overflow: hidden;
+	width: 200px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.mobile-nav ul li:last-of-type {
+	margin: 100px auto;
+	border: 1px solid #e60012;
+	color: #e60012;
 }
 
 .mobile-nav ul li a {
-  border: none;
-  font-size: 1.75rem;
-  color: #009BEB;
-  border-radius: .4rem;
-  width: 250px;
+	display: block;
+	border: none;
+	padding: 0.5rem;
+	font-size: 1.35rem;
+	color: #009beb;
+	border-radius: 0.4rem;
+	text-decoration: none;
+	background: #fff;
+	width: 100%;
+	height: 100%;
 }
 
 .active {
-  color: #fff !important;
-  background: #009BEB;
+	color: #fff !important;
+	background: #009beb !important;
+}
+
+.logo {
+	margin: 55px auto;
+	width: 300px;
+}
+
+.btn--logout {
+	color: #fff;
+	display: block;
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+	background-color: #e60012;
+}
+
+.mobile-nav ul li a:hover,
+.btn--logout:hover {
+	filter: brightness(85%);
 }
 
 @media only screen and (min-width: 1024px) {
-  .mobile-nav {
-    display: none;
-  }
+	.mobile-nav {
+		display: none;
+	}
 }
