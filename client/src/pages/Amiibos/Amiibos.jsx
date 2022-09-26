@@ -8,6 +8,7 @@ import Loading from '../../components/Spinners/Loading';
 import MainWrapper from '../../components/Wrappers/MainWrapper';
 import SearchContainer from '../../components/Search/SearchContainer';
 import { useAppContext } from '../../context/appContext';
+import AmiiboDetail from '../../components/Amiibo/AmiiboDetail';
 
 const Amiibos = () => {
 	const {
@@ -32,6 +33,7 @@ const Amiibos = () => {
 
 	return (
 		<>
+			<AmiiboDetail />
 			<Navbar />
 			<MainWrapper>
 				<SearchContainer />
