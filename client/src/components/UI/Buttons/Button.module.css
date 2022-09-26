@@ -6,9 +6,11 @@
   outline: none;
   cursor: pointer;
   transition: all ease-in-out 300ms;
+  box-shadow: 0px 5px 0px #006699;
 }
 
 .button:hover {
   filter: brightness(90%);
   transform: scale(1.05);
+  box-shadow: 0px 2px 0px #006699;
 }

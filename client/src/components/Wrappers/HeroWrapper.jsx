@@ -52,7 +52,7 @@ const HeroWrapper = () => {
 				<h3>
 					Keep track of all current and upcoming Amiibo's you collect!
 				</h3>
-				<Link to="/auth">
+				<Link to="/">
 					<Button className={classes['hero--btn']}>
 						Start Collecting
 					</Button>

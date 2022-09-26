@@ -8,8 +8,9 @@
   justify-content: center;
   align-items: center;
   padding: 2rem 1rem;
-  margin: 1rem 0;
   text-align: center;
+  background: url('https://tcrf.net/images/thumb/b/bb/AmiiboTap_TitleBG.png/320px-AmiiboTap_TitleBG.png');
+  background-size: contain;
 }
 
 .hero--text h1 {

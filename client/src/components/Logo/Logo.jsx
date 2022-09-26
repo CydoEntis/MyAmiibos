@@ -7,7 +7,7 @@ const Logo = ({className}) => {
   const logoClasses = `${className} ${classes["logo-container"]}`;
   return (
     <div className={logoClasses}>
-      <img className={classes["logo-img"]} src={logo} alt="my amiibos logo" />
+      <h3 className={classes.logo}>Amiibo<span>Party</span></h3>
     </div>
   )
 }
