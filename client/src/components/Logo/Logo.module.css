@@ -5,6 +5,15 @@
 	background: #009beb;
 	color: #fff;
 	box-shadow: 0px 5px 0px #006699;
+	cursor: pointer;
+	transform: all ease-in-out 450ms;
+	margin: 0 1rem;
+}
+
+.logo:hover {
+	box-shadow: 0px 3px 0px #006699;
+	transform: translateY(2px); 
+	filter: brightness(85%)
 }
 
 .logo span {
