@@ -58,12 +58,12 @@
 	height: 100%;
 }
 
-
-
-.logo {
-	margin: 55px auto;
-	width: 300px;
+.btn--nav {
+	padding: .5;
+	text-align: center;
+	border-radius: .4rem;
 }
+
 
 .btn--logout {
 	color: #fff;

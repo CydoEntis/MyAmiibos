@@ -14,7 +14,7 @@ const MobileNav = ({ toggle }) => {
 		<>
 			{toggle && (
 				<nav className={mobileNavClasses}>
-					<Logo className={classes.logo} />
+					<Logo />
 					<ul>
 						<li>
 							<NavLink

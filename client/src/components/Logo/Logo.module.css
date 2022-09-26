@@ -8,6 +8,8 @@
 	cursor: pointer;
 	transform: all ease-in-out 450ms;
 	margin: 0 1rem;
+	max-width: 175px;
+	text-align: center;
 }
 
 .logo:hover {
