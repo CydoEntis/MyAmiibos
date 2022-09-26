@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactDOM } from 'react';
 import Navbar from '../../components/Navigation/Navbar';
 import AmiiboList from '../../components/Amiibo/AmiiboList';
 import Pagination from '../../components/Pagination/Pagination';

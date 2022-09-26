@@ -1,4 +1,5 @@
-import React, { ReactDOM, useState } from 'react';
+import React, { useState } from 'react';
+import ReactDom from 'react-dom';
 
 import classes from './AmiiboDetail.module.css';
 
@@ -23,7 +24,7 @@ const Modal = ({ open, children, onClose }) => {
 const AmiiboDetail = () => {
 	const [isOpen, setIsOpen] = useState(true);
 
-	return (
+	return ReactDom.createPortal(
 		<>
 			<Modal
 				open={isOpen}
@@ -36,7 +37,8 @@ const AmiiboDetail = () => {
 			>
 				Text
 			</Modal>
-		</>
+		</>,
+		document.getElementById('modal')
 	);
 };
 
