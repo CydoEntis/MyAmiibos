@@ -1,19 +1,21 @@
 import React from 'react';
+import { FaTimes } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import Button from '../UI/Buttons/Button';
 
 import classes from './MobileNav.module.css';
 
-const MobileNav = ({ toggle }) => {
+const MobileNav = ({ toggle, onClick }) => {
 	const mobileNavClasses = toggle
 		? `${classes['mobile-nav']} ${classes['is-active']}`
 		: `${classes['mobile-nav']}`;
 
 	return (
 		<>
-			{toggle && (
+		
 				<nav className={mobileNavClasses}>
+					<Button className={classes['nav--close']} onClick={onClick}><FaTimes /></Button>
 					<div className={classes['mobile--logo']}>
 						<Logo className={classes['logo--large']}/>
 					</div>
@@ -49,7 +51,6 @@ const MobileNav = ({ toggle }) => {
 						</li>
 					</ul>
 				</nav>
-			)}
 		</>
 	);
 };

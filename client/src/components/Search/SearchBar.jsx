@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import Button from '../UI/Buttons/Button';
-import SearchWrapper from '../Wrappers/SearchWrapper';
 
 import classes from './SearchBar.module.css';
 
@@ -17,7 +16,6 @@ const SearchBar = ({ getAmiibo, className }) => {
 		getAmiibo(searchValue);
 	};
 	return (
-		<SearchWrapper>
 			<form className={classes.search} onSubmit={handleSubmit}>
 				<input
 					className={classes.searchbar}
@@ -27,11 +25,10 @@ const SearchBar = ({ getAmiibo, className }) => {
 					value={searchValue}
 					onChange={handleChange}
 				/>
-				<Button type='submit' className={className}>
+				<Button type='submit' className={classes['search--btn']}>
 					<FaSearch />
 				</Button>
 			</form>
-		</SearchWrapper>
 	);
 };
 

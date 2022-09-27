@@ -9,6 +9,7 @@ import MainWrapper from '../../components/Wrappers/MainWrapper';
 import SearchContainer from '../../components/Search/SearchContainer';
 import { useAppContext } from '../../context/appContext';
 import AmiiboDetail from '../../components/Amiibo/AmiiboDetails/AmiiboDetail/AmiiboDetail';
+import Filter from '../../components/Search/Filter';
 
 const Amiibos = () => {
 	const {
@@ -36,7 +37,7 @@ const Amiibos = () => {
 			<AmiiboDetail />
 			<Navbar />
 			<MainWrapper>
-				<SearchContainer />
+				<Filter />
 				{isLoading && <Loading />}
 				{!isLoading && (
 					<>

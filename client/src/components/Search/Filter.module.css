@@ -1,0 +1,8 @@
+.filter--container {
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 2rem;
+  background: #f6f6f6;
+  padding: .75rem;
+  border-radius: .4rem; 
+}

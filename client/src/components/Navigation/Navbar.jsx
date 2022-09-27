@@ -18,12 +18,9 @@ const Navbar = () => {
 			<ul className={classes['nav--list']}>
 				<Logo className={classes['nav--logo']} />
 				<div className={classes['nav--options']}>
-					<Hamburger
-						toggleMenu={toggleMenu}
-						onClick={toggleMenuHandler}
-					/>
-					<MobileNav toggle={toggleMenu} />
-					<div className="main-nav">
+					{!toggleMenu && <Hamburger onClick={toggleMenuHandler} />}
+					<MobileNav onClick={toggleMenuHandler} toggle={toggleMenu} />
+					<div className='main-nav'>
 						<NavLink
 							className={({ isActive }) =>
 								isActive ? 'active' : ''
