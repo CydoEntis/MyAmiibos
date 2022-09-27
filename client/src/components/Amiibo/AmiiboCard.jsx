@@ -1,10 +1,17 @@
 import React from 'react';
 import classes from './AmiiboCard.module.css';
 import { FaCheck, FaMinus } from 'react-icons/fa';
+import { useAppContext } from '../../context/appContext';
 
 const AmiiboCard = ({ amiibo, index }) => {
+	const { getSelectedAmiibo, showAmiiboDetails } = useAppContext();
+	const handleClick = () => {
+		getSelectedAmiibo(amiibo);
+		showAmiiboDetails();
+	}
+
 	return (
-		<div className={classes.card}>
+		<button className={classes.card} onClick={handleClick}>
 			<header className={classes['card--header']}>
 				<h3 className={classes['amiibo--name']}>{amiibo.name}</h3>
 				<span className={classes['card--icon']}>
@@ -30,7 +37,7 @@ const AmiiboCard = ({ amiibo, index }) => {
 					Available: {amiibo.release.na}
 				</p>
 			</div>
-		</div>
+		</button>
 	);
 };
 

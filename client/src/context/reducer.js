@@ -11,6 +11,10 @@ import {
 	GO_TO_PAGE,
 	NEXT_PAGE,
 	PREV_PAGE,
+	SELECT_AMIIBO,
+	CLEAR_AMIIBO,
+	SHOW_DETAILS,
+	HIDE_DETAILS,
 	ADD_TO_COLLECTION_LOADING,
 	ADD_TO_COLLECTION_SUCCESS,
 	ADD_TO_COLLECTION_ERROR,
@@ -67,7 +71,7 @@ const reducer = (state, action) => {
 				allAmiibos: action.payload.allAmiibos,
 				numOfPages: action.payload.numOfPages,
 				pageNumbers: action.payload.pageNumbers,
-				currentPage: 1
+				currentPage: 1,
 				// Add collected amiibos
 			};
 		case GET_AMIIBOS_ERROR:
@@ -79,18 +83,39 @@ const reducer = (state, action) => {
 		case GO_TO_PAGE:
 			return {
 				...state,
-				currentPage: action.payload.currentPage
-			}
+				currentPage: action.payload.currentPage,
+			};
 		case NEXT_PAGE:
 			return {
 				...state,
-				currentPage: state.currentPage + 1
-			}
-		case PREV_PAGE: 
+				currentPage: state.currentPage + 1,
+			};
+		case PREV_PAGE:
 			return {
 				...state,
-				currentPage: state.currentPage - 1
+				currentPage: state.currentPage - 1,
+			};
+		case SELECT_AMIIBO:
+			console.log(action.payload)
+			return {
+				...state,
+				selectedAmiibo: action.payload.selectedAmiibo
 			}
+		case CLEAR_AMIIBO:
+			return {
+				...state,
+				selectedAmiibo: {}
+			}
+		case SHOW_DETAILS:
+			return {
+				...state,
+				showDetails: true,
+			};
+		case HIDE_DETAILS:
+			return {
+				...state,
+				showDetails: false,
+			};
 		case ADD_TO_COLLECTION_LOADING:
 			return {};
 		case ADD_TO_COLLECTION_SUCCESS:

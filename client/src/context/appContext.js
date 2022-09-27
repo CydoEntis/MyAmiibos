@@ -13,6 +13,10 @@ import {
 	GO_TO_PAGE,
 	NEXT_PAGE,
 	PREV_PAGE,
+	SELECT_AMIIBO,
+	CLEAR_AMIIBO,
+	SHOW_DETAILS,
+	HIDE_DETAILS,
 	ADD_TO_COLLECTION_LOADING,
 	ADD_TO_COLLECTION_SUCCESS,
 	ADD_TO_COLLECTION_ERROR,
@@ -42,6 +46,8 @@ const initialState = {
 	maxPages: 4,
 	pageNumbers: [],
 	limit: 25,
+	showDetails: false,
+	selectedAmiibo: {},
 };
 
 const AppContext = React.createContext();
@@ -151,7 +157,7 @@ const AppProvider = ({ children }) => {
 		} else if (type === 'yarn') {
 			endPoint = '/?type=yarn';
 		} else if (type === 'search') {
-			endPoint = '/?name=' + charName
+			endPoint = '/?name=' + charName;
 		}
 
 		try {
@@ -194,6 +200,22 @@ const AppProvider = ({ children }) => {
 		dispatch({ type: PREV_PAGE });
 	};
 
+	const getSelectedAmiibo = (amiibo) => {
+		dispatch({ type: SELECT_AMIIBO, payload: { selectedAmiibo: amiibo } });
+	};
+
+	const clearSelectedAmiibo = () => {
+		dispatch({ type: CLEAR_AMIIBO });
+	};
+
+	const showAmiiboDetails = () => {
+		dispatch({ type: SHOW_DETAILS });
+	};
+
+	const hideAmiiboDetails = () => {
+		dispatch({ type: HIDE_DETAILS });
+	};
+
 	const addAmiiboToCollection = () => {};
 
 	const removeAmiiboFromCollection = () => {};
@@ -207,6 +229,10 @@ const AppProvider = ({ children }) => {
 		goToPage,
 		nextPage,
 		prevPage,
+		getSelectedAmiibo,
+		clearSelectedAmiibo,
+		showAmiiboDetails,
+		hideAmiiboDetails,
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
