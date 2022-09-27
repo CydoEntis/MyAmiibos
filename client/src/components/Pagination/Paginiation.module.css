@@ -29,8 +29,8 @@
 	transition: hover ease-in-out 300ms;
 	cursor: pointer;
 	list-style: none;
-	background: #4cd8e6;
-	box-shadow: 0px 5px 0px #249ca8;
+	background: #12c7b7;
+	box-shadow: 0px 3px 0px #00957b;
 }
 
 .page--item:hover {
@@ -42,7 +42,6 @@
 .page--link {
 	background: transparent;
 	border: none;
-	color: #009beb;
 	font-size: 1.25rem;
 	cursor: pointer;
 	width: 100%;
@@ -64,7 +63,7 @@
 
 .page--prev,
 .page--next {
-	background: #4cd8e6;
+	background: #12c7b7;
 }
 
 .page--prev button,
@@ -77,7 +76,7 @@
 }
 
 .active {
-	background: #4cd8e6;
-	box-shadow: 0px 2px 0px #249ca8;
+	background: #0e9b90;
+	box-shadow: 0px 3px 0px #016b59;
 	transform: translateY(2px);
 }
