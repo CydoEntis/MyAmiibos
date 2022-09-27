@@ -1,12 +1,14 @@
 import React from 'react'
 
 import classes from "./Filter.module.css";
-import SearchContainer from './SearchContainer';
+import SearchBar from './SearchBar';
+import FilterOptions from './FilterOptions';
 
 const Filter = () => {
   return (
     <div className={classes['filter--container']}>
-      <SearchContainer/>
+      <SearchBar />
+      <FilterOptions />
     </div>
   )
 }

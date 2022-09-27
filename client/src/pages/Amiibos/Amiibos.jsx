@@ -6,7 +6,7 @@ import Footer from '../../components/Footer/Footer';
 import Loading from '../../components/Spinners/Loading';
 
 import MainWrapper from '../../components/Wrappers/MainWrapper';
-import SearchContainer from '../../components/Search/SearchContainer';
+import SearchContainer from '../../components/Search/FilterOptions';
 import { useAppContext } from '../../context/appContext';
 import AmiiboDetail from '../../components/Amiibo/AmiiboDetails/AmiiboDetail/AmiiboDetail';
 import Filter from '../../components/Search/Filter';

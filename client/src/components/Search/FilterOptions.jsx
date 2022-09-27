@@ -1,24 +1,11 @@
-import React, { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React from 'react';
 import { useAppContext } from '../../context/appContext';
 import Button from '../UI/Buttons/Button';
-import SearchBar from './SearchBar';
 
-import classes from './SearchContainer.module.css';
+import classes from './FilterOptions.module.css';
 
-const SearchContainer = () => {
+const FilterOptions = () => {
 	const { fetchAmiibos } = useAppContext();
-	const [searchParams, setSearchParams] = useSearchParams();
-
-	const getAmiibo = async (value) => {
-		if(value === '') {
-			console.log(value);
-			await fetchAmiibos({type: 'all'})
-		} else {
-			await fetchAmiibos({type: 'search', charName: value})
-		}
-
-	}
 
 	const getAllAmiibos = async () => {
 		await fetchAmiibos({ type: 'all' });
@@ -37,7 +24,6 @@ const SearchContainer = () => {
 	};
 	return (
 		<div>
-			<SearchBar className={`${classes.btn} ${classes['btn--search']}`} getAmiibo={getAmiibo}/>
 			<div className={classes['filter-options']}>
 				<Button
 					className={`${classes.btn} ${classes['btn--all']}`}
@@ -68,4 +54,4 @@ const SearchContainer = () => {
 	);
 };
 
-export default SearchContainer;
+export default FilterOptions;

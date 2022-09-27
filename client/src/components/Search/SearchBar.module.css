@@ -3,6 +3,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	padding-bottom: .5rem;
+	border-bottom: 2px solid #E1E1E1;
 }
 
 .searchbar {
