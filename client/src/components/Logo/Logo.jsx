@@ -1,12 +1,11 @@
 import React from 'react'
-import logo from "../../assets/images/logo.png"
-
+import { Link } from 'react-router-dom'
 import classes from "./Logo.module.css";
 
 const Logo = ({className}) => {
   const logoClasses = `${className} ${classes.logo}`;
   return (
-      <h3 className={logoClasses}>Amiibo<span>Party</span></h3>
+      <Link to="/amiibos" className={logoClasses}>Amiibo<span>Party</span></Link>
   )
 }
 
