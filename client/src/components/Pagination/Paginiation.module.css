@@ -81,3 +81,18 @@
 	box-shadow: 0px 3px 0px #016b59;
 	transform: translateY(2px);
 }
+
+@media only screen and (min-width: 1440px) {
+	.page--item {
+		width: 100px;
+		height: 55px;
+	}
+
+	.pages {
+		max-width: 600px;
+	}
+
+	.page--link {
+		font-size: 1.75rem;
+	}
+}

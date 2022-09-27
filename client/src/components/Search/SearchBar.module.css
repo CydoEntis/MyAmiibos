@@ -37,6 +37,7 @@
 	justify-content: center;
 	align-items: center;
 	margin-left: .5rem;
+	margin-bottom: 3px;
 }
 
 @media screen and (min-width: 460px) {
@@ -48,11 +49,22 @@
 		width: 100%;
 		max-width: 500px;
 		height: 50px;
-		border-radius: 0.4rem 0 0 0.4rem;
 		border: 2px solid #ccc;
-		border-right: none;
 		padding: 0.5rem;
 		font-size: 1.075rem;
 		margin: 0;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.searchbar {
+		height: 65px;
+		font-size: 1.25rem;
+	}
+
+	.search--btn {
+		height: 65px;
+		width: 65px;
+		font-size: 1.75rem;
 	}
 }

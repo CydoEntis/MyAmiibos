@@ -27,3 +27,15 @@
   color: #707070;
   padding: .25rem;
 }
+
+@media only screen and (min-width: 2560px) {
+  .btn--add {
+    padding: 1.25rem;
+    font-size: 1.75rem;
+  }
+
+  .link {
+    font-size: 1.5rem;
+    padding: .75rem;
+  }
+}

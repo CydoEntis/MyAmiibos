@@ -8,43 +8,14 @@
 	position: relative;
 }
 
-.btn {
-	color: #fff;
-	margin: 0.15rem;
-	border-radius: 0.4rem;
-	min-width: 75px;
-	font-size: 0.9rem;
-	transition: all ease-in-out 250ms;
-	cursor: pointer;
-	padding: .5rem;
-}
-
-
-
-.btn--all {
-	background: #009beb;
-	box-shadow: 0px 5px 0px #006ea6;
-}
-
-.btn--figures {
-	background: #e6001e;
-	box-shadow: 0px 5px 0px #a70016;
-}
-
-.btn--cards {
-	background: #f5aa00;
-	box-shadow: 0px 5px 0px #b27d00;
-}
-
-.btn--yarn {
-	background: #e62d8c;
-	box-shadow: 0px 5px 0px #941d5b;
-}
-
 @media only screen and (min-width: 460px) {
 	.btn--search {
 		max-width: 75px;
 		border-radius: 0 0.4rem 0.4rem 0;
 		height: 50px;
 	}
+}
+
+@media only screen and (min-width: 768px) {
+
 }
