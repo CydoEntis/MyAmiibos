@@ -9,7 +9,7 @@ import Logo from '../Logo/Logo';
 import Mario from '../../assets/images/mario.png';
 import Luigi from '../../assets/images/luigi.png';
 import Yoshi from '../../assets/images/yoshi.png';
-import AmiiboCard from '../Amiibo/AmiiboCard';
+import AmiiboCard from '../Amiibo/AmiiboCard/AmiiboCard';
 
 const amiibos = [
 	{

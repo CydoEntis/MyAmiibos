@@ -7,6 +7,7 @@ import Button from '../../../UI/Buttons/Button';
 import classes from './AmiiboDetail.module.css';
 import { FaTimes } from 'react-icons/fa';
 import DetailText from '../DetailText/DetailText';
+import DetailControls from '../DetailControls/DetailControls';
 
 const Overlay = () => {
 	return <div className={classes.overlay}></div>;
@@ -37,11 +38,11 @@ const AmiiboDetail = () => {
 					/>
 				</div>
 
-				<h3>{selectedAmiibo.name}</h3>
+				<h3 className={classes.characterName}>{selectedAmiibo.name}</h3>
 				<DetailText category='Type' text={selectedAmiibo.type} />
 				<DetailText category='Game Series' text={selectedAmiibo.gameSeries} />
 				<DetailText category='Release Date' text={selectedAmiibo.release.na} />
-				
+				<DetailControls />
 			</div>
 			{/* <Modal
 				open={isOpen}

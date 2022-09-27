@@ -1,5 +1,5 @@
 import React from 'react';
-import AmiiboCard from './AmiiboCard';
+import AmiiboCard from '../AmiiboCard/AmiiboCard';
 
 import classes from './AmiiboList.module.css';
 

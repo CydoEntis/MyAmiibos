@@ -1,0 +1,20 @@
+.detail {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #707070;
+}
+
+.category {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+  padding: .25rem;
+}
+
+.text {
+  font-weight: bold;
+  font-size: 18px;
+}
