@@ -4,7 +4,8 @@
 	right: 0;
 	bottom: 0;
 	/* left: 0; */
-	background: white;
+	/* background: white; */
+	background: url('https://external-preview.redd.it/FvWw8abLQYxU9ZiQYffjk9cAWhNZGBqL7YcIFY99xS8.png?auto=webp&s=1402b1e236cdbf552608f9e474a53b2396549244');
 	color: #333;
 	overflow-y: hidden;
 	animation: slideOut 350ms linear;
