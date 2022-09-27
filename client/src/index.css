@@ -28,10 +28,10 @@ body {
   background: rgb(168, 254, 168);
 }
 
-.active {
+/* .active {
 	color: #fff !important;
 	background: #009beb !important;
-}
+} */
 
 .main-nav {
   display: none;

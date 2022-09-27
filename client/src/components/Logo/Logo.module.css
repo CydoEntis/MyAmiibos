@@ -8,6 +8,7 @@
 	cursor: pointer;
 	transition: all ease-in-out 350ms;;
 	max-width: 175px;
+	max-height: 55px;
 	text-align: center;
 	display: flex;
 	justify-content: center;
