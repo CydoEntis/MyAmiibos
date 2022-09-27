@@ -1,15 +1,13 @@
 .search {
 	margin: 0 auto;
 	display: flex;
-	justify-content: center;
 	align-items: center;
-	padding-bottom: .5rem;
-	border-bottom: 2px solid #E1E1E1;
+	width: 100%;
 }
 
 .searchbar {
-	width: 100%;
-	max-width: 500px;
+	width: 95%;
+	/* max-width: 500px; */
 	height: 45px;
 	border-radius: 0.4rem;
 	border: none;
@@ -17,7 +15,6 @@
 	padding: 0.5rem;
 	font-size: 1.075rem;
 	margin: 0.5rem 0;
-
 }
 
 .searchbar:focus {
@@ -46,8 +43,6 @@
 	}
 
 	.searchbar {
-		width: 100%;
-		max-width: 500px;
 		height: 50px;
 		border: 2px solid #ccc;
 		padding: 0.5rem;

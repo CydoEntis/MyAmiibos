@@ -5,3 +5,9 @@
   border-radius: .4rem;
   background: #fff;
 }
+
+@media only screen and (min-width: 768px) {
+  .dropdown--list {
+    width: 200px;
+  }
+}

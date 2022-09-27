@@ -1,16 +1,24 @@
 .dropdown--item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 150px;
-  height: 35px;
-  margin: .15rem 0;
-  cursor: pointer;
-  transition: ease-in-out all 350ms;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	width: 150px;
+	height: 35px;
+	margin: 0.15rem 0;
+	cursor: pointer;
+	transition: ease-in-out all 350ms;
 }
 
 .dropdown--item:hover {
-  background: rgba(18, 199, 183, .35);
-  color: #fff;
+	background: rgba(18, 199, 183, 0.35);
+	color: #fff;
+}
+
+@media only screen and (min-width: 768px) {
+	.dropdown--item {
+		width: 200px;
+		height: 50px;
+    font-size: 1.15rem;
+	}
 }

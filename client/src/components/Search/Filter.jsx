@@ -2,13 +2,13 @@ import React from 'react'
 
 import classes from "./Filter.module.css";
 import SearchBar from './SearchBar';
-import FilterOptions from './FilterOptions';
+import Dropdown from '../UI/Dropdown/Dropdown';
 
 const Filter = () => {
   return (
     <div className={classes['filter--container']}>
       <SearchBar />
-      <FilterOptions />
+      <Dropdown />
     </div>
   )
 }
