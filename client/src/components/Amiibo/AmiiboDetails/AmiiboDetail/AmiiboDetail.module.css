@@ -20,7 +20,7 @@
 	background-color: #fff;
 	z-index: 97;
 	max-height: 625px;
-	overflow: scroll;
+	overflow-y: scroll;
 }
 
 
@@ -37,6 +37,8 @@
   cursor: pointer;
   position: absolute;
   right: 1rem;
+	padding: .75rem;
+
 }
 
 .btn--close:hover {

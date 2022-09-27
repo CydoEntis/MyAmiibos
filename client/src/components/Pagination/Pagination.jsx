@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import classes from './Paginiation.module.css';
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go';
 import { useAppContext } from '../../context/appContext';
+import Button from '../UI/Buttons/Button';
 
 // TODO Reset pages every time the filter is changed.
 
@@ -70,13 +71,13 @@ const Pagination = () => {
 				<li
 					className={`${classes['page--item']} ${classes['page--prev']}`}
 				>
-					<button
+					<Button
 						type='button'
 						className={classes['page--link']}
 						onClick={goToPrevPage}
 					>
 						<GoChevronLeft />
-					</button>
+					</Button>
 				</li>
 				{currentPages.map((pageNumber) => (
 					<li
@@ -85,7 +86,7 @@ const Pagination = () => {
 						}`}
 						key={pageNumber}
 					>
-						<button
+						<Button
 							type='button'
 							className={`${classes['page--link']} ${
 								pageNumber === currentPage
@@ -95,19 +96,19 @@ const Pagination = () => {
 							onClick={() => goToPage(pageNumber)}
 						>
 							{pageNumber}
-						</button>
+						</Button>
 					</li>
 				))}
 				<li
 					className={`${classes['page--item']} ${classes['page--next']}`}
 				>
-					<button
+					<Button
 						type='button'
 						className={classes['page--link']}
 						onClick={goToNextPage}
 					>
 						<GoChevronRight />
-					</button>
+					</Button>
 				</li>
 			</ul>
 		</nav>
