@@ -7,6 +7,18 @@
   border-radius: .4rem;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.filter {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.filter h3 {
+  color: #707070;
+  margin-right: .75rem;
 }
 
 @media only screen and (min-width: 768px) {

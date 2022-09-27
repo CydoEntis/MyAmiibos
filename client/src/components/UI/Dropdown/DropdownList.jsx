@@ -34,8 +34,8 @@ const DropdownList = ({ setIsOpen, setFilter }) => {
 	return (
 		<div className={classes['dropdown--list']}>
 			<DropdownItem text='All' onClick={getAllAmiibos} />
-			<DropdownItem text='Figures' onClick={getAllFigures} />
-			<DropdownItem text='Cards' onClick={getAllCards} />
+			<DropdownItem text='Figure' onClick={getAllFigures} />
+			<DropdownItem text='Card' onClick={getAllCards} />
 			<DropdownItem text='Yarn' onClick={getAllYarn} />
 		</div>
 	);
