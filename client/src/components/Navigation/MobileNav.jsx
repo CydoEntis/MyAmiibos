@@ -14,12 +14,16 @@ const MobileNav = ({ toggle }) => {
 		<>
 			{toggle && (
 				<nav className={mobileNavClasses}>
-					<Logo />
+					<div className={classes['mobile--logo']}>
+						<Logo className={classes['logo--large']}/>
+					</div>
 					<ul>
 						<li>
 							<NavLink
 								className={({ isActive }) =>
-									isActive ? classes.active : ''
+									isActive
+										? classes.active
+										: classes['btn--nav']
 								}
 								to='/amiibos'
 							>
@@ -29,7 +33,9 @@ const MobileNav = ({ toggle }) => {
 						<li>
 							<NavLink
 								className={({ isActive }) =>
-									isActive ? classes.active : ''
+									isActive
+										? classes.active
+										: classes['btn--nav']
 								}
 								to='/amiibos/my-collection'
 							>

@@ -4,9 +4,9 @@ import logo from "../../assets/images/logo.png"
 import classes from "./Logo.module.css";
 
 const Logo = ({className}) => {
-  const logoClasses = `${className} ${classes["logo-container"]}`;
+  const logoClasses = `${className} ${classes.logo}`;
   return (
-      <h3 className={classes.logo}>Amiibo<span>Party</span></h3>
+      <h3 className={logoClasses}>Amiibo<span>Party</span></h3>
   )
 }
 
