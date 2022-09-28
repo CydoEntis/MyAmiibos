@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Hamburger from '../UI/Buttons/Hamburger';
 import MobileNav from './MobileNav';
-import Tab from '../UI/Tabs/Tab';
 
 import classes from './Navbar.module.css';
 import Logo from '../Logo/Logo';
@@ -39,7 +38,7 @@ const Navbar = () => {
 									Amiibos
 								</NavLink>
 								<NavLink
-									to='/amiibos/collection'
+									to='/collection'
 									className={({ isActive }) =>
 										isActive ? classes.active : classes.tab
 									}
@@ -47,7 +46,7 @@ const Navbar = () => {
 									My Collection
 								</NavLink>
 								<NavLink
-									to='/amiibos/wishlist'
+									to='/wishlist'
 									className={({ isActive }) =>
 										isActive ? classes.active : classes.tab
 									}

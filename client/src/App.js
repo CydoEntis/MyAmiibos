@@ -1,7 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Auth } from './pages';
+import ProtectedRoute from './pages/ProtectedRoute';
 import Dashboard from './pages/Dashboard';
 import Amiibos from './pages/Amiibos/Amiibos';
+import MyAmiibos from './pages/Amiibos/MyAmiibos';
+import Wishlist from './pages/Amiibos/Wishlist';
 
 import './App.css';
 
@@ -10,7 +13,6 @@ function App() {
 		<BrowserRouter>
 			<Routes>
 				<Route path='/' element={<Dashboard />} />
-				<Route path='/amiibos' element={<Amiibos />} />
 				<Route
 					path='/auth'
 					element={
@@ -19,7 +21,30 @@ function App() {
 						</div>
 					}
 				/>
-				<Route path='/landing' element={<div>Landing</div>} />
+				<Route
+					path='/amiibos'
+					element={
+						<ProtectedRoute>
+							<Amiibos />
+						</ProtectedRoute>
+					}
+				/>
+				<Route
+					path='/collection'
+					element={
+						<ProtectedRoute>
+							<MyAmiibos />
+						</ProtectedRoute>
+					}
+				/>
+				<Route
+					path='/wishlist'
+					element={
+						<ProtectedRoute>
+							<Wishlist />
+						</ProtectedRoute>
+					}
+				/>
 			</Routes>
 		</BrowserRouter>
 	);
