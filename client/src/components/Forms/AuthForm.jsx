@@ -77,8 +77,8 @@ const AuthForm = () => {
 
 	const btnText = values.isMember ? 'Login' : 'Sign Up';
 
-	const loginClasses = `${classes.btn} ${classes['btn-login']}`;
-	const registerClasses = `${classes.btn} ${classes['btn-register']}`;
+	const loginClasses = `${classes.btn} ${classes['btn--login']}`;
+	const registerClasses = `${classes.btn} ${classes['btn--register']}`;
 
 	return (
 		<Card className={classes['auth-card']}>
@@ -88,21 +88,21 @@ const AuthForm = () => {
 				<FormRow
 					name='email'
 					type='email'
-					labelText='Email'
+					placeholder='Email'
 					onChange={onChangeHandler}
 				/>
 				{!values.isMember && (
 					<FormRow
 						name='username'
 						type='text'
-						labelText='Username'
+						placeholder='Username'
 						onChange={onChangeHandler}
 					/>
 				)}
 				<FormRow
 					name='password'
 					type='password'
-					labelText='Password'
+					placeholder='Password'
 					onChange={onChangeHandler}
 				/>
 				<Button
@@ -117,7 +117,7 @@ const AuthForm = () => {
 						? "Don't have an account?"
 						: 'Already have an Account?'}
 				</p>
-				<Button className={classes['btn-alt']} onClick={toggleMember}>
+				<Button className={`${classes.btn} ${classes['btn--alt']}`} onClick={toggleMember}>
 					{values.isMember ? 'Create an Account' : 'Login'}
 				</Button>
 			</div>

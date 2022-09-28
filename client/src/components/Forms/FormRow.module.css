@@ -8,14 +8,19 @@
 .form-row label {
   padding: .5rem 0;
   font-size: 1.25rem;
+  color: #707070;
 }
 
 .form-row input {
-  height: 3rem;
-  border: 2px solid #BBB;
-  border-radius: .4rem;
-  padding: .75rem;
-  font-size: 1.25rem;
+	width: 95%;
+	/* max-width: 500px; */
+	height: 45px;
+	border-radius: 0.4rem;
+	border: none;
+	box-shadow: inset 0px 3px 0px RGBA(0, 0, 0, 0.1);
+	padding: 0.5rem;
+	font-size: 1.075rem;
+	margin: 0.5rem auto;
 }
 
 .form-row input:focus,

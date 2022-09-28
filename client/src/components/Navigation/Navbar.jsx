@@ -6,9 +6,12 @@ import Tab from '../UI/Tabs/Tab';
 
 import classes from './Navbar.module.css';
 import Logo from '../Logo/Logo';
+import { useAppContext } from '../../context/appContext';
 
 const Navbar = () => {
 	const [toggleMenu, setToggleMenu] = useState(false);
+
+	const { token } = useAppContext();
 
 	const toggleMenuHandler = () => {
 		setToggleMenu((prevState) => !prevState);
@@ -25,30 +28,46 @@ const Navbar = () => {
 						toggle={toggleMenu}
 					/>
 					<div className={classes['nav--desktop']}>
-						<NavLink
-							to='/amiibos'
-							className={({ isActive }) =>
-								isActive ? classes.active : classes.tab
-							}
-						>
-							Amiibos
-						</NavLink>
-						<NavLink
-							to='/amiibos/collection'
-							className={({ isActive }) =>
-								isActive ? classes.active : classes.tab
-							}
-						>
-							My Collection
-						</NavLink>
-						<NavLink
-							to='/amiibos/wishlist'
-							className={({ isActive }) =>
-								isActive ? classes.active : classes.tab
-							}
-						>
-							My Wishlist
-						</NavLink>
+						{token && (
+							<>
+								<NavLink
+									to='/amiibos'
+									className={({ isActive }) =>
+										isActive ? classes.active : classes.tab
+									}
+								>
+									Amiibos
+								</NavLink>
+								<NavLink
+									to='/amiibos/collection'
+									className={({ isActive }) =>
+										isActive ? classes.active : classes.tab
+									}
+								>
+									My Collection
+								</NavLink>
+								<NavLink
+									to='/amiibos/wishlist'
+									className={({ isActive }) =>
+										isActive ? classes.active : classes.tab
+									}
+								>
+									My Wishlist
+								</NavLink>
+							</>
+						)}
+						{!token && (
+							<>
+								<NavLink
+									to='/auth'
+									className={({ isActive }) =>
+										isActive ? classes.active : classes.tab
+									}
+								>
+									Login/Signup
+								</NavLink>
+							</>
+						)}
 					</div>
 				</div>
 			</ul>

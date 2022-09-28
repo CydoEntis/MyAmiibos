@@ -5,7 +5,7 @@ import classes from "./Logo.module.css";
 const Logo = ({className}) => {
   const logoClasses = `${className} ${classes.logo}`;
   return (
-      <Link to="/amiibos" className={logoClasses}>Amiibo<span>Party</span></Link>
+      <Link to="/" className={logoClasses}>Amiibo<span>Party</span></Link>
   )
 }
 

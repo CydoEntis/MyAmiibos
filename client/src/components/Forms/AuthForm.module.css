@@ -1,45 +1,63 @@
 .auth-card {
-  max-width: 650px;
-  width: 95%;
-  margin-top: 100px;
+	max-width: 650px;
+	width: 95%;
+	margin-top: 100px;
+  background: #f6f6f6;
+  border: 1px solid RGBA(0, 0, 0, 0.2);
+	box-shadow: 0px 7px 0px RGBA(0, 0, 0, 0.2);
 }
 
 .logo {
-  margin: 1rem auto;
+	margin: 1rem auto;
 }
 
 .btn {
-  color: #FFF;
-  margin: .5rem auto;
-  max-width: 300px;
-  min-width: 250px;
+	color: #fff;
+	margin: 0.5rem auto;
+	max-width: 300px;
+	min-width: 250px;
+	padding: 0.75rem;
+	font-size: 1.05rem;
+	border-radius: 0.4rem;
 }
 
-.btn:hover,
-.btn:focus {
-  opacity: .85;
-  transform: scale(1.1);
+.btn--login {
+	background: #12c7b7;
+	box-shadow: 0px 5px 0px #00957b;
+  margin-bottom: 2rem;
+  margin-left: 1rem;
 }
 
-.btn-login {
-  background: #009BEB;
+.btn--register {
+	background: #fa603f;
+	box-shadow: 0px 5px 0px #d5492b;
+  margin-bottom: 2rem;
+  margin-left: 1rem;
 }
 
-.btn-register {
-  background: #E60012;
+.btn--alt {
+	min-width: 225px;
+	display: block;
+	margin: 1rem auto;
+  background: #e1e1e1;
+	box-shadow: 0px 3px 0px #959595;
+  color: #707070;
 }
 
-.btn-alt {
-  min-width: 225px;
-  border: 1px solid #C8C8C8;
-  color: #333;
-  display: block;
-  margin: 1rem auto;
+.btn--login:hover,
+.btn--login:focus {
+  transform: translateY(2px);
+  box-shadow: 0px 2px 0px #00957b;
 }
 
-.btn-alt:hover {
-  background: #C8C8C8;
+.btn--register:hover,
+.btn--register:focus {
+  transform: translateY(2px);
+  box-shadow: 0px 2px 0px #d5492b;
 }
 
-.form-controls {
+.btn--alt:hover,
+.btn--alt:focus {
+  transform: translateY(2px);
+  box-shadow: 0px 2px 0px #959595;
 }
