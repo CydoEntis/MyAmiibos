@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Amiibos from './pages/Amiibos/Amiibos';
 import MyAmiibos from './pages/Amiibos/MyAmiibos';
 import Wishlist from './pages/Amiibos/Wishlist';
+import Error from './pages/Error';
 
 import './App.css';
 
@@ -45,6 +46,7 @@ function App() {
 						</ProtectedRoute>
 					}
 				/>
+				<Route path='*' element={<Error />} />
 			</Routes>
 		</BrowserRouter>
 	);
