@@ -43,16 +43,16 @@
 
 @media only screen and (min-width: 768px) {
   .dropdown {
-    min-width: 200px;
-    height: 50px;
+    min-width: 125px;
+    height: 40px;
   }
 
   .dropdown--text {
-    font-size: 1.35rem;
+    font-size: 1.05rem;
   }
   
   .dropdown--icon {
-    font-size: 1.35rem;
+    font-size: 1.05rem;
   }
 }
 

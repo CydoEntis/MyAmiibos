@@ -3,8 +3,8 @@
 	flex-direction: column;
 	justify-content: space-evenly;
 	position: relative;
-	width: 150px;
-	height: 200px;
+	width: 160px;
+	height: 235px;
 	margin: .5rem .3rem ;
 	border-radius: 0.8rem;
 	transition: all 300ms ease-in-out;
@@ -64,8 +64,8 @@
 
 @media only screen and (min-width: 475px) {
 	.card {
-		width: 200px;
-		height: 250px;
+		width: 230px;
+		height: 320px;
 		margin: .5rem .3rem ;
 	}
 
@@ -82,8 +82,8 @@
 
 @media only screen and (min-width: 1440px) {
 	.card {
-		width: 225px;
-		height: 300px;
+		width: 275px;
+		height: 380px;
 		margin: .5rem .3rem ;
 	}
 
@@ -94,19 +94,22 @@
 	}
 
 	.amiibo--name {
-		font-size: 1.25rem;
+		font-size: 1.35rem;
 		color: #707070;
 	}
 	
-
-	
 	.image-container {
+		padding: 1rem 0;
 		margin: 0 auto;
-		height: 150px;
+		height: 225px;
+	}
+
+	.amiibo--series {
+		font-size: 1.1rem;
 	}
 }
 
-@media only screen and (min-width: 2560px) {
+/* @media only screen and (min-width: 2560px) {
 	.card {
 		width: 300px;
 		height: 400px;
@@ -126,4 +129,4 @@
 	.amiibo--series {
 		font-size: 1.25rem;
 	}
-}
+} */
