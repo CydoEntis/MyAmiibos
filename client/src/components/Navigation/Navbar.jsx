@@ -22,10 +22,7 @@ const Navbar = () => {
 				<Logo className={classes['nav--logo']} />
 				<div className={classes['nav--options']}>
 					{!toggleMenu && <Hamburger onClick={toggleMenuHandler} />}
-					<MobileNav
-						onClick={toggleMenuHandler}
-						toggle={toggleMenu}
-					/>
+					<MobileNav toggleMenu={toggleMenuHandler} toggle={toggleMenu} />
 					<div className={classes['nav--desktop']}>
 						{token && (
 							<>

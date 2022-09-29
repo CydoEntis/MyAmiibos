@@ -59,6 +59,12 @@ const reducer = (state, action) => {
 				alertType: 'danger',
 				alertText: action.payload.msg,
 			};
+		case LOGOUT_USER :
+			return {
+				...state,
+				user: null,
+				token: null,
+			}
 		case GET_AMIIBOS_LOADING:
 			return {
 				...state,

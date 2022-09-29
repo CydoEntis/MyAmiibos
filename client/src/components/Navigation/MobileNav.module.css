@@ -48,11 +48,11 @@
 	border-radius: 0.4rem;
 }
 
-.mobile-nav ul li:last-of-type {
+/* .mobile-nav ul li:last-of-type {
 	margin: 100px auto;
 	background: #fa603f;
 	box-shadow: 0px 5px 0px #d5492b;
-}
+} */
 
 .mobile-nav ul li a {
 	display: block;
