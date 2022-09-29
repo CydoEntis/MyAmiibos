@@ -23,14 +23,14 @@
 
 .btn--login {
 	background: #12c7b7;
-	box-shadow: 0px 5px 0px #00957b;
+	box-shadow: 0px 7px 0px #00957b;
   margin-bottom: 2rem;
   margin-left: 1rem;
 }
 
 .btn--register {
 	background: #fa603f;
-	box-shadow: 0px 5px 0px #d5492b;
+	box-shadow: 0px 7px 0px #d5492b;
   margin-bottom: 2rem;
   margin-left: 1rem;
 }
@@ -40,24 +40,24 @@
 	display: block;
 	margin: 1rem auto;
   background: #e1e1e1;
-	box-shadow: 0px 3px 0px #959595;
+	box-shadow: 0px 7px 0px #959595;
   color: #707070;
 }
 
 .btn--login:hover,
 .btn--login:focus {
   transform: translateY(2px);
-  box-shadow: 0px 2px 0px #00957b;
+  box-shadow: 0px 5px 0px #00957b;
 }
 
 .btn--register:hover,
 .btn--register:focus {
   transform: translateY(2px);
-  box-shadow: 0px 2px 0px #d5492b;
+  box-shadow: 0px 5px 0px #d5492b;
 }
 
 .btn--alt:hover,
 .btn--alt:focus {
   transform: translateY(2px);
-  box-shadow: 0px 2px 0px #959595;
+  box-shadow: 0px 5px 0px #959595;
 }

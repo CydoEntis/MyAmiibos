@@ -5,7 +5,7 @@
 	border-radius: 0.4rem;
 	height: 35px;
 	background: #e1e1e1;
-	box-shadow: 0px 3px 0px #959595;
+	box-shadow: 0px 7px 0px #959595;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,6 +13,12 @@
   cursor: pointer;
   transition: all ease-in-out 350ms;
   position: relative;
+}
+
+.dropdown:focus,
+.dropdown:hover {
+  transform: translateY(2px);
+  box-shadow: 0px 5px 0px #959595;
 }
 
 .dropdown--text {

@@ -27,6 +27,12 @@
 
 .tab {
   display: none;
+  transition: all ease-in-out 350ms;
+}
+
+.tab:hover,
+.active:hover {
+  filter: brightness(85%);
 }
 
 .active {
