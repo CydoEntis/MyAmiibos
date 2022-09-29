@@ -19,7 +19,7 @@ const Navbar = () => {
 	return (
 		<nav className={classes['nav--main']}>
 			<ul className={classes['nav--list']}>
-				<Logo className={classes['nav--logo']} />
+				<Logo onClick={toggleMenu} className={classes['nav--logo']} />
 				<div className={classes['nav--options']}>
 					{!toggleMenu && <Hamburger onClick={toggleMenuHandler} />}
 					<MobileNav toggleMenu={toggleMenuHandler} toggle={toggleMenu} />

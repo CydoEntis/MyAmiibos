@@ -19,7 +19,7 @@
 }
 
 .logo:hover {
-	box-shadow: 0px 5px 0px #006699;
+	box-shadow: 0px 5px 0px #00957b;
 	transform: translateY(2px); 
 	filter: brightness(85%)
 }

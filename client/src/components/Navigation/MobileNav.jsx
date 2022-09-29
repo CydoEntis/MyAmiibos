@@ -26,7 +26,7 @@ const MobileNav = ({ toggle, toggleMenu }) => {
 					<FaTimes />
 				</Button>
 				<div className={classes['mobile--logo']}>
-					<Logo className={classes['logo--large']} />
+					<Logo toggleMenu={toggleMenu} className={classes['logo--large']} />
 				</div>
 				<ul>
 					{user && (
