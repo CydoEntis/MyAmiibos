@@ -65,7 +65,7 @@
 }
 
 .characterName {
-	font-size: 2rem;
+	font-size: 1.5rem;
 	text-align: center;
 	color: #707070;
 	font-weight: bold;
@@ -80,17 +80,17 @@
 
 @media only screen and (min-width: 2560px) {
 	.details {
-		max-width: 1200px;
+		max-width: 850px;
 		max-height: 1000px;
 		overflow: hidden;
 	}
 
 	.detail__image-wrapper {
-		width: 250px;
+		width: 200px;
 	}
 
 	.icon--close {
-		font-size: 3rem;
+		font-size: 1.5rem;
 	}
 }
 

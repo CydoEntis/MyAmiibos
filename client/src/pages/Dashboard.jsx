@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navigation/Navbar';
-import MainWrapper from '../components/Wrappers/MainWrapper';
 import Footer from '../components/Footer/Footer';
 
 import AmiiboList from '../assets/images/amiibo-list.png';

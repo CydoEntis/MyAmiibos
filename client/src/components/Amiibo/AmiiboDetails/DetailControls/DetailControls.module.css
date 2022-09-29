@@ -30,12 +30,12 @@
 
 @media only screen and (min-width: 2560px) {
   .btn--add {
-    padding: 1.25rem;
-    font-size: 1.75rem;
+    padding: .75rem;
+    font-size: 1.25rem;
   }
 
   .link {
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding: .75rem;
   }
 }
