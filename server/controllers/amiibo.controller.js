@@ -1,0 +1,3 @@
+const getAmiibos = (req, res) => {
+  
+}
