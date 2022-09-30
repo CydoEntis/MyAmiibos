@@ -30,7 +30,7 @@ const getAmiibo = async (req, res) => {
 	}
 };
 
-const collectAmiibo = async (req, res) => {
+const saveAmiibo = async (req, res) => {
 	const {
 		amiiboSeries,
 		character,
@@ -40,9 +40,11 @@ const collectAmiibo = async (req, res) => {
 		release,
 		type,
 		amiiboId,
+		collected,
+		wishlisted
 	} = req.body;
 	try {
-		const amiibo = await Amiibo.create({
+		const newAmiibo = await Amiibo.create({
 			amiiboSeries,
 			character,
 			gameSeries,
@@ -51,19 +53,47 @@ const collectAmiibo = async (req, res) => {
 			release,
 			type,
 			amiiboId,
-			collected: true,
-			wishlistAmiibo: false,
+			collected,
+			wishlisted
 		});
 
 		res.status(StatusCodes.CREATED).json({
-			amiibo,
+			amiibo: newAmiibo,
 		});
 	} catch (error) {
 		console.log(error);
-		throw new BadRequestError('Amiibo could not be collected');
+		throw new BadRequestError('Amiibo could not be saved');
 	}
 };
 
-const wishlistAmiibo = (req, res) => {};
+const updateAmiibo = async (req, res) => {
+	const { amiiboId, wishlisted, collected } = req.body;
+	console.log(req.body);
+	try {
+		const foundAmiibo = await Amiibo.findOne({ amiiboId });
 
-export { getAmiibos, getAmiibo, collectAmiibo, wishlistAmiibo };
+		if (!foundAmiibo) {
+			throw new BadRequestError('Amiibo could not be collected');
+		}
+
+		const updatedAmiibo = await Amiibo.findOneAndUpdate({ amiiboId }, {
+			wishlisted,
+			collected
+		});
+
+		res.status(StatusCodes.CREATED).json({
+			amiibo: updatedAmiibo,
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+
+export {
+	getAmiibos,
+	getAmiibo,
+	saveAmiibo,
+	updateAmiibo,
+	wishlistAmiibo,
+};
