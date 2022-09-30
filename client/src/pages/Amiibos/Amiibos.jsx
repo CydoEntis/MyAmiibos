@@ -5,22 +5,21 @@ import Pagination from '../../components/Pagination/Pagination';
 import Footer from '../../components/Footer/Footer';
 import Loading from '../../components/Spinners/Loading';
 
-import MainWrapper from '../../components/Wrappers/MainWrapper';
+import MainWrapper from "../../components/Wrappers/MainWrapper"
 import { useAppContext } from '../../context/appContext';
 import AmiiboDetail from '../../components/Amiibo/AmiiboDetails/AmiiboDetail/AmiiboDetail';
-import Filter from '../../components/Search/Filter';
+import AmiiboForm from '../../components/Forms/AmiiboForm';
 
 const Amiibos = () => {
 	const {
 		isLoading,
-		amiiboList,
+		modifiedList,
 		fetchAmiibos,
 		currentPage,
 		limit,
 		numOfPages,
 	} = useAppContext();
 
-	console.log(amiiboList);
 
 	useEffect(() => {
 		fetchAmiibos({ type: 'all' });
@@ -28,19 +27,18 @@ const Amiibos = () => {
 
 	const indexOfLastAmiibo = currentPage * limit;
 	const indexOfFirstAmiibo = indexOfLastAmiibo - limit;
-	const currentAmiibos = amiiboList.slice(
+	const currentAmiibos = modifiedList.slice(
 		indexOfFirstAmiibo,
 		indexOfLastAmiibo
 	);
 
-	console.log(amiiboList);
 
 	return (
 		<>
 			<AmiiboDetail />
 			<Navbar />
 			<MainWrapper>
-				<Filter />
+				<AmiiboForm />
 				{isLoading && <Loading />}
 				{!isLoading && (
 					<>

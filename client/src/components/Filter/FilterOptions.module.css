@@ -1,4 +1,4 @@
-.dropdown--list {
+.filter--list {
   position: absolute;
   z-index: 98;
   border: 1px solid #e1e1e1;
@@ -9,7 +9,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .dropdown--list {
+  .filter--list {
     width: 200px;
     top: 10.8rem;
     left: 7rem;

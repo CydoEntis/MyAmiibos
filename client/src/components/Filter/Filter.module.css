@@ -1,4 +1,4 @@
-.dropdown {
+.filter {
 	margin: 0.5rem 0;
 	text-align: center;
   min-width: 150px;
@@ -15,19 +15,19 @@
   position: relative;
 }
 
-.dropdown:focus,
-.dropdown:hover {
+.filter:focus,
+.filter:hover {
   transform: translateY(2px);
   box-shadow: 0px 5px 0px #959595;
 }
 
-.dropdown--text {
+.filter--text {
 	color: #798b8f;
   width: 75%;
   font-weight: 500;
 }
 
-.dropdown--icon {
+.filter--icon {
   background: #c2c2c2;
   display: flex;
   justify-content: center;
@@ -42,16 +42,16 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .dropdown {
+  .filter {
     min-width: 125px;
     height: 40px;
   }
 
-  .dropdown--text {
+  .filter--text {
     font-size: 1.05rem;
   }
   
-  .dropdown--icon {
+  .filter--icon {
     font-size: 1.05rem;
   }
 }

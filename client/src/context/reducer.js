@@ -8,6 +8,9 @@ import {
 	GET_AMIIBOS_LOADING,
 	GET_AMIIBOS_SUCCESS,
 	GET_AMIIBOS_ERROR,
+	FILTER_AMIIBOS_LOADING,
+	FILTER_AMIIBOS_SUCCESS,
+	FILTER_AMIIBOS_ERROR,
 	GO_TO_PAGE,
 	NEXT_PAGE,
 	PREV_PAGE,
@@ -15,14 +18,6 @@ import {
 	CLEAR_AMIIBO,
 	SHOW_DETAILS,
 	HIDE_DETAILS,
-	ADD_TO_COLLECTION_LOADING,
-	ADD_TO_COLLECTION_SUCCESS,
-	ADD_TO_COLLECTION_ERROR,
-	REMOVE_FROM_COLLECTION_LOADING,
-	REMOVE_FROM_COLLECTION_SUCCESS,
-	REMOVE_FROM_COLLECTION_ERROR,
-	GET_ALL_AMIIBOS_LOADING,
-	GET_ALL_AMIIBOS,
 } from './actions';
 
 const reducer = (state, action) => {
@@ -61,29 +56,53 @@ const reducer = (state, action) => {
 				alertType: 'danger',
 				alertText: action.payload.msg,
 			};
-		case LOGOUT_USER :
+		case LOGOUT_USER:
 			return {
 				...state,
 				user: null,
 				token: null,
-			}
+			};
 		case GET_AMIIBOS_LOADING:
 			return {
 				...state,
 				isLoading: true,
-				
 			};
 		case GET_AMIIBOS_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
 				amiiboList: action.payload.amiiboList,
+				modifiedList: action.payload.amiiboList,
 				numOfPages: action.payload.numOfPages,
 				pageNumbers: action.payload.pageNumbers,
 				currentPage: 1,
 				// Add collected amiibos
 			};
 		case GET_AMIIBOS_ERROR:
+			return {
+				...state,
+				isLoading: false,
+				// TODO: Add error alerts
+			};
+		case FILTER_AMIIBOS_LOADING:
+			console.log("AmiiboList: ", state.amiiboList);
+			return {
+				...state,
+				isLoading: true,
+				modifiedList: state.amiiboList
+			};
+		case FILTER_AMIIBOS_SUCCESS:
+			console.log(action.payload.modifiedList);
+			return {
+				...state,
+				isLoading: false,
+				modifiedList: action.payload.modifiedList,
+				numOfPages: action.payload.numOfPages,
+				pageNumbers: action.payload.pageNumbers,
+				currentPage: 1,
+				// Add collected amiibos
+			};
+		case FILTER_AMIIBOS_ERROR:
 			return {
 				...state,
 				isLoading: false,
@@ -107,13 +126,13 @@ const reducer = (state, action) => {
 		case SELECT_AMIIBO:
 			return {
 				...state,
-				selectedAmiibo: action.payload.selectedAmiibo
-			}
+				selectedAmiibo: action.payload.selectedAmiibo,
+			};
 		case CLEAR_AMIIBO:
 			return {
 				...state,
-				selectedAmiibo: {}
-			}
+				selectedAmiibo: {},
+			};
 		case SHOW_DETAILS:
 			return {
 				...state,
@@ -123,35 +142,8 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				showDetails: false,
-				selectedAmiibo: action.payload.selectedAmiibo
+				selectedAmiibo: action.payload.selectedAmiibo,
 			};
-		case ADD_TO_COLLECTION_LOADING:
-			return {};
-		case ADD_TO_COLLECTION_SUCCESS:
-			return {};
-		case ADD_TO_COLLECTION_ERROR:
-			return {};
-		case REMOVE_FROM_COLLECTION_LOADING:
-			return {};
-		case REMOVE_FROM_COLLECTION_SUCCESS:
-			return {};
-		case REMOVE_FROM_COLLECTION_ERROR:
-			return {};
-		case GET_ALL_AMIIBOS_LOADING:
-			return {
-				...state,
-				isLoading: true,
-			}
-		case GET_ALL_AMIIBOS:
-			return {
-				...state,
-				isLoading: false,
-				myAmiibos: action.payload.amiibos,
-				collectedAmiibos: action.payload.collected,
-				numOfPages: action.payload.numOfPages,
-				pageNumbers: action.payload.pageNumbers,
-				currentPage: 1,
-			}
 		default:
 			throw new Error(`no such action : ${action.type}`);
 	}

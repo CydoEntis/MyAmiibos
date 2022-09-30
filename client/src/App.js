@@ -3,8 +3,6 @@ import { Auth } from './pages';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Dashboard from './pages/Dashboard';
 import Amiibos from './pages/Amiibos/Amiibos';
-import MyAmiibos from './pages/Amiibos/MyAmiibos';
-import Wishlist from './pages/Amiibos/Wishlist';
 import Error from './pages/Error';
 
 import './App.css';
@@ -27,22 +25,6 @@ function App() {
 					element={
 						<ProtectedRoute>
 							<Amiibos />
-						</ProtectedRoute>
-					}
-				/>
-				<Route
-					path='/collection'
-					element={
-						<ProtectedRoute>
-							<MyAmiibos />
-						</ProtectedRoute>
-					}
-				/>
-				<Route
-					path='/wishlist'
-					element={
-						<ProtectedRoute>
-							<Wishlist />
 						</ProtectedRoute>
 					}
 				/>

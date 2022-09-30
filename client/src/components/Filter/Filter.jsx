@@ -2,21 +2,21 @@ import React from 'react';
 import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 
-import classes from './Dropdown.module.css';
-import DropdownList from './DropdownList';
+import classes from './Filter.module.css';
+import DropdownList from './FilterOptions';
 
-const Dropdown = () => {
+const Filter = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [filter, setFilter] = useState("All");
 
-	const openDropdown = () => {
+	const openFilter = () => {
 		setIsOpen((prevState) => !prevState);
 	};
 	return (
 		<>
-			<div className={classes.dropdown} onClick={openDropdown}>
-				<div className={classes['dropdown--text']}>{filter}</div>
-				<div className={classes['dropdown--icon']}>
+			<div className={classes.filter} onClick={openFilter}>
+				<div className={classes['filter--text']}>{filter}</div>
+				<div className={classes['filter--icon']}>
 					<FaChevronDown />
 				</div>
 			</div>
@@ -25,4 +25,4 @@ const Dropdown = () => {
 	);
 };
 
-export default Dropdown;
+export default Filter;

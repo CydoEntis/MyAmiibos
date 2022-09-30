@@ -45,32 +45,6 @@ const MobileNav = ({ toggle, toggleMenu }) => {
 								</NavLink>
 							</li>
 							<li>
-								<NavLink
-									className={({ isActive }) =>
-										isActive
-											? classes.active
-											: classes['btn--nav']
-									}
-									to='/collection'
-									onClick={toggleMenu}
-								>
-									My Collection
-								</NavLink>
-							</li>
-							<li>
-								<NavLink
-									className={({ isActive }) =>
-										isActive
-											? classes.active
-											: classes['btn--nav']
-									}
-									to='/wishlist'
-									onClick={toggleMenu}
-								>
-									My Wishlist
-								</NavLink>
-							</li>
-							<li>
 								<Button className={classes['btn--logout']} onClick={handleLogout}>
 									Logout
 								</Button>

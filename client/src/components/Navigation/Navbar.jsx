@@ -25,7 +25,6 @@ const Navbar = () => {
 					<MobileNav toggleMenu={toggleMenuHandler} toggle={toggleMenu} />
 					<div className={classes['nav--desktop']}>
 						{token && (
-							<>
 								<NavLink
 									to='/amiibos'
 									className={({ isActive }) =>
@@ -34,23 +33,6 @@ const Navbar = () => {
 								>
 									Amiibos
 								</NavLink>
-								<NavLink
-									to='/collection'
-									className={({ isActive }) =>
-										isActive ? classes.active : classes.tab
-									}
-								>
-									My Collection
-								</NavLink>
-								<NavLink
-									to='/wishlist'
-									className={({ isActive }) =>
-										isActive ? classes.active : classes.tab
-									}
-								>
-									My Wishlist
-								</NavLink>
-							</>
 						)}
 						{!token && (
 							<>

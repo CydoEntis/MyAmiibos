@@ -1,4 +1,4 @@
-.dropdown--item {
+.filter--item {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -10,13 +10,13 @@
 	transition: ease-in-out all 350ms;
 }
 
-.dropdown--item:hover {
+.filter--item:hover {
 	background: rgba(18, 199, 183, 0.35);
 	color: #fff;
 }
 
 @media only screen and (min-width: 768px) {
-	.dropdown--item {
+	.filter--item {
 		width: 200px;
 		height: 50px;
     font-size: 1.15rem;

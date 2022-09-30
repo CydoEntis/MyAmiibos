@@ -10,6 +10,9 @@ import {
 	GET_AMIIBOS_LOADING,
 	GET_AMIIBOS_SUCCESS,
 	GET_AMIIBOS_ERROR,
+	FILTER_AMIIBOS_LOADING,
+	FILTER_AMIIBOS_SUCCESS,
+	FILTER_AMIIBOS_ERROR,
 	GO_TO_PAGE,
 	NEXT_PAGE,
 	PREV_PAGE,
@@ -17,14 +20,6 @@ import {
 	CLEAR_AMIIBO,
 	SHOW_DETAILS,
 	HIDE_DETAILS,
-	GET_ALL_AMIIBOS_LOADING,
-	GET_ALL_AMIIBOS,
-	// ADD_TO_COLLECTION_LOADING,
-	// ADD_TO_COLLECTION_SUCCESS,
-	// ADD_TO_COLLECTION_ERROR,
-	// REMOVE_FROM_COLLECTION_LOADING,
-	// REMOVE_FROM_COLLECTION_SUCCESS,
-	// REMOVE_FROM_COLLECTION_ERROR,
 } from './actions';
 import reducer from './reducer';
 
@@ -40,6 +35,7 @@ const initialState = {
 	user: user ? JSON.parse(user) : null,
 	token: token,
 	amiiboList: [],
+	modifiedList: [],
 	collectedCount: 0,
 	wishlistCount: 0,
 	page: 1,
@@ -145,32 +141,19 @@ const AppProvider = ({ children }) => {
 		removeUserFromLocalStorage();
 	};
 
-	const fetchAmiibos = async ({ type, charName = '' }) => {
+	const fetchAmiibos = async () => {
 		dispatch({ type: GET_AMIIBOS_LOADING });
-
-		// let endPoint = '';
-
-		// if (type === 'all') {
-		// 	endPoint = '';
-		// } else if (type === 'figure') {
-		// 	endPoint = '/?type=figure';
-		// } else if (type === 'card') {
-		// 	endPoint = '/?type=card';
-		// } else if (type === 'yarn') {
-		// 	endPoint = '/?type=yarn';
-		// } else if (type === 'search') {
-		// 	endPoint = '/?name=' + charName;
-		// }
 
 		try {
 			const { data: rawAmiibos } = await amiiboFetch();
-			const { data: adAmiibos } = await axios.get('/api/v1/amiibos/all');
+			const { data: dbAmiibos } = await axios.get('/api/v1/amiibos/all');
 
 			const formattedAmiibos = [];
 			for (let amiibo of rawAmiibos.amiibo) {
 				let amiiboId = amiibo.head + amiibo.tail;
 				let formattedAmiibo = {
-					amiiboSeres: amiibo.amiiboSeries,
+					name: amiibo.name,
+					amiiboSeries: amiibo.amiiboSeries,
 					character: amiibo.character,
 					gameSeries: amiibo.gameSeries,
 					head: amiibo.head,
@@ -183,7 +166,7 @@ const AppProvider = ({ children }) => {
 					amiiboId: amiiboId,
 				};
 
-				for (let myAmiibo of adAmiibos.amiibos) {
+				for (let myAmiibo of dbAmiibos.amiibos) {
 					if (amiiboId === myAmiibo.amiiboId) {
 						formattedAmiibo.collected = myAmiibo.collected;
 						formattedAmiibo.wishlisted = myAmiibo.wishlisted;
@@ -192,8 +175,6 @@ const AppProvider = ({ children }) => {
 
 				formattedAmiibos.push(formattedAmiibo);
 			}
-
-			console.log(formattedAmiibos);
 
 			dispatch({
 				type: GET_AMIIBOS_SUCCESS,
@@ -204,8 +185,7 @@ const AppProvider = ({ children }) => {
 					),
 					pageNumbers: [
 						...Array(
-							Math.ceil(formattedAmiibos.length / state.limit) +
-								1
+							Math.ceil(formattedAmiibos.length / state.limit) + 1
 						).keys(),
 					].slice(1),
 				},
@@ -216,6 +196,40 @@ const AppProvider = ({ children }) => {
 				payload: { msg: error.response.amiiboList.msg },
 			});
 		}
+	};
+
+	const filterAmiiboType = async ({ type }) => {
+		dispatch({ type: FILTER_AMIIBOS_LOADING });
+		if(type === "all") {
+			try {
+				await fetchAmiibos();
+				return;
+			} catch (error) {
+				dispatch({
+					type: FILTER_AMIIBOS_ERROR,
+					payload: { msg: error.response.msg },
+				});
+			}
+		}
+
+		const filteredAmiibos = state.amiiboList.filter((amiibo) => {
+			return amiibo.type.toLowerCase() === type.toLowerCase();
+		});
+
+		dispatch({
+			type: FILTER_AMIIBOS_SUCCESS,
+			payload: {
+				modifiedList: filteredAmiibos,
+				numOfPages: Math.ceil(
+					filteredAmiibos.length / state.limit
+				),
+				pageNumbers: [
+					...Array(
+						Math.ceil(filteredAmiibos.length / state.limit) + 1
+					).keys(),
+				].slice(1),
+			},
+		});
 	};
 
 	const goToPage = (newPage) => {
@@ -277,9 +291,11 @@ const AppProvider = ({ children }) => {
 	};
 
 	const saveAmiibo = async (amiiboData) => {
-		console.log(amiiboData);
 		try {
 			await axios.post('/api/v1/amiibos/save', amiiboData);
+
+			const amiibo = state.amiiboList.some(amiibo => amiibo.amiiboId === amiiboData.amiiboId);
+			console.log(amiibo);
 		} catch (error) {
 			console.log(error);
 		}
@@ -288,66 +304,13 @@ const AppProvider = ({ children }) => {
 	const updateAmiibo = async (amiiboData) => {
 		try {
 			await axios.post('/api/v1/amiibos/update', amiiboData);
+
+			const amiibo = state.amiiboList.find(amiibo => amiibo.amiiboId === amiiboData.amiiboId);
+			console.log(amiibo);
 		} catch (error) {
 			console.log(error);
 		}
 	};
-
-	// const getAmiiboCollection = async () => {
-	// 	dispatch({ type: GET_ALL_AMIIBOS_LOADING });
-	// 	try {
-	// 		const { data } = await axios.get('/api/v1/amiibos/all');
-	// 		const { amiibos } = data;
-	// 		const collected = amiibos.filter(
-	// 			(amiibo) => amiibo.collected === true
-	// 		);
-
-	// 		dispatch({
-	// 			type: GET_ALL_AMIIBOS,
-	// 			payload: {
-	// 				amiibos: collected,
-	// 				collectedCount: collected.length,
-	// 				numOfPages: Math.ceil(collected.length / state.limit) || 0,
-	// 				pageNumbers: [
-	// 					...Array(
-	// 						Math.ceil(collected.length / state.limit) + 1
-	// 					).keys(),
-	// 				].slice(1),
-	// 			},
-	// 		});
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
-
-	// const getWishlistAmiibos = async () => {
-	// 	dispatch({ type: GET_ALL_AMIIBOS_LOADING });
-	// 	try {
-	// 		const { data } = await axios.get('/api/v1/amiibos/all');
-	// 		const { amiibos } = data;
-	// 		const wishlisted = amiibos.filter(
-	// 			(amiibo) => amiibo.wishlisted === true
-	// 		);
-
-	// 		console.log(wishlisted);
-
-	// 		dispatch({
-	// 			type: GET_ALL_AMIIBOS,
-	// 			payload: {
-	// 				amiibos: wishlisted,
-	// 				wishlistCount: wishlisted.length,
-	// 				numOfPages: Math.ceil(wishlisted.length / state.limit),
-	// 				pageNumbers: [
-	// 					...Array(
-	// 						Math.ceil(wishlisted.length / state.limit) + 1
-	// 					).keys(),
-	// 				].slice(1),
-	// 			},
-	// 		});
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
 
 	const values = {
 		...state,
@@ -355,6 +318,7 @@ const AppProvider = ({ children }) => {
 		userAuth,
 		logout,
 		fetchAmiibos,
+		filterAmiiboType,
 		goToPage,
 		nextPage,
 		prevPage,
@@ -364,8 +328,7 @@ const AppProvider = ({ children }) => {
 		hideAmiiboDetails,
 		saveAmiibo,
 		updateAmiibo,
-		// getAmiiboCollection,
-		// getWishlistAmiibos,
+
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

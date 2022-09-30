@@ -1,6 +1,5 @@
 import React from 'react';
 import classes from './AmiiboCard.module.css';
-import { FaCheck, FaMinus } from 'react-icons/fa';
 import { useAppContext } from '../../../context/appContext';
 
 const AmiiboCard = ({ amiibo, index }) => {
