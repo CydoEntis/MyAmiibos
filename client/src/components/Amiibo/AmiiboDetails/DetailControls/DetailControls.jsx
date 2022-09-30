@@ -22,7 +22,6 @@ const DetailControls = () => {
 			type,
 		} = selectedAmiibo;
 
-		const { na } = release;
 
 		const amiiboData = {
 			amiiboSeries,
@@ -30,14 +29,17 @@ const DetailControls = () => {
 			gameSeries,
 			image,
 			name,
-			release: na,
+			release,
 			type,
 			amiiboId: head + tail,
 			collected: true,
 			wishlisted: false,
 		};
 
+		console.log(amiiboData);
+
 		addAmiiboToCollection(amiiboData);
+		hideAmiiboDetails();
 	};
 
 	const handleRemoveAmiibo = () => {};

@@ -204,14 +204,14 @@ const AppProvider = ({ children }) => {
 		const { head, tail } = amiibo;
 		try {
 			const { data } = await axios.get(`/api/v1/amiibos/${head + tail}`);
-			const { amiibo } = data;
-			console.log(amiibo[0]);
+			const { amiibo: foundAmiibo } = data;
+			console.log(foundAmiibo[0]);
 
-			if (amiibo[0]) {
+			if (foundAmiibo[0]) {
 				const formattedAmiibo = {
-					...amiibo[0],
-					collected: amiibo[0].collected,
-					wishlist: amiibo[0].wishlisted,
+					...foundAmiibo[0],
+					collected: foundAmiibo[0].collected,
+					wishlist: foundAmiibo[0].wishlisted,
 				};
 
 				console.log(formattedAmiibo)
