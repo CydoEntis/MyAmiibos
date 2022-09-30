@@ -32,6 +32,14 @@ const AmiiboSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	collected: {
+		type: Boolean,
+		default: false,
+	},
+	wishedlisted: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 export default mongoose.model('Amiibo', AmiiboSchema);
