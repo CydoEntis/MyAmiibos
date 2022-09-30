@@ -6,22 +6,25 @@ import classes from './DetailControls.module.css';
 import { useAppContext } from '../../../../context/appContext';
 
 const DetailControls = () => {
-	const { hideAmiiboDetails, addAmiiboToCollection, selectedAmiibo } =
-		useAppContext();
+	const {
+		hideAmiiboDetails,
+		saveAmiibo,
+		updateAmiibo,
+		selectedAmiibo,
+		myAmiibos,
+	} = useAppContext();
 
-	const handleAddAmiibo = () => {
+	const handleAmiibo = (action) => {
 		const {
 			amiiboSeries,
 			character,
 			gameSeries,
-			head,
 			image,
 			name,
 			release,
-			tail,
 			type,
+			amiiboId,
 		} = selectedAmiibo;
-
 
 		const amiiboData = {
 			amiiboSeries,
@@ -31,18 +34,36 @@ const DetailControls = () => {
 			name,
 			release,
 			type,
-			amiiboId: head + tail,
-			collected: true,
-			wishlisted: false,
+			amiiboId,
 		};
 
-		console.log(amiiboData);
+		const amiiboExists = myAmiibos.some((amiibo) => {
+			return amiibo.amiiboId === amiiboId;
+		});
 
-		addAmiiboToCollection(amiiboData);
+		if (amiiboExists) {
+			if (action === 'collected') {
+				amiiboData.collected = !selectedAmiibo.collected;
+				amiiboData.wishlisted = false;
+			} else if (action === 'wishlisted') {
+				amiiboData.collected = false;
+				amiiboData.wishlisted = !selectedAmiibo.wishlisted;
+			}
+			console.log('Updated data: ', amiiboData);
+			updateAmiibo(amiiboData);
+		} else {
+			if (action === 'collected') {
+				amiiboData.collected = true;
+				amiiboData.wishlisted = false;
+			} else if (action === 'wishlisted') {
+				amiiboData.collected = false;
+				amiiboData.wishlisted = true;
+			}
+			saveAmiibo(amiiboData);
+		}
+
 		hideAmiiboDetails();
 	};
-
-	const handleRemoveAmiibo = () => {};
 
 	return (
 		<div className={classes.controls}>
@@ -50,7 +71,9 @@ const DetailControls = () => {
 				<>
 					<Button
 						className={classes['btn--remove']}
-						onClick={handleRemoveAmiibo}
+						onClick={() => {
+							handleAmiibo('collected');
+						}}
 					>
 						Remove From My Collection
 					</Button>
@@ -60,7 +83,9 @@ const DetailControls = () => {
 				<>
 					<Button
 						className={classes['btn--add']}
-						onClick={handleAddAmiibo}
+						onClick={() => {
+							handleAmiibo('collected');
+						}}
 					>
 						Add To My Collection
 					</Button>
@@ -74,14 +99,42 @@ const DetailControls = () => {
 			>
 				View My Collection
 			</Link>
-			<Button className={classes['btn--add']}>Add To My Wishlist</Button>
-			<Link
-				className={classes.link}
-				to='/wishlist'
-				onClick={hideAmiiboDetails}
-			>
-				View My Wishlist
-			</Link>
+
+			{!selectedAmiibo.collected && (
+				<>
+					{selectedAmiibo.wishlisted && (
+						<>
+							<Button
+								className={classes['btn--remove']}
+								onClick={() => {
+									handleAmiibo('wishlisted');
+								}}
+							>
+								Remove From My Wishlist
+							</Button>
+						</>
+					)}
+					{!selectedAmiibo.wishlisted && (
+						<>
+							<Button
+								className={classes['btn--add']}
+								onClick={() => {
+									handleAmiibo('wishlisted');
+								}}
+							>
+								Add To My Wishlist
+							</Button>
+						</>
+					)}
+					<Link
+						className={classes.link}
+						to='/wishlist'
+						onClick={hideAmiiboDetails}
+					>
+						View My Wishlist
+					</Link>
+				</>
+			)}
 		</div>
 	);
 };

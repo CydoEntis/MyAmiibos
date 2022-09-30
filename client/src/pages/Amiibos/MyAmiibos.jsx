@@ -13,20 +13,20 @@ import Filter from '../../components/Search/Filter';
 const Amiibos = () => {
 	const {
 		isLoading,
-		allAmiibos,
-		fetchAmiibos,
+		myAmiibos,
+		getAmiiboCollection,
 		currentPage,
 		limit,
 		numOfPages,
 	} = useAppContext();
 
 	useEffect(() => {
-		fetchAmiibos({ type: 'all' });
+		getAmiiboCollection();
 	}, []);
 
 	const indexOfLastAmiibo = currentPage * limit;
 	const indexOfFirstAmiibo = indexOfLastAmiibo - limit;
-	const currentAmiibos = allAmiibos.slice(
+	const currentAmiibos = myAmiibos.slice(
 		indexOfFirstAmiibo,
 		indexOfLastAmiibo
 	);
@@ -40,8 +40,15 @@ const Amiibos = () => {
 				{isLoading && <Loading />}
 				{!isLoading && (
 					<>
-						<AmiiboList currentAmiibos={currentAmiibos} />
-						{numOfPages > 1 && <Pagination />}
+						{myAmiibos.length === 0 && (
+							<p>No Amiibos Collected Yet...</p>
+						)}
+						{myAmiibos.length > 0 && (
+							<>
+								<AmiiboList currentAmiibos={currentAmiibos} />
+								{numOfPages > 1 && <Pagination />}
+							</>
+						)}
 					</>
 				)}
 			</MainWrapper>

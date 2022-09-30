@@ -13,12 +13,12 @@ const Overlay = ({ onClick }) => {
 };
 
 const AmiiboDetail = () => {
-	const { selectedAmiibo, showDetails, hideAmiiboDetails, getSelectedAmiibo } = useAppContext();
+	const { selectedAmiibo, showDetails, hideAmiiboDetails } = useAppContext();
 
 	const onClose = () => {
+	
 		hideAmiiboDetails();
 	};
-
 
 	if (!showDetails) return;
 

@@ -95,5 +95,4 @@ export {
 	getAmiibo,
 	saveAmiibo,
 	updateAmiibo,
-	wishlistAmiibo,
 };

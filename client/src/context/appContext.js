@@ -17,12 +17,14 @@ import {
 	CLEAR_AMIIBO,
 	SHOW_DETAILS,
 	HIDE_DETAILS,
-	ADD_TO_COLLECTION_LOADING,
-	ADD_TO_COLLECTION_SUCCESS,
-	ADD_TO_COLLECTION_ERROR,
-	REMOVE_FROM_COLLECTION_LOADING,
-	REMOVE_FROM_COLLECTION_SUCCESS,
-	REMOVE_FROM_COLLECTION_ERROR,
+	GET_ALL_AMIIBOS_LOADING,
+	GET_ALL_AMIIBOS
+	// ADD_TO_COLLECTION_LOADING,
+	// ADD_TO_COLLECTION_SUCCESS,
+	// ADD_TO_COLLECTION_ERROR,
+	// REMOVE_FROM_COLLECTION_LOADING,
+	// REMOVE_FROM_COLLECTION_SUCCESS,
+	// REMOVE_FROM_COLLECTION_ERROR,
 } from './actions';
 import reducer from './reducer';
 
@@ -39,7 +41,8 @@ const initialState = {
 	token: token,
 	allAmiibos: [],
 	myAmiibos: [],
-	collectedAmiibos: 0,
+	collectedCount: 0,
+	wishlistCount: 0,
 	page: 1,
 	numOfPages: 1,
 	currentPage: 1,
@@ -204,17 +207,15 @@ const AppProvider = ({ children }) => {
 		const { head, tail } = amiibo;
 		try {
 			const { data } = await axios.get(`/api/v1/amiibos/${head + tail}`);
-			const { amiibo: foundAmiibo } = data;
-			console.log(foundAmiibo[0]);
+			const { amiibo: selectedAmiibo } = data;
 
-			if (foundAmiibo[0]) {
+			if (selectedAmiibo[0]) {
 				const formattedAmiibo = {
-					...foundAmiibo[0],
-					collected: foundAmiibo[0].collected,
-					wishlist: foundAmiibo[0].wishlisted,
+					...selectedAmiibo[0],
+					collected: selectedAmiibo[0].collected,
+					wishlisted: selectedAmiibo[0].wishlisted,
 				};
 
-				console.log(formattedAmiibo)
 				dispatch({
 					type: SELECT_AMIIBO,
 					payload: { selectedAmiibo: formattedAmiibo },
@@ -239,18 +240,28 @@ const AppProvider = ({ children }) => {
 	};
 
 	const hideAmiiboDetails = () => {
-		dispatch({ type: HIDE_DETAILS });
+		dispatch({ type: HIDE_DETAILS, payload: { selectedAmiibo: {}} });
 	};
 
-	const addAmiiboToCollection = async (amiiboData) => {
+	const saveAmiibo = async (amiiboData) => {
+		console.log(amiiboData);
 		try {
-			await axios.post('/api/v1/amiibos/collect', amiiboData);
+			await axios.post('/api/v1/amiibos/save', amiiboData);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const updateAmiibo = async (amiiboData) => {
+		try {
+			await axios.post('/api/v1/amiibos/update', amiiboData);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
 	const getAmiiboCollection = async () => {
+		dispatch({type: GET_ALL_AMIIBOS_LOADING});
 		try {
 			const { data } = await axios.get('/api/v1/amiibos/all');
 			const { amiibos } = data;
@@ -259,19 +270,51 @@ const AppProvider = ({ children }) => {
 			);
 
 			dispatch({
-				type: 'GET_ALL_AMIIBOS',
-				payload: { amiibos, collected: collected.length },
+				type: GET_ALL_AMIIBOS,
+				payload: {
+					amiibos: collected,
+					collectedCount: collected.length,
+					numOfPages: Math.ceil(collected.length / state.limit) || 0,
+					pageNumbers: [
+						...Array(
+							Math.ceil(collected.length / state.limit) + 1
+						).keys(),
+					].slice(1),
+				},
 			});
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	// const getAmiibo = async () => {
+	const getWishlistAmiibos = async () => {
+		dispatch({type: GET_ALL_AMIIBOS_LOADING});
+		try {
+			const { data } = await axios.get('/api/v1/amiibos/all');
+			const { amiibos } = data;
+			const wishlisted = amiibos.filter(
+				(amiibo) => amiibo.wishlisted === true
+			);
 
-	// }
+			console.log(wishlisted);
 
-	const removeAmiiboFromCollection = () => {};
+			dispatch({
+				type: GET_ALL_AMIIBOS,
+				payload: {
+					amiibos: wishlisted,
+					wishlistCount: wishlisted.length,
+					numOfPages: Math.ceil(wishlisted.length / state.limit),
+					pageNumbers: [
+						...Array(
+							Math.ceil(wishlisted.length / state.limit) + 1
+						).keys(),
+					].slice(1),
+				},
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	const values = {
 		...state,
@@ -286,8 +329,10 @@ const AppProvider = ({ children }) => {
 		clearSelectedAmiibo,
 		showAmiiboDetails,
 		hideAmiiboDetails,
-		addAmiiboToCollection,
+		saveAmiibo,
+		updateAmiibo,
 		getAmiiboCollection,
+		getWishlistAmiibos
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

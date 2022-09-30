@@ -21,6 +21,7 @@ import {
 	REMOVE_FROM_COLLECTION_LOADING,
 	REMOVE_FROM_COLLECTION_SUCCESS,
 	REMOVE_FROM_COLLECTION_ERROR,
+	GET_ALL_AMIIBOS_LOADING,
 	GET_ALL_AMIIBOS,
 } from './actions';
 
@@ -70,6 +71,7 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				isLoading: true,
+				
 			};
 		case GET_AMIIBOS_SUCCESS:
 			return {
@@ -103,7 +105,6 @@ const reducer = (state, action) => {
 				currentPage: state.currentPage - 1,
 			};
 		case SELECT_AMIIBO:
-			console.log(action.payload)
 			return {
 				...state,
 				selectedAmiibo: action.payload.selectedAmiibo
@@ -122,6 +123,7 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				showDetails: false,
+				selectedAmiibo: action.payload.selectedAmiibo
 			};
 		case ADD_TO_COLLECTION_LOADING:
 			return {};
@@ -135,11 +137,20 @@ const reducer = (state, action) => {
 			return {};
 		case REMOVE_FROM_COLLECTION_ERROR:
 			return {};
+		case GET_ALL_AMIIBOS_LOADING:
+			return {
+				...state,
+				isLoading: true,
+			}
 		case GET_ALL_AMIIBOS:
 			return {
 				...state,
+				isLoading: false,
 				myAmiibos: action.payload.amiibos,
-				collectedAmiibos: action.payload.collected
+				collectedAmiibos: action.payload.collected,
+				numOfPages: action.payload.numOfPages,
+				pageNumbers: action.payload.pageNumbers,
+				currentPage: 1,
 			}
 		default:
 			throw new Error(`no such action : ${action.type}`);

@@ -9,6 +9,7 @@ const AmiiboCard = ({ amiibo, index }) => {
 		const formattedAmiibo = {
 			...amiibo,
 			release: amiibo.release.na,
+			amiiboId: amiibo.head + amiibo.tail
 		};
 
 		getSelectedAmiibo(formattedAmiibo);

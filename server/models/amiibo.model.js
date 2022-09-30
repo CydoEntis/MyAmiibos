@@ -36,7 +36,7 @@ const AmiiboSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  wishedlisted: {
+  wishlisted: {
     type: Boolean,
     default: false,
   }
