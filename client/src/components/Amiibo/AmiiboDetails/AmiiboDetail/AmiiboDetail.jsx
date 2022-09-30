@@ -19,7 +19,6 @@ const AmiiboDetail = () => {
 		hideAmiiboDetails();
 	};
 
-	console.log(selectedAmiibo)
 
 	if (!showDetails) return;
 

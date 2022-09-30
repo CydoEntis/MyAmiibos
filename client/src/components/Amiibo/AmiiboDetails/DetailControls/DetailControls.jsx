@@ -11,55 +11,27 @@ const DetailControls = () => {
 		saveAmiibo,
 		updateAmiibo,
 		selectedAmiibo,
-		amiiboList
+		modifiedList,
 	} = useAppContext();
 
 	const handleAmiibo = (action) => {
-		const {
-			amiiboSeries,
-			character,
-			gameSeries,
-			image,
-			name,
-			release,
-			type,
-			amiiboId,
-		} = selectedAmiibo;
+		const { amiiboId } = selectedAmiibo;
 
-		const amiiboData = {
-			amiiboSeries,
-			character,
-			gameSeries,
-			image,
-			name,
-			release,
-			type,
-			amiiboId,
-		};
+		const currentSelectedAmiibo = modifiedList.filter(
+			(amiibo) => amiibo.amiiboId === amiiboId
+		);
 
-		const amiiboExists = amiiboList.some((amiibo) => {
-			return amiibo.amiiboId === amiiboId;
-		});
-
-		if (amiiboExists) {
-			if (action === 'collected') {
-				amiiboData.collected = !selectedAmiibo.collected;
-				amiiboData.wishlisted = false;
-			} else if (action === 'wishlisted') {
-				amiiboData.collected = false;
-				amiiboData.wishlisted = !selectedAmiibo.wishlisted;
+		if (
+			currentSelectedAmiibo[0].collected === false &&
+			currentSelectedAmiibo[0].wishlisted === false
+		) {
+			if (action === 'collect') {
+				currentSelectedAmiibo[0].collected = true;
+			} else if (action === 'wishlist') {
+				currentSelectedAmiibo[0].wishlisted = true;
 			}
-			console.log('Updated data: ', amiiboData);
-			updateAmiibo(amiiboData);
-		} else {
-			if (action === 'collected') {
-				amiiboData.collected = true;
-				amiiboData.wishlisted = false;
-			} else if (action === 'wishlisted') {
-				amiiboData.collected = false;
-				amiiboData.wishlisted = true;
-			}
-			saveAmiibo(amiiboData);
+			console.log(currentSelectedAmiibo[0]);
+			saveAmiibo(currentSelectedAmiibo[0]);
 		}
 
 		hideAmiiboDetails();
@@ -72,7 +44,7 @@ const DetailControls = () => {
 					<Button
 						className={classes['btn--remove']}
 						onClick={() => {
-							handleAmiibo('collected');
+							handleAmiibo('collect');
 						}}
 					>
 						Remove From My Collection
@@ -84,7 +56,7 @@ const DetailControls = () => {
 					<Button
 						className={classes['btn--add']}
 						onClick={() => {
-							handleAmiibo('collected');
+							handleAmiibo('collect');
 						}}
 					>
 						Add To My Collection
@@ -107,7 +79,7 @@ const DetailControls = () => {
 							<Button
 								className={classes['btn--remove']}
 								onClick={() => {
-									handleAmiibo('wishlisted');
+									handleAmiibo('wishlist');
 								}}
 							>
 								Remove From My Wishlist
@@ -119,7 +91,7 @@ const DetailControls = () => {
 							<Button
 								className={classes['btn--add']}
 								onClick={() => {
-									handleAmiibo('wishlisted');
+									handleAmiibo('wishlist');
 								}}
 							>
 								Add To My Wishlist
