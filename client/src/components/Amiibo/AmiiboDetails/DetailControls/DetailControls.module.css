@@ -1,41 +1,53 @@
 .controls {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem;
 }
 
 .btn--add {
-  width: 100%;
+	width: 100%;
 	background: #12c7b7;
 	box-shadow: 0px 7px 0px #00957b;
-  color: #fff;
-  font-size: 1.15rem;
-  border-radius: .4rem;
-  margin: .5rem 0;
-  padding: .75rem;
+	color: #fff;
+	font-size: 1.15rem;
+	border-radius: 0.4rem;
+	margin: 0.5rem 0;
+	padding: 0.75rem;
+}
+
+.btn--remove {
+	width: 100%;
+  background: #fa603f;
+  box-shadow: 0px 7px 0px #d5492b;
+	color: #fff;
+	font-size: 1.15rem;
+	border-radius: 0.4rem;
+	margin: 0.5rem 0;
+	padding: 0.75rem;
 }
 
 .btn--add:hover {
-  transform: translateY(2px);
-  box-shadow: 0px 5px 0px #00957b;
+	transform: translateY(2px);
+	box-shadow: 0px 5px 0px #00957b;
 }
 
 .link {
-  text-align: right;
-  color: #707070;
-  padding: .25rem;
+	text-align: right;
+	color: #707070;
+	padding: 0.25rem;
 }
 
 @media only screen and (min-width: 2560px) {
-  .btn--add {
-    padding: .75rem;
-    font-size: 1.25rem;
-  }
+	.btn--add,
+	.btn--remove {
+		padding: 0.75rem;
+		font-size: 1.25rem;
+	}
 
-  .link {
-    font-size: 1rem;
-    padding: .75rem;
-  }
+	.link {
+		font-size: 1rem;
+		padding: 0.75rem;
+	}
 }

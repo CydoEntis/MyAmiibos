@@ -6,18 +6,78 @@ import classes from './DetailControls.module.css';
 import { useAppContext } from '../../../../context/appContext';
 
 const DetailControls = () => {
-	const { hideAmiiboDetails } = useAppContext();
+	const { hideAmiiboDetails, addAmiiboToCollection, selectedAmiibo } =
+		useAppContext();
+
+	const handleAddAmiibo = () => {
+		const {
+			amiiboSeries,
+			character,
+			gameSeries,
+			head,
+			image,
+			name,
+			release,
+			tail,
+			type,
+		} = selectedAmiibo;
+
+		const { na } = release;
+
+		const amiiboData = {
+			amiiboSeries,
+			character,
+			gameSeries,
+			image,
+			name,
+			release: na,
+			type,
+			amiiboId: head + tail,
+			collected: true,
+			wishlisted: false,
+		};
+
+		addAmiiboToCollection(amiiboData);
+	};
+
+	const handleRemoveAmiibo = () => {};
 
 	return (
 		<div className={classes.controls}>
-			<Button className={classes['btn--add']}>
-				Add To My Collection
-			</Button>
-			<Link className={classes.link} to='/collection' onClick={hideAmiiboDetails}>
+			{selectedAmiibo.collected && (
+				<>
+					<Button
+						className={classes['btn--remove']}
+						onClick={handleRemoveAmiibo}
+					>
+						Remove From My Collection
+					</Button>
+				</>
+			)}
+			{!selectedAmiibo.collected && (
+				<>
+					<Button
+						className={classes['btn--add']}
+						onClick={handleAddAmiibo}
+					>
+						Add To My Collection
+					</Button>
+				</>
+			)}
+
+			<Link
+				className={classes.link}
+				to='/collection'
+				onClick={hideAmiiboDetails}
+			>
 				View My Collection
 			</Link>
 			<Button className={classes['btn--add']}>Add To My Wishlist</Button>
-			<Link className={classes.link} to='/wishlist' onClick={hideAmiiboDetails}>
+			<Link
+				className={classes.link}
+				to='/wishlist'
+				onClick={hideAmiiboDetails}
+			>
 				View My Wishlist
 			</Link>
 		</div>

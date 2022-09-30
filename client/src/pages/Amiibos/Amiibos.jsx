@@ -18,10 +18,12 @@ const Amiibos = () => {
 		currentPage,
 		limit,
 		numOfPages,
+		getAmiiboCollection
 	} = useAppContext();
 
 	useEffect(() => {
 		fetchAmiibos({ type: 'all' });
+		getAmiiboCollection();
 	}, []);
 
 	const indexOfLastAmiibo = currentPage * limit;

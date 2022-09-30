@@ -8,6 +8,7 @@ import connectToDB from './db/connect.js';
 
 // Routers
 import authRouter from './routes/auth.routes.js';
+import amiiboRouter from './routes/amiibo.routes.js'
 
 //Middleware
 import notFoundMiddleware from './middleware/not-found.middleware.js';
@@ -17,15 +18,8 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-	res.send('Welcome');
-});
-
-app.get('/api/v1', (req, res) => {
-	res.json({ msg: 'API' });
-});
-
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/amiibos', amiiboRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

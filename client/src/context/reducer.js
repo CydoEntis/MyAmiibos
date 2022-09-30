@@ -21,6 +21,7 @@ import {
 	REMOVE_FROM_COLLECTION_LOADING,
 	REMOVE_FROM_COLLECTION_SUCCESS,
 	REMOVE_FROM_COLLECTION_ERROR,
+	GET_ALL_AMIIBOS,
 } from './actions';
 
 const reducer = (state, action) => {
@@ -134,6 +135,12 @@ const reducer = (state, action) => {
 			return {};
 		case REMOVE_FROM_COLLECTION_ERROR:
 			return {};
+		case GET_ALL_AMIIBOS:
+			return {
+				...state,
+				myAmiibos: action.payload.amiibos,
+				collectedAmiibos: action.payload.collected
+			}
 		default:
 			throw new Error(`no such action : ${action.type}`);
 	}

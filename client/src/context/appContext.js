@@ -200,8 +200,34 @@ const AppProvider = ({ children }) => {
 		dispatch({ type: PREV_PAGE });
 	};
 
-	const getSelectedAmiibo = (amiibo) => {
-		dispatch({ type: SELECT_AMIIBO, payload: { selectedAmiibo: amiibo } });
+	const getSelectedAmiibo = async (amiibo) => {
+		const { head, tail } = amiibo;
+		try {
+			const { data } = await axios.get(`/api/v1/amiibos/${head + tail}`);
+			const { amiibo } = data;
+			console.log(amiibo[0]);
+
+			if (amiibo[0]) {
+				const formattedAmiibo = {
+					...amiibo[0],
+					collected: amiibo[0].collected,
+					wishlist: amiibo[0].wishlisted,
+				};
+
+				console.log(formattedAmiibo)
+				dispatch({
+					type: SELECT_AMIIBO,
+					payload: { selectedAmiibo: formattedAmiibo },
+				});
+			} else {
+				dispatch({
+					type: SELECT_AMIIBO,
+					payload: { selectedAmiibo: amiibo },
+				});
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const clearSelectedAmiibo = () => {
@@ -216,7 +242,34 @@ const AppProvider = ({ children }) => {
 		dispatch({ type: HIDE_DETAILS });
 	};
 
-	const addAmiiboToCollection = () => {};
+	const addAmiiboToCollection = async (amiiboData) => {
+		try {
+			await axios.post('/api/v1/amiibos/collect', amiiboData);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const getAmiiboCollection = async () => {
+		try {
+			const { data } = await axios.get('/api/v1/amiibos/all');
+			const { amiibos } = data;
+			const collected = amiibos.filter(
+				(amiibo) => amiibo.collected === true
+			);
+
+			dispatch({
+				type: 'GET_ALL_AMIIBOS',
+				payload: { amiibos, collected: collected.length },
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	// const getAmiibo = async () => {
+
+	// }
 
 	const removeAmiiboFromCollection = () => {};
 
@@ -233,6 +286,8 @@ const AppProvider = ({ children }) => {
 		clearSelectedAmiibo,
 		showAmiiboDetails,
 		hideAmiiboDetails,
+		addAmiiboToCollection,
+		getAmiiboCollection,
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

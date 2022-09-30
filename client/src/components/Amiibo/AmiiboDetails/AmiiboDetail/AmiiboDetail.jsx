@@ -22,7 +22,6 @@ const AmiiboDetail = () => {
 
 	if (!showDetails) return;
 
-	console.log(selectedAmiibo);
 
 	return ReactDom.createPortal(
 		<>
@@ -41,20 +40,9 @@ const AmiiboDetail = () => {
 				<h3 className={classes.characterName}>{selectedAmiibo.name}</h3>
 				<DetailText category='Type' text={selectedAmiibo.type} />
 				<DetailText category='Game Series' text={selectedAmiibo.gameSeries} />
-				<DetailText category='Release Date' text={selectedAmiibo.release.na} />
+				{/* <DetailText category='Release Date' text={selectedAmiibo.release.na} /> */}
 				<DetailControls />
 			</div>
-			{/* <Modal
-				open={isOpen}
-				onClick={() => {
-					setIsOpen(true);
-				}}
-				onClose={() => {
-					setIsOpen(false);
-				}}
-			>
-				Text
-			</Modal> */}
 		</>,
 		document.getElementById('modal')
 	);
