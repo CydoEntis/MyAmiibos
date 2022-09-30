@@ -14,7 +14,7 @@ const Overlay = ({ onClick }) => {
 
 const AmiiboDetail = () => {
 	const { selectedAmiibo, showDetails, hideAmiiboDetails } = useAppContext();
-
+	console.log(selectedAmiibo);
 	const onClose = () => {
 	
 		hideAmiiboDetails();

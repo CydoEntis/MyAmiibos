@@ -10,24 +10,32 @@ const DropdownList = ({ setIsOpen, setFilter }) => {
 	const getAllAmiibos = async () => {
 		setIsOpen(false);
     setFilter("All");
+
+		if(window.location.pathname === "")
 		await fetchAmiibos({ type: 'all' });
 	};
 
 	const getAllFigures = async () => {
 		setIsOpen(false);
     setFilter("Figure");
+
+		if(window.location.pathname === "")
 		await fetchAmiibos({ type: 'figure' });
 	};
 
 	const getAllCards = async () => {
 		setIsOpen(false);
     setFilter("Card");
+
+		if(window.location.pathname === "")
 		await fetchAmiibos({ type: 'card' });
 	};
 
 	const getAllYarn = async () => {
 		setIsOpen(false);
     setFilter("Yarn");
+
+		if(window.location.pathname === "")
 		await fetchAmiibos({ type: 'yarn' });
 	};
 

@@ -13,25 +13,27 @@ import Filter from '../../components/Search/Filter';
 const Amiibos = () => {
 	const {
 		isLoading,
-		allAmiibos,
+		amiiboList,
 		fetchAmiibos,
 		currentPage,
 		limit,
 		numOfPages,
-		getAmiiboCollection
 	} = useAppContext();
+
+	console.log(amiiboList);
 
 	useEffect(() => {
 		fetchAmiibos({ type: 'all' });
-		getAmiiboCollection();
 	}, []);
 
 	const indexOfLastAmiibo = currentPage * limit;
 	const indexOfFirstAmiibo = indexOfLastAmiibo - limit;
-	const currentAmiibos = allAmiibos.slice(
+	const currentAmiibos = amiiboList.slice(
 		indexOfFirstAmiibo,
 		indexOfLastAmiibo
 	);
+
+	console.log(amiiboList);
 
 	return (
 		<>

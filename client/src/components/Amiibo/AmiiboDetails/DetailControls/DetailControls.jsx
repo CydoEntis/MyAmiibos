@@ -11,7 +11,7 @@ const DetailControls = () => {
 		saveAmiibo,
 		updateAmiibo,
 		selectedAmiibo,
-		myAmiibos,
+		amiiboList
 	} = useAppContext();
 
 	const handleAmiibo = (action) => {
@@ -37,7 +37,7 @@ const DetailControls = () => {
 			amiiboId,
 		};
 
-		const amiiboExists = myAmiibos.some((amiibo) => {
+		const amiiboExists = amiiboList.some((amiibo) => {
 			return amiibo.amiiboId === amiiboId;
 		});
 

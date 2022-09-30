@@ -77,7 +77,7 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				isLoading: false,
-				allAmiibos: action.payload.allAmiibos,
+				amiiboList: action.payload.amiiboList,
 				numOfPages: action.payload.numOfPages,
 				pageNumbers: action.payload.pageNumbers,
 				currentPage: 1,
