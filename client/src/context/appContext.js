@@ -20,6 +20,7 @@ import {
 	CLEAR_AMIIBO,
 	SHOW_DETAILS,
 	HIDE_DETAILS,
+	UPDATE_AMIIBO_LIST
 } from './actions';
 import reducer from './reducer';
 
@@ -164,12 +165,14 @@ const AppProvider = ({ children }) => {
 					collected: false,
 					wishlisted: false,
 					amiiboId: amiiboId,
+					createdAt: null,
 				};
 
 				for (let myAmiibo of dbAmiibos.amiibos) {
 					if (amiiboId === myAmiibo.amiiboId) {
 						formattedAmiibo.collected = myAmiibo.collected;
 						formattedAmiibo.wishlisted = myAmiibo.wishlisted;
+						formattedAmiibo.createdAt = myAmiibo.createdAt;
 					}
 				}
 
@@ -200,7 +203,7 @@ const AppProvider = ({ children }) => {
 
 	const filterAmiiboType = async ({ type }) => {
 		dispatch({ type: FILTER_AMIIBOS_LOADING });
-		if(type === "all") {
+		if (type === 'all') {
 			try {
 				await fetchAmiibos();
 				return;
@@ -220,9 +223,7 @@ const AppProvider = ({ children }) => {
 			type: FILTER_AMIIBOS_SUCCESS,
 			payload: {
 				modifiedList: filteredAmiibos,
-				numOfPages: Math.ceil(
-					filteredAmiibos.length / state.limit
-				),
+				numOfPages: Math.ceil(filteredAmiibos.length / state.limit),
 				pageNumbers: [
 					...Array(
 						Math.ceil(filteredAmiibos.length / state.limit) + 1
@@ -293,9 +294,6 @@ const AppProvider = ({ children }) => {
 	const saveAmiibo = async (amiiboData) => {
 		try {
 			await axios.post('/api/v1/amiibos/save', amiiboData);
-
-			const amiibo = state.amiiboList.some(amiibo => amiibo.amiiboId === amiiboData.amiiboId);
-			console.log(amiibo);
 		} catch (error) {
 			console.log(error);
 		}
@@ -305,11 +303,25 @@ const AppProvider = ({ children }) => {
 		try {
 			await axios.post('/api/v1/amiibos/update', amiiboData);
 
-			const amiibo = state.amiiboList.find(amiibo => amiibo.amiiboId === amiiboData.amiiboId);
+			const amiibo = state.amiiboList.find(
+				(amiibo) => amiibo.amiiboId === amiiboData.amiiboId
+			);
 			console.log(amiibo);
 		} catch (error) {
 			console.log(error);
 		}
+	};
+
+	const updateAmiiboList = (index, amiiboData) => {
+		const updatedList = state.modifiedList
+		for(let i = 0; i < updatedList.length; i++) {
+			if(i === index) {
+				updatedList[index] = amiiboData;
+			}
+		}
+		console.log("Updated List: ", updatedList);
+
+		dispatch({ type: UPDATE_AMIIBO_LIST, payload: { updatedList } });
 	};
 
 	const values = {
@@ -328,7 +340,7 @@ const AppProvider = ({ children }) => {
 		hideAmiiboDetails,
 		saveAmiibo,
 		updateAmiibo,
-
+		updateAmiiboList,
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

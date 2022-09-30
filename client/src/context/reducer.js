@@ -18,6 +18,7 @@ import {
 	CLEAR_AMIIBO,
 	SHOW_DETAILS,
 	HIDE_DETAILS,
+	UPDATE_AMIIBO_LIST
 } from './actions';
 
 const reducer = (state, action) => {
@@ -144,6 +145,11 @@ const reducer = (state, action) => {
 				showDetails: false,
 				selectedAmiibo: action.payload.selectedAmiibo,
 			};
+			case UPDATE_AMIIBO_LIST:
+				return {
+					...state,
+					modifiedList: action.payload.updatedList,
+				};
 		default:
 			throw new Error(`no such action : ${action.type}`);
 	}

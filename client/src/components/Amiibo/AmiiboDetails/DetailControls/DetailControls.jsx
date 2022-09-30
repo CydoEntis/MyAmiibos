@@ -12,6 +12,7 @@ const DetailControls = () => {
 		updateAmiibo,
 		selectedAmiibo,
 		modifiedList,
+		updateAmiiboList,
 	} = useAppContext();
 
 	const handleAmiibo = (action) => {
@@ -20,20 +21,40 @@ const DetailControls = () => {
 		const currentSelectedAmiibo = modifiedList.filter(
 			(amiibo) => amiibo.amiiboId === amiiboId
 		);
+		
+		const index = modifiedList.findIndex(amiibo => amiibo.amiiboId === amiiboId);
 
-		if (
-			currentSelectedAmiibo[0].collected === false &&
-			currentSelectedAmiibo[0].wishlisted === false
-		) {
+		const amiibo = currentSelectedAmiibo[0];
+			console.log(amiibo);
+		if (amiibo.createdAt === null) {
+			console.log(amiibo.createdAt);
 			if (action === 'collect') {
-				currentSelectedAmiibo[0].collected = true;
+				amiibo.collected = true;
+				amiibo.wishlisted = false;
+				amiibo.createdAt = Date.now();
 			} else if (action === 'wishlist') {
-				currentSelectedAmiibo[0].wishlisted = true;
+				amiibo.wishlisted = true;
+				amiibo.collected = false;
+				amiibo.createdAt = Date.now();
 			}
-			console.log(currentSelectedAmiibo[0]);
-			saveAmiibo(currentSelectedAmiibo[0]);
+			saveAmiibo(amiibo);
+		} else {
+			if (action === 'collect') {
+				amiibo.wishlisted = false;
+				amiibo.collected = true;
+			} else if (action === 'uncollect') {
+				amiibo.wishlisted = false;
+				amiibo.collected = false;
+			} else if (action === 'wishlist') {
+				amiibo.wishlisted = true;
+				amiibo.collected = false;
+			} else if (action === 'unwishlist') {
+				amiibo.wishlisted = false;
+				amiibo.collected = false;
+			}
+			updateAmiibo(amiibo);
 		}
-
+		updateAmiiboList(index, amiibo);
 		hideAmiiboDetails();
 	};
 
@@ -44,7 +65,7 @@ const DetailControls = () => {
 					<Button
 						className={classes['btn--remove']}
 						onClick={() => {
-							handleAmiibo('collect');
+							handleAmiibo('uncollect');
 						}}
 					>
 						Remove From My Collection
@@ -79,7 +100,7 @@ const DetailControls = () => {
 							<Button
 								className={classes['btn--remove']}
 								onClick={() => {
-									handleAmiibo('wishlist');
+									handleAmiibo('unwishlist');
 								}}
 							>
 								Remove From My Wishlist
