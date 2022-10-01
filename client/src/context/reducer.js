@@ -18,7 +18,8 @@ import {
 	CLEAR_AMIIBO,
 	SHOW_DETAILS,
 	HIDE_DETAILS,
-	UPDATE_AMIIBO_LIST
+	UPDATE_AMIIBO_LIST,
+	FIND_AMIIBO
 } from './actions';
 
 const reducer = (state, action) => {
@@ -152,6 +153,12 @@ const reducer = (state, action) => {
 					...state,
 					modifiedList: action.payload.updatedList,
 				};
+			case FIND_AMIIBO:
+				return {
+					...state,
+					modifiedList: action.payload.result
+				}
+
 		default:
 			throw new Error(`no such action : ${action.type}`);
 	}

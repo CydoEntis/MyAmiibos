@@ -6,7 +6,7 @@ import Button from '../UI/Buttons/Button';
 import classes from './SearchBar.module.css';
 
 const SearchBar = () => {
-	const { fetchAmiibos } = useAppContext();
+	const { fetchAmiibos, findAmiibo} = useAppContext();
 	const [searchValue, setSearchValue] = useState('');
 
 	const handleChange = (e) => {
@@ -15,10 +15,9 @@ const SearchBar = () => {
 
 	const getAmiibo = async (value) => {
 		if (value === '') {
-			console.log(value);
-			await fetchAmiibos({ type: 'all' });
+			await fetchAmiibos("all");
 		} else {
-			await fetchAmiibos({ type: 'search', charName: value });
+			await fetchAmiibos(searchValue);
 		}
 	};
 

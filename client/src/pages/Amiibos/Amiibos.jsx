@@ -22,7 +22,7 @@ const Amiibos = () => {
 
 
 	useEffect(() => {
-		fetchAmiibos({ type: 'all' });
+		fetchAmiibos("all");
 	}, []);
 
 	const indexOfLastAmiibo = currentPage * limit;

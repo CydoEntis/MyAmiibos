@@ -21,6 +21,7 @@ import {
 	SHOW_DETAILS,
 	HIDE_DETAILS,
 	UPDATE_AMIIBO_LIST,
+	FIND_AMIIBO
 } from './actions';
 import reducer from './reducer';
 
@@ -142,12 +143,19 @@ const AppProvider = ({ children }) => {
 		removeUserFromLocalStorage();
 	};
 
-	const fetchAmiibos = async () => {
+	const fetchAmiibos = async (value) => {
 		dispatch({ type: GET_AMIIBOS_LOADING });
 
 		try {
-			const { data: rawAmiibos } = await amiiboFetch();
 			const { data: dbAmiibos } = await axios.get('/api/v1/amiibos/all');
+			let rawAmiibos;
+			if (value !== 'all') {
+				const { data } = await axios.get(`https://www.amiiboapi.com/api/amiibo/?name=${value}`);
+				rawAmiibos = data;
+			} else {
+				const { data } = await amiiboFetch()
+				rawAmiibos = data;
+			}
 
 			const formattedAmiibos = [];
 			for (let amiibo of rawAmiibos.amiibo) {
@@ -256,7 +264,6 @@ const AppProvider = ({ children }) => {
 			(amiibo) => amiibo.amiiboId === amiiboId
 		);
 
-
 		const amiibo = foundAmiibo[0];
 
 		dispatch({
@@ -275,6 +282,24 @@ const AppProvider = ({ children }) => {
 
 	const hideAmiiboDetails = () => {
 		dispatch({ type: HIDE_DETAILS, payload: { selectedAmiibo: {} } });
+	};
+
+	const findAmiibo = (searchValue) => {
+		dispatch({type: FIND_AMIIBO, payload: {result: state.amiiboList}})
+		console.log(state.modifiedList);
+		if (searchValue === '') {
+			dispatch({
+				type: FIND_AMIIBO,
+				payload: { result: state.amiiboList },
+			});
+		} else {
+			const result = state.modifiedList.filter((amiibo) => {
+				return amiibo.name.toLowerCase() === searchValue.toLowerCase();
+			});
+
+			dispatch({ type: FIND_AMIIBO, payload: { result } });
+		}
+
 	};
 
 	const saveAmiibo = async (amiiboData) => {
@@ -327,6 +352,7 @@ const AppProvider = ({ children }) => {
 		saveAmiibo,
 		updateAmiibo,
 		updateAmiiboList,
+		findAmiibo,
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
