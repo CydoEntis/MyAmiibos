@@ -20,7 +20,7 @@ import {
 	CLEAR_AMIIBO,
 	SHOW_DETAILS,
 	HIDE_DETAILS,
-	UPDATE_AMIIBO_LIST
+	UPDATE_AMIIBO_LIST,
 } from './actions';
 import reducer from './reducer';
 
@@ -160,7 +160,7 @@ const AppProvider = ({ children }) => {
 					head: amiibo.head,
 					tail: amiibo.tail,
 					image: amiibo.image,
-					release: amiibo.release.na,
+					release: amiibo.release.na || 'N/A',
 					type: amiibo.type,
 					collected: false,
 					wishlisted: false,
@@ -251,32 +251,18 @@ const AppProvider = ({ children }) => {
 		dispatch({ type: PREV_PAGE });
 	};
 
-	const getSelectedAmiibo = async (amiibo) => {
-		const { head, tail } = amiibo;
-		try {
-			const { data } = await axios.get(`/api/v1/amiibos/${head + tail}`);
-			const { amiibo: selectedAmiibo } = data;
+	const getSelectedAmiibo = async (amiiboId) => {
+		const foundAmiibo = state.modifiedList.filter(
+			(amiibo) => amiibo.amiiboId === amiiboId
+		);
 
-			if (selectedAmiibo[0]) {
-				const formattedAmiibo = {
-					...selectedAmiibo[0],
-					collected: selectedAmiibo[0].collected,
-					wishlisted: selectedAmiibo[0].wishlisted,
-				};
 
-				dispatch({
-					type: SELECT_AMIIBO,
-					payload: { selectedAmiibo: formattedAmiibo },
-				});
-			} else {
-				dispatch({
-					type: SELECT_AMIIBO,
-					payload: { selectedAmiibo: amiibo },
-				});
-			}
-		} catch (error) {
-			console.log(error);
-		}
+		const amiibo = foundAmiibo[0];
+
+		dispatch({
+			type: SELECT_AMIIBO,
+			payload: { selectedAmiibo: amiibo },
+		});
 	};
 
 	const clearSelectedAmiibo = () => {
@@ -313,13 +299,13 @@ const AppProvider = ({ children }) => {
 	};
 
 	const updateAmiiboList = (index, amiiboData) => {
-		const updatedList = state.modifiedList
-		for(let i = 0; i < updatedList.length; i++) {
-			if(i === index) {
+		const updatedList = state.modifiedList;
+		for (let i = 0; i < updatedList.length; i++) {
+			if (i === index) {
 				updatedList[index] = amiiboData;
 			}
 		}
-		console.log("Updated List: ", updatedList);
+		console.log('Updated List: ', updatedList);
 
 		dispatch({ type: UPDATE_AMIIBO_LIST, payload: { updatedList } });
 	};

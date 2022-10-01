@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDom from 'react-dom';
 import { useAppContext } from '../../../../context/appContext';
 import Button from '../../../UI/Buttons/Button';
@@ -13,42 +13,46 @@ const Overlay = ({ onClick }) => {
 };
 
 const AmiiboDetail = () => {
-	const { selectedAmiibo, showDetails, hideAmiiboDetails } = useAppContext();
+	const { selectedAmiibo, showDetails, hideAmiiboDetails, isLoading } =
+		useAppContext();
 	const onClose = () => {
-	
 		hideAmiiboDetails();
 	};
 
-	console.log(selectedAmiibo);
+	console.log(isLoading);
 
 	if (!showDetails) return;
 
 	return ReactDom.createPortal(
 		<>
 			<Overlay onClick={onClose} />
-			<div className={classes.details}>
-				<Button className={classes['btn--close']} onClick={onClose}>
-					<FaTimes className={classes['icon--close']} />
-				</Button>
-				<div className={classes['detail__image-wrapper']}>
-					<img
-						src={selectedAmiibo.image}
-						alt={selectedAmiibo.character}
-					/>
-				</div>
+			<>
+				<div className={classes.details}>
+					<Button className={classes['btn--close']} onClick={onClose}>
+						<FaTimes className={classes['icon--close']} />
+					</Button>
+					<div className={classes['detail__image-wrapper']}>
+						<img
+							src={selectedAmiibo.image}
+							alt={selectedAmiibo.character}
+						/>
+					</div>
 
-				<h3 className={classes.characterName}>{selectedAmiibo.name}</h3>
-				<DetailText category='Type' text={selectedAmiibo.type} />
-				<DetailText
-					category='Game Series'
-					text={selectedAmiibo.gameSeries}
-				/>
-				<DetailText
-					category='Release Date'
-					text={selectedAmiibo.release}
-				/>
-				<DetailControls />
-			</div>
+					<h3 className={classes.characterName}>
+						{selectedAmiibo.name}
+					</h3>
+					<DetailText category='Type' text={selectedAmiibo.type} />
+					<DetailText
+						category='Game Series'
+						text={selectedAmiibo.gameSeries}
+					/>
+					<DetailText
+						category='Release Date'
+						text={selectedAmiibo.release}
+					/>
+					<DetailControls />
+				</div>
+			</>
 		</>,
 		document.getElementById('modal')
 	);

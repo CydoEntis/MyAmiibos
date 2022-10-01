@@ -128,6 +128,7 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				selectedAmiibo: action.payload.selectedAmiibo,
+				isLoading: true
 			};
 		case CLEAR_AMIIBO:
 			return {
@@ -138,6 +139,7 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				showDetails: true,
+				isLoading: false,
 			};
 		case HIDE_DETAILS:
 			return {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../../../UI/Buttons/Button';
 import { Link } from 'react-router-dom';
 
@@ -21,11 +21,13 @@ const DetailControls = () => {
 		const currentSelectedAmiibo = modifiedList.filter(
 			(amiibo) => amiibo.amiiboId === amiiboId
 		);
-		
-		const index = modifiedList.findIndex(amiibo => amiibo.amiiboId === amiiboId);
+
+		const index = modifiedList.findIndex(
+			(amiibo) => amiibo.amiiboId === amiiboId
+		);
 
 		const amiibo = currentSelectedAmiibo[0];
-			console.log(amiibo);
+		console.log(amiibo);
 		if (amiibo.createdAt === null) {
 			console.log(amiibo.createdAt);
 			if (action === 'collect') {
@@ -61,71 +63,63 @@ const DetailControls = () => {
 	return (
 		<div className={classes.controls}>
 			{selectedAmiibo.collected && (
-				<>
-					<Button
-						className={classes['btn--remove']}
-						onClick={() => {
-							handleAmiibo('uncollect');
-						}}
-					>
-						Remove From My Collection
-					</Button>
-				</>
+				<Button
+					className={classes['btn--remove']}
+					onClick={() => {
+						handleAmiibo('uncollect');
+					}}
+				>
+					Remove From My Collection
+				</Button>
 			)}
 			{!selectedAmiibo.collected && (
-				<>
-					<Button
-						className={classes['btn--add']}
-						onClick={() => {
-							handleAmiibo('collect');
-						}}
-					>
-						Add To My Collection
-					</Button>
-				</>
+				<Button
+					className={classes['btn--add']}
+					onClick={() => {
+						handleAmiibo('collect');
+					}}
+				>
+					Add To My Collection
+				</Button>
 			)}
 
-			<Link
+			{/* <Link
 				className={classes.link}
 				to='/collection'
 				onClick={hideAmiiboDetails}
 			>
 				View My Collection
-			</Link>
+			</Link> */}
 
 			{!selectedAmiibo.collected && (
 				<>
 					{selectedAmiibo.wishlisted && (
-						<>
-							<Button
-								className={classes['btn--remove']}
-								onClick={() => {
-									handleAmiibo('unwishlist');
-								}}
-							>
-								Remove From My Wishlist
-							</Button>
-						</>
+						<Button
+							className={classes['btn--remove']}
+							onClick={() => {
+								handleAmiibo('unwishlist');
+							}}
+						>
+							Remove From My Wishlist
+						</Button>
 					)}
 					{!selectedAmiibo.wishlisted && (
-						<>
-							<Button
-								className={classes['btn--add']}
-								onClick={() => {
-									handleAmiibo('wishlist');
-								}}
-							>
-								Add To My Wishlist
-							</Button>
-						</>
+						<Button
+							className={classes['btn--add']}
+							onClick={() => {
+								handleAmiibo('wishlist');
+							}}
+						>
+							Add To My Wishlist
+						</Button>
 					)}
-					<Link
+					{/* <Link
 						className={classes.link}
 						to='/wishlist'
 						onClick={hideAmiiboDetails}
 					>
 						View My Wishlist
-					</Link>
+					</Link> */}
 				</>
 			)}
 		</div>

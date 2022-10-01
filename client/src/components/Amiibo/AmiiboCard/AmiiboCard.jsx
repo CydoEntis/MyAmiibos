@@ -5,13 +5,8 @@ import { useAppContext } from '../../../context/appContext';
 const AmiiboCard = ({ amiibo, index }) => {
 	const { getSelectedAmiibo, showAmiiboDetails } = useAppContext();
 	const handleClick = () => {
-		const formattedAmiibo = {
-			...amiibo,
-			release: amiibo.release.na,
-			amiiboId: amiibo.head + amiibo.tail
-		};
-
-		getSelectedAmiibo(formattedAmiibo);
+		let amiiboId = amiibo.amiiboId;
+		getSelectedAmiibo(amiiboId);
 		showAmiiboDetails();
 	};
 
