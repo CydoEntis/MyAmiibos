@@ -9,12 +9,12 @@ const Filter = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [filter, setFilter] = useState("All");
 
-	const openFilter = () => {
+	const toggleFilter = () => {
 		setIsOpen((prevState) => !prevState);
 	};
 	return (
 		<>
-			<div className={classes.filter} onClick={openFilter}>
+			<div className={classes.filter} onClick={toggleFilter}>
 				<div className={classes['filter--text']}>{filter}</div>
 				<div className={classes['filter--icon']}>
 					<FaChevronDown />

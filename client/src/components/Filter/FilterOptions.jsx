@@ -8,17 +8,17 @@ const FilterOptions = ({ setIsOpen, setFilter }) => {
 	const { filterAmiiboType } = useAppContext();
 	const filterListRef = useRef(null);
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (filterListRef.current && !filterListRef.current.contains(event.target)) {
-					setIsOpen(false);
-	      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [filterListRef]);
+  // useEffect(() => {
+  //   function handleClickOutside(event) {
+  //     if (filterListRef.current && !filterListRef.current.contains(event.target)) {
+	// 				setIsOpen(false);
+	//       }
+  //   }
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [filterListRef]);
 
 	const getAllAmiibos = async () => {
 		setIsOpen(false);
