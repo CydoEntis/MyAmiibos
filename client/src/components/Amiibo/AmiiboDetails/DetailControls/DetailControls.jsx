@@ -57,7 +57,7 @@ const DetailControls = () => {
 			updateAmiibo(amiibo);
 		}
 		updateAmiiboList(index, amiibo);
-		hideAmiiboDetails();
+		// hideAmiiboDetails();
 	};
 
 	return (

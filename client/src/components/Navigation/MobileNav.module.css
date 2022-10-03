@@ -65,12 +65,20 @@
 	text-decoration: none;
 	padding: 0.75rem;
 	border-radius: 0.4rem;
-	font-size: 1.35rem;
+	font-size: 1.15rem;
+}
+
+.btn {
+	width: 200px;
+	padding: .75rem;
+	border-radius: .4rem;
+	color: white;
+	font-size: 1.15rem;
 }
 
 .btn--nav {
 	background: #12c7b7;
-	box-shadow: 0px 5px 0px #00957b;
+	box-shadow: 0px 7px 0px #00957b;
 }
 
 .btn--logout {
@@ -93,7 +101,7 @@
 
 .active {
 	background: #0e9b90;
-	box-shadow: 0px 3px 0px #016b59;
+	box-shadow: 0px 5px 0px #016b59;
 	transform: translate(2px);
 }
 

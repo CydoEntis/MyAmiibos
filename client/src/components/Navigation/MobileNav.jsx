@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import { useAppContext } from '../../context/appContext';
@@ -10,10 +10,24 @@ import classes from './MobileNav.module.css';
 const MobileNav = ({ toggle, toggleMenu }) => {
 	const { user, logout } = useAppContext();
 
+	// ! State to manage active button unless I can achieve active page with NavLinks.
+	const [collectionActive, setCollectionActive] = useState(false);
+	const [wishlistActive, setWishlistActive] = useState(false);
+
+	const handleCollection = () => {
+		// TODO: Implement Logic to get all collected ammibos
+		// TODO: Hide mobile nav
+	};
+
+	const handleWishlist = () => {
+		// TODO: Implement Logic to get all wishlisted amiibos
+		// TODO: Hide mobile nav
+	};
+
 	const handleLogout = () => {
 		logout();
 		toggleMenu();
-	}
+	};
 
 	const mobileNavClasses = toggle
 		? `${classes['mobile-nav']} ${classes['is-active']}`
@@ -26,7 +40,10 @@ const MobileNav = ({ toggle, toggleMenu }) => {
 					<FaTimes />
 				</Button>
 				<div className={classes['mobile--logo']}>
-					<Logo toggleMenu={toggleMenu} className={classes['logo--large']} />
+					<Logo
+						toggleMenu={toggleMenu}
+						className={classes['logo--large']}
+					/>
 				</div>
 				<ul>
 					{user && (
@@ -45,7 +62,26 @@ const MobileNav = ({ toggle, toggleMenu }) => {
 								</NavLink>
 							</li>
 							<li>
-								<Button className={classes['btn--logout']} onClick={handleLogout}>
+								<Button
+									className={`${classes.btn} ${classes['btn--nav']}`}
+									onClick={handleCollection}
+								>
+									My Collection
+								</Button>
+							</li>
+							<li>
+								<Button
+									className={`${classes.btn} ${classes['btn--nav']}`}
+									onClick={handleWishlist}
+								>
+									My Wishlist
+								</Button>
+							</li>
+							<li>
+								<Button
+									className={classes['btn--logout']}
+									onClick={handleLogout}
+								>
 									Logout
 								</Button>
 							</li>
