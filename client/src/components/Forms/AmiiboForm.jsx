@@ -20,11 +20,28 @@ const AmiiboForm = () => {
 					</div>
 					<div className={`${classes['form--row']} ${classes.sort}`}>
 						<h3>Sort: </h3>
-						<Button className={classes['form--button']} onClick={() => sortAmiibos("a-z")}>A-Z</Button>
-						<Button className={classes['form--button']} onClick={() => sortAmiibos("series")}>
+						<Button
+							className={classes['form--button']}
+							onClick={() => sortAmiibos('num')}
+						>
+							Id
+						</Button>
+						<Button
+							className={classes['form--button']}
+							onClick={() => sortAmiibos('a-z')}
+						>
+							A-Z
+						</Button>
+						<Button
+							className={classes['form--button']}
+							onClick={() => sortAmiibos('series')}
+						>
 							Series
 						</Button>
-						<Button className={classes['form--button']}>
+						<Button
+							className={classes['form--button']}
+							onClick={() => sortAmiibos('date')}
+						>
 							Date
 						</Button>
 					</div>

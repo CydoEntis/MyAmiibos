@@ -258,12 +258,20 @@ const AppProvider = ({ children }) => {
 			sorted = state.modifiedList.sort((a, b) =>
 				a.gameSeries > b.gameSeries ? 1 : -1
 			);
+		} else if (sort === 'date') {
+			sorted = state.modifiedList.sort((a, b) =>
+				a.release > b.release ? 1 : -1
+			);
 		} else {
-			dispatch({
-				type: SORT_AMIIBOS_SUCCESS,
-				payload: { amiibos: state.amiiboList },
-			});
+			sorted = state.modifiedList.sort((a, b) => {
+				let amiiboIdOne = a.head + a.tail;
+				let amiiboIdTwo = b.head + b.tail;
+				return amiiboIdOne > amiiboIdTwo ? 1 : -1
+			}
+		);
 		}
+
+		console.log(sorted);
 
 		dispatch({
 			type: SORT_AMIIBOS_SUCCESS,
