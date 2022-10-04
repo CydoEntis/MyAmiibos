@@ -109,7 +109,6 @@ const AppProvider = ({ children }) => {
 	};
 
 	const userAuth = async ({ currentUser, endPoint, alertText }) => {
-		console.log(currentUser);
 		dispatch({ type: USER_AUTH_BEGIN });
 		try {
 			const { data } = await axios.post(
@@ -117,7 +116,6 @@ const AppProvider = ({ children }) => {
 				currentUser
 			);
 
-			console.log(data);
 			const { user, token } = data;
 
 			dispatch({
@@ -271,7 +269,6 @@ const AppProvider = ({ children }) => {
 		);
 		}
 
-		console.log(sorted);
 
 		dispatch({
 			type: SORT_AMIIBOS_SUCCESS,
@@ -280,7 +277,6 @@ const AppProvider = ({ children }) => {
 	};
 
 	const goToPage = (newPage) => {
-		console.log(newPage);
 		dispatch({
 			type: GO_TO_PAGE,
 			payload: {
@@ -324,7 +320,6 @@ const AppProvider = ({ children }) => {
 
 	const findAmiibo = (searchValue) => {
 		dispatch({ type: FIND_AMIIBO, payload: { result: state.amiiboList } });
-		console.log(state.modifiedList);
 		if (searchValue === '') {
 			dispatch({
 				type: FIND_AMIIBO,
@@ -354,7 +349,6 @@ const AppProvider = ({ children }) => {
 			const amiibo = state.amiiboList.find(
 				(amiibo) => amiibo.amiiboId === amiiboData.amiiboId
 			);
-			console.log(amiibo);
 		} catch (error) {
 			console.log(error);
 		}
@@ -367,7 +361,6 @@ const AppProvider = ({ children }) => {
 				updatedList[index] = amiiboData;
 			}
 		}
-		console.log('Updated List: ', updatedList);
 
 		dispatch({ type: UPDATE_AMIIBO_LIST, payload: { updatedList } });
 	};

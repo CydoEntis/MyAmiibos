@@ -40,6 +40,12 @@
   box-shadow: 0px 7px 0px #398233;
 }
 
+.form--button-active {
+  transform: translateY(2px);
+  filter: brightness(85%);
+  box-shadow: 0px 5px 0px #398233;
+}
+
 .form {
   display: flex;
   flex-direction: column;

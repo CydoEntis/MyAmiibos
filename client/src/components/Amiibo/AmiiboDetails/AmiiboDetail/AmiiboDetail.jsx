@@ -19,8 +19,6 @@ const AmiiboDetail = () => {
 		hideAmiiboDetails();
 	};
 
-	console.log(isLoading);
-
 	if (!showDetails) return;
 
 	return ReactDom.createPortal(

@@ -89,14 +89,12 @@ const reducer = (state, action) => {
 				// TODO: Add error alerts
 			};
 		case FILTER_AMIIBOS_LOADING:
-			console.log('AmiiboList: ', state.amiiboList);
 			return {
 				...state,
 				isLoading: true,
 				modifiedList: state.amiiboList,
 			};
 		case FILTER_AMIIBOS_SUCCESS:
-			console.log(action.payload.modifiedList);
 			return {
 				...state,
 				isLoading: false,

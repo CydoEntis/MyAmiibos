@@ -27,9 +27,7 @@ const DetailControls = () => {
 		);
 
 		const amiibo = currentSelectedAmiibo[0];
-		console.log(amiibo);
 		if (amiibo.createdAt === null) {
-			console.log(amiibo.createdAt);
 			if (action === 'collect') {
 				amiibo.collected = true;
 				amiibo.wishlisted = false;

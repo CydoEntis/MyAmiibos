@@ -5,9 +5,50 @@ import Button from '../UI/Buttons/Button';
 
 import classes from './AmiiboForm.module.css';
 import { useAppContext } from '../../context/appContext';
+import { useState } from 'react';
+
+const sortData = [
+	{
+		id: 1,
+		name: 'Id',
+		isActive: true,
+		sortType: 'default',
+	},
+	{
+		id: 2,
+		name: 'A-Z',
+		isActive: false,
+		sortType: 'a-z',
+	},
+	{
+		id: 3,
+		name: 'Series',
+		isActive: false,
+		sortType: 'series',
+	},
+	{
+		id: 4,
+		name: 'Date',
+		isActive: false,
+		sortType: 'date',
+	},
+];
 
 const AmiiboForm = () => {
 	const { sortAmiibos } = useAppContext();
+	const [sortControls, setSortControls] = useState(sortData);
+
+	const handleSort = (sortType, index) => {
+		const updatedControls = sortControls.map((control, controlIndex) => {
+			if (controlIndex === index) control.isActive = true;
+			else control.isActive = false;
+			
+			return control;
+		});
+
+		setSortControls(updatedControls);
+		sortAmiibos(sortType);
+	};
 
 	return (
 		<div className={classes['form--container']}>
@@ -19,31 +60,19 @@ const AmiiboForm = () => {
 						<Filter />
 					</div>
 					<div className={`${classes['form--row']} ${classes.sort}`}>
-						<h3>Sort: </h3>
-						<Button
-							className={classes['form--button']}
-							onClick={() => sortAmiibos('num')}
-						>
-							Id
-						</Button>
-						<Button
-							className={classes['form--button']}
-							onClick={() => sortAmiibos('a-z')}
-						>
-							A-Z
-						</Button>
-						<Button
-							className={classes['form--button']}
-							onClick={() => sortAmiibos('series')}
-						>
-							Series
-						</Button>
-						<Button
-							className={classes['form--button']}
-							onClick={() => sortAmiibos('date')}
-						>
-							Date
-						</Button>
+						{sortControls.map((data, index) => (
+							<Button
+								key={data.id}
+								className={`${
+									data.isActive
+										? classes['form--button-active']
+										: ''
+								} ${classes['form--button']}`}
+								onClick={() => handleSort(data.sortType, index)}
+							>
+								{data.name}
+							</Button>
+						))}
 					</div>
 				</div>
 				<div className={`${classes['form--row']} ${classes.pages}`}>
