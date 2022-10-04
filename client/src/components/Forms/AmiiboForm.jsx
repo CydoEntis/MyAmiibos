@@ -15,7 +15,7 @@ const AmiiboForm = () => {
 						<h3>Filter: </h3>
 						<Filter />
 					</div>
-					<div className={classes['form--row']}>
+					<div className={`${classes['form--row']} ${classes.sort}`}>
 						<h3>Sort: </h3>
 						<Button className={classes['form--button']}>A-Z</Button>
 						<Button className={classes['form--button']}>
@@ -26,8 +26,7 @@ const AmiiboForm = () => {
 						</Button>
 					</div>
 				</div>
-
-				<div className={classes['form--buttons']}>
+				<div className={`${classes['form--row']} ${classes.pages}`}>
 					<h3>Cards Per Page: </h3>
 					<Button className={classes['form--button']}>25</Button>
 					<Button className={classes['form--button']}>50</Button>
