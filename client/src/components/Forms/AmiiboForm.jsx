@@ -12,7 +12,7 @@ const sortData = [
 		id: 1,
 		name: 'Id',
 		isActive: true,
-		sortType: 'default',
+		sortType: 'all',
 	},
 	{
 		id: 2,

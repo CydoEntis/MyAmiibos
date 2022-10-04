@@ -247,8 +247,13 @@ const AppProvider = ({ children }) => {
 		dispatch({ type: SORT_AMIIBOS_LOADING });
 
 		let sorted;
-
-		if (sort === 'a-z') {
+		if (sort === 'default') {
+			sorted = state.modifiedList.sort((a, b) => {
+				let amiiboIdOne = a.head + a.tail;
+				let amiiboIdTwo = b.head + b.tail;
+				return amiiboIdOne > amiiboIdTwo ? 1 : -1;
+			});
+		} else if (sort === 'a-z') {
 			sorted = state.modifiedList.sort((a, b) =>
 				a.name > b.name ? 1 : -1
 			);
@@ -260,15 +265,21 @@ const AppProvider = ({ children }) => {
 			sorted = state.modifiedList.sort((a, b) =>
 				a.release > b.release ? 1 : -1
 			);
-		} else {
-			sorted = state.modifiedList.sort((a, b) => {
-				let amiiboIdOne = a.head + a.tail;
-				let amiiboIdTwo = b.head + b.tail;
-				return amiiboIdOne > amiiboIdTwo ? 1 : -1
-			}
-		);
+		} else if (sort === 'collection') {
+			console.log('collection');
+			sorted = state.modifiedList.filter(
+				(amiibo) => amiibo.collected === true
+			);
+		} else if (sort === 'wishlist') {
+			console.log('wishlist');
+			sorted = state.modifiedList.filter(
+				(amiibo) => amiibo.wishlisted === true
+			);
+		} else if (sort === 'all') {
+			sorted = state.amiiboList;
 		}
 
+		console.log(sorted[0]);
 
 		dispatch({
 			type: SORT_AMIIBOS_SUCCESS,

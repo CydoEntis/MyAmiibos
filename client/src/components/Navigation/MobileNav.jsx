@@ -7,21 +7,43 @@ import Button from '../UI/Buttons/Button';
 
 import classes from './MobileNav.module.css';
 
+const buttonData = [
+	{
+		id: 1,
+		type: 'all',
+		isActive: true,
+		text: 'All Amiibos',
+	},
+	{
+		id: 2,
+		type: 'collection',
+		isActive: false,
+		text: 'My Collection',
+	},
+	{
+		id: 3,
+		type: 'wishlist',
+		isActive: false,
+		text: 'My Wishlist',
+	},
+];
+
 const MobileNav = ({ toggle, toggleMenu }) => {
-	const { user, logout } = useAppContext();
+	const { user, logout, sortAmiibos } = useAppContext();
 
-	// ! State to manage active button unless I can achieve active page with NavLinks.
-	const [collectionActive, setCollectionActive] = useState(false);
-	const [wishlistActive, setWishlistActive] = useState(false);
+	const [buttons, setButtons] = useState(buttonData);
 
-	const handleCollection = () => {
-		// TODO: Implement Logic to get all collected ammibos
-		// TODO: Hide mobile nav
-	};
+	const handleClick = (type, index) => {
+		const updatedButtons = buttons.map((button, buttonIndex) => {
+			if (buttonIndex === index) button.isActive = true;
+			else button.isActive = false;
 
-	const handleWishlist = () => {
-		// TODO: Implement Logic to get all wishlisted amiibos
-		// TODO: Hide mobile nav
+			return button;
+		});
+
+		setButtons(updatedButtons);
+		sortAmiibos(type);
+		toggleMenu();
 	};
 
 	const handleLogout = () => {
@@ -61,22 +83,24 @@ const MobileNav = ({ toggle, toggleMenu }) => {
 									Amiibos
 								</NavLink>
 							</li>
-							<li>
-								<Button
-									className={`${classes.btn} ${classes['btn--nav']}`}
-									onClick={handleCollection}
-								>
-									My Collection
-								</Button>
-							</li>
-							<li>
-								<Button
-									className={`${classes.btn} ${classes['btn--nav']}`}
-									onClick={handleWishlist}
-								>
-									My Wishlist
-								</Button>
-							</li>
+							{buttons.map((button, index) => (
+								<li key={button.id}>
+									<Button
+										className={`${
+											button.isActive
+												? classes['btn--action-active']
+												: ''
+										} ${classes.btn} ${
+											classes['btn--action']
+										}`}
+										onClick={() => {
+											handleClick(button.type, index);
+										}}
+									>
+										{button.text}
+									</Button>
+								</li>
+							))}
 							<li>
 								<Button
 									className={classes['btn--logout']}
