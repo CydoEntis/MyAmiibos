@@ -42,7 +42,7 @@ const AmiiboForm = () => {
 		const updatedControls = sortControls.map((control, controlIndex) => {
 			if (controlIndex === index) control.isActive = true;
 			else control.isActive = false;
-			
+
 			return control;
 		});
 
@@ -60,6 +60,7 @@ const AmiiboForm = () => {
 						<Filter />
 					</div>
 					<div className={`${classes['form--row']} ${classes.sort}`}>
+						<h3>Sort By: </h3>
 						{sortControls.map((data, index) => (
 							<Button
 								key={data.id}
@@ -75,12 +76,12 @@ const AmiiboForm = () => {
 						))}
 					</div>
 				</div>
-				<div className={`${classes['form--row']} ${classes.pages}`}>
+				{/* <div className={`${classes['form--row']} ${classes.pages}`}>
 					<h3>Cards Per Page: </h3>
 					<Button className={classes['form--button']}>25</Button>
 					<Button className={classes['form--button']}>50</Button>
 					<Button className={classes['form--button']}>100</Button>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);
