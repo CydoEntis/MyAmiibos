@@ -21,7 +21,9 @@ import {
 	SHOW_DETAILS,
 	HIDE_DETAILS,
 	UPDATE_AMIIBO_LIST,
-	FIND_AMIIBO
+	FIND_AMIIBO,
+	SORT_AMIIBOS_LOADING,
+	SORT_AMIIBOS_SUCCESS,
 } from './actions';
 import reducer from './reducer';
 
@@ -150,10 +152,12 @@ const AppProvider = ({ children }) => {
 			const { data: dbAmiibos } = await axios.get('/api/v1/amiibos/all');
 			let rawAmiibos;
 			if (value !== 'all') {
-				const { data } = await axios.get(`https://www.amiiboapi.com/api/amiibo/?name=${value}`);
+				const { data } = await axios.get(
+					`https://www.amiiboapi.com/api/amiibo/?name=${value}`
+				);
 				rawAmiibos = data;
 			} else {
-				const { data } = await amiiboFetch()
+				const { data } = await amiiboFetch();
 				rawAmiibos = data;
 			}
 
@@ -241,6 +245,32 @@ const AppProvider = ({ children }) => {
 		});
 	};
 
+	const sortAmiibos = (sort) => {
+		dispatch({ type: SORT_AMIIBOS_LOADING });
+
+		let sorted;
+
+		if (sort === 'a-z') {
+			sorted = state.modifiedList.sort((a, b) =>
+				a.name > b.name ? 1 : -1
+			);
+		} else if (sort === 'series') {
+			sorted = state.modifiedList.sort((a, b) =>
+				a.gameSeries > b.gameSeries ? 1 : -1
+			);
+		} else {
+			dispatch({
+				type: SORT_AMIIBOS_SUCCESS,
+				payload: { amiibos: state.amiiboList },
+			});
+		}
+
+		dispatch({
+			type: SORT_AMIIBOS_SUCCESS,
+			payload: { amiibos: sorted },
+		});
+	};
+
 	const goToPage = (newPage) => {
 		console.log(newPage);
 		dispatch({
@@ -285,7 +315,7 @@ const AppProvider = ({ children }) => {
 	};
 
 	const findAmiibo = (searchValue) => {
-		dispatch({type: FIND_AMIIBO, payload: {result: state.amiiboList}})
+		dispatch({ type: FIND_AMIIBO, payload: { result: state.amiiboList } });
 		console.log(state.modifiedList);
 		if (searchValue === '') {
 			dispatch({
@@ -299,7 +329,6 @@ const AppProvider = ({ children }) => {
 
 			dispatch({ type: FIND_AMIIBO, payload: { result } });
 		}
-
 	};
 
 	const saveAmiibo = async (amiiboData) => {
@@ -353,6 +382,7 @@ const AppProvider = ({ children }) => {
 		updateAmiibo,
 		updateAmiiboList,
 		findAmiibo,
+		sortAmiibos,
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

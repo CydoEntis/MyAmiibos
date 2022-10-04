@@ -4,8 +4,11 @@ import Filter from '../Filter/Filter';
 import Button from '../UI/Buttons/Button';
 
 import classes from './AmiiboForm.module.css';
+import { useAppContext } from '../../context/appContext';
 
 const AmiiboForm = () => {
+	const { sortAmiibos } = useAppContext();
+
 	return (
 		<div className={classes['form--container']}>
 			<SearchBar />
@@ -17,8 +20,8 @@ const AmiiboForm = () => {
 					</div>
 					<div className={`${classes['form--row']} ${classes.sort}`}>
 						<h3>Sort: </h3>
-						<Button className={classes['form--button']}>A-Z</Button>
-						<Button className={classes['form--button']}>
+						<Button className={classes['form--button']} onClick={() => sortAmiibos("a-z")}>A-Z</Button>
+						<Button className={classes['form--button']} onClick={() => sortAmiibos("series")}>
 							Series
 						</Button>
 						<Button className={classes['form--button']}>

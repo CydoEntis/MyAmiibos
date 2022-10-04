@@ -19,7 +19,9 @@ import {
 	SHOW_DETAILS,
 	HIDE_DETAILS,
 	UPDATE_AMIIBO_LIST,
-	FIND_AMIIBO
+	FIND_AMIIBO,
+	SORT_AMIIBOS_LOADING,
+	SORT_AMIIBOS_SUCCESS,
 } from './actions';
 
 const reducer = (state, action) => {
@@ -87,11 +89,11 @@ const reducer = (state, action) => {
 				// TODO: Add error alerts
 			};
 		case FILTER_AMIIBOS_LOADING:
-			console.log("AmiiboList: ", state.amiiboList);
+			console.log('AmiiboList: ', state.amiiboList);
 			return {
 				...state,
 				isLoading: true,
-				modifiedList: state.amiiboList
+				modifiedList: state.amiiboList,
 			};
 		case FILTER_AMIIBOS_SUCCESS:
 			console.log(action.payload.modifiedList);
@@ -129,7 +131,7 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				selectedAmiibo: action.payload.selectedAmiibo,
-				isLoading: true
+				isLoading: true,
 			};
 		case CLEAR_AMIIBO:
 			return {
@@ -148,16 +150,27 @@ const reducer = (state, action) => {
 				showDetails: false,
 				selectedAmiibo: action.payload.selectedAmiibo,
 			};
-			case UPDATE_AMIIBO_LIST:
-				return {
-					...state,
-					modifiedList: action.payload.updatedList,
-				};
-			case FIND_AMIIBO:
-				return {
-					...state,
-					modifiedList: action.payload.result
-				}
+		case UPDATE_AMIIBO_LIST:
+			return {
+				...state,
+				modifiedList: action.payload.updatedList,
+			};
+		case FIND_AMIIBO:
+			return {
+				...state,
+				modifiedList: action.payload.result,
+			};
+		case SORT_AMIIBOS_LOADING:
+			return {
+				...state,
+				isLoading: true,
+			};
+		case SORT_AMIIBOS_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				modifiedList: action.payload.amiibos,
+			};
 
 		default:
 			throw new Error(`no such action : ${action.type}`);
