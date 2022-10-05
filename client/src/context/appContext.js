@@ -50,6 +50,26 @@ const initialState = {
 	limit: 25,
 	showDetails: false,
 	selectedAmiibo: {},
+	// collectionData: [
+	// 	{
+	// 		id: 1,
+	// 		type: 'all',
+	// 		isActive: true,
+	// 		text: 'All Amiibos',
+	// 	},
+	// 	{
+	// 		id: 2,
+	// 		type: 'collection',
+	// 		isActive: false,
+	// 		text: 'My Collection',
+	// 	},
+	// 	{
+	// 		id: 3,
+	// 		type: 'wishlist',
+	// 		isActive: false,
+	// 		text: 'My Wishlist',
+	// 	},
+	// ]
 };
 
 const AppContext = React.createContext();
@@ -375,6 +395,8 @@ const AppProvider = ({ children }) => {
 
 		dispatch({ type: UPDATE_AMIIBO_LIST, payload: { updatedList } });
 	};
+
+
 
 	const values = {
 		...state,

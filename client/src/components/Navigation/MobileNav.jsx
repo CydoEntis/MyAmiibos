@@ -7,44 +7,9 @@ import Button from '../UI/Buttons/Button';
 
 import classes from './MobileNav.module.css';
 
-const buttonData = [
-	{
-		id: 1,
-		type: 'all',
-		isActive: true,
-		text: 'All Amiibos',
-	},
-	{
-		id: 2,
-		type: 'collection',
-		isActive: false,
-		text: 'My Collection',
-	},
-	{
-		id: 3,
-		type: 'wishlist',
-		isActive: false,
-		text: 'My Wishlist',
-	},
-];
-
 const MobileNav = ({ toggle, toggleMenu }) => {
 	const { user, logout, sortAmiibos } = useAppContext();
 
-	const [buttons, setButtons] = useState(buttonData);
-
-	const handleClick = (type, index) => {
-		const updatedButtons = buttons.map((button, buttonIndex) => {
-			if (buttonIndex === index) button.isActive = true;
-			else button.isActive = false;
-
-			return button;
-		});
-
-		setButtons(updatedButtons);
-		sortAmiibos(type);
-		toggleMenu();
-	};
 
 	const handleLogout = () => {
 		logout();
@@ -83,24 +48,6 @@ const MobileNav = ({ toggle, toggleMenu }) => {
 									Amiibos
 								</NavLink>
 							</li>
-							{buttons.map((button, index) => (
-								<li key={button.id}>
-									<Button
-										className={`${
-											button.isActive
-												? classes['btn--action-active']
-												: ''
-										} ${classes.btn} ${
-											classes['btn--action']
-										}`}
-										onClick={() => {
-											handleClick(button.type, index);
-										}}
-									>
-										{button.text}
-									</Button>
-								</li>
-							))}
 							<li>
 								<Button
 									className={classes['btn--logout']}

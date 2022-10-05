@@ -34,9 +34,31 @@ const sortData = [
 	},
 ];
 
+const collectionData = [
+	{
+		id: 1,
+		type: 'all',
+		isActive: true,
+		text: 'All Amiibos',
+	},
+	{
+		id: 2,
+		type: 'collection',
+		isActive: false,
+		text: 'My Collection',
+	},
+	{
+		id: 3,
+		type: 'wishlist',
+		isActive: false,
+		text: 'My Wishlist',
+	},
+];
+
 const AmiiboForm = () => {
 	const { sortAmiibos } = useAppContext();
 	const [sortControls, setSortControls] = useState(sortData);
+	const [collections, setCollections] = useState(collectionData);
 
 	const handleSort = (sortType, index) => {
 		const updatedControls = sortControls.map((control, controlIndex) => {
@@ -50,8 +72,40 @@ const AmiiboForm = () => {
 		sortAmiibos(sortType);
 	};
 
+	const handleClick = (collection, index) => {
+		const updatedCollections = collections.map(
+			(collection, collectionIndex) => {
+				if (collectionIndex === index) collection.isActive = true;
+				else collection.isActive = false;
+
+				return collection;
+			}
+		);
+
+		setCollections(updatedCollections);
+		sortAmiibos(collection);
+	};
+
 	return (
 		<div className={classes['form--container']}>
+			<div className={`${classes['form--row']}`}>
+				<h3>Collection: </h3>
+				{collections.map((collection, index) => (
+					<Button
+						key={collection.id}
+						className={`${
+							collection.isActive
+								? classes['form--button-active']
+								: ''
+						} ${classes.btn} ${classes['form--button']}`}
+						onClick={() => {
+							handleClick(collection.type, index);
+						}}
+					>
+						{collection.text}
+					</Button>
+				))}
+			</div>
 			<SearchBar />
 			<div className={classes.form}>
 				<div className={classes['form--filter']}>
@@ -76,12 +130,6 @@ const AmiiboForm = () => {
 						))}
 					</div>
 				</div>
-				{/* <div className={`${classes['form--row']} ${classes.pages}`}>
-					<h3>Cards Per Page: </h3>
-					<Button className={classes['form--button']}>25</Button>
-					<Button className={classes['form--button']}>50</Button>
-					<Button className={classes['form--button']}>100</Button>
-				</div> */}
 			</div>
 		</div>
 	);
