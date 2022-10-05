@@ -168,6 +168,9 @@ const reducer = (state, action) => {
 				...state,
 				isLoading: false,
 				modifiedList: action.payload.amiibos,
+				numOfPages: action.payload.numOfPages,
+				pageNumbers: action.payload.pageNumbers,
+				currentPage: 1,
 			};
 
 		default:

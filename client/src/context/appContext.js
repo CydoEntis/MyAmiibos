@@ -50,26 +50,6 @@ const initialState = {
 	limit: 25,
 	showDetails: false,
 	selectedAmiibo: {},
-	// collectionData: [
-	// 	{
-	// 		id: 1,
-	// 		type: 'all',
-	// 		isActive: true,
-	// 		text: 'All Amiibos',
-	// 	},
-	// 	{
-	// 		id: 2,
-	// 		type: 'collection',
-	// 		isActive: false,
-	// 		text: 'My Collection',
-	// 	},
-	// 	{
-	// 		id: 3,
-	// 		type: 'wishlist',
-	// 		isActive: false,
-	// 		text: 'My Wishlist',
-	// 	},
-	// ]
 };
 
 const AppContext = React.createContext();
@@ -299,11 +279,16 @@ const AppProvider = ({ children }) => {
 			sorted = state.amiiboList;
 		}
 
-		console.log(sorted[0]);
 
 		dispatch({
 			type: SORT_AMIIBOS_SUCCESS,
 			payload: { amiibos: sorted },
+			numOfPages: Math.ceil(sorted.length / state.limit),
+			pageNumbers: [
+				...Array(
+					Math.ceil(sorted.length / state.limit) + 1
+				).keys(),
+			].slice(1),
 		});
 	};
 
