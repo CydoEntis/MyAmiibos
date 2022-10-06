@@ -244,7 +244,11 @@ const AppProvider = ({ children }) => {
 	};
 
 	const sortAmiibos = (sort) => {
-		dispatch({ type: SORT_AMIIBOS_LOADING });
+		dispatch({
+			type: SORT_AMIIBOS_LOADING,
+		});
+
+		state.modifiedList = state.amiiboList;
 
 		let sorted;
 		if (sort === 'default') {
@@ -279,15 +283,12 @@ const AppProvider = ({ children }) => {
 			sorted = state.amiiboList;
 		}
 
-
 		dispatch({
 			type: SORT_AMIIBOS_SUCCESS,
 			payload: { amiibos: sorted },
 			numOfPages: Math.ceil(sorted.length / state.limit),
 			pageNumbers: [
-				...Array(
-					Math.ceil(sorted.length / state.limit) + 1
-				).keys(),
+				...Array(Math.ceil(sorted.length / state.limit) + 1).keys(),
 			].slice(1),
 		});
 	};
@@ -380,8 +381,6 @@ const AppProvider = ({ children }) => {
 
 		dispatch({ type: UPDATE_AMIIBO_LIST, payload: { updatedList } });
 	};
-
-
 
 	const values = {
 		...state,

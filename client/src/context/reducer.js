@@ -162,6 +162,7 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				isLoading: true,
+				modifiedList: state.amiiboList
 			};
 		case SORT_AMIIBOS_SUCCESS:
 			return {
