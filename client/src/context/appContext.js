@@ -24,6 +24,7 @@ import {
 	FIND_AMIIBO,
 	SORT_AMIIBOS_LOADING,
 	SORT_AMIIBOS_SUCCESS,
+	SET_COLLECTION,
 } from './actions';
 import reducer from './reducer';
 
@@ -40,6 +41,9 @@ const initialState = {
 	token: token,
 	amiiboList: [],
 	modifiedList: [],
+	allAmiibos: [],
+	collectedAmiibos: [],
+	wishlistedAmiibos: [],
 	collectedCount: 0,
 	wishlistCount: 0,
 	page: 1,
@@ -50,6 +54,9 @@ const initialState = {
 	limit: 25,
 	showDetails: false,
 	selectedAmiibo: {},
+
+	collectionType: 'all',
+	sortType: 'default',
 };
 
 const AppContext = React.createContext();
@@ -189,10 +196,19 @@ const AppProvider = ({ children }) => {
 				formattedAmiibos.push(formattedAmiibo);
 			}
 
+			const collectedAmiibos = formattedAmiibos.filter(
+				(amiibo) => amiibo.collected === true
+			);
+			const wishlistedAmiibos = formattedAmiibos.filter(
+				(amiibo) => amiibo.wishlisted === true
+			);
+
 			dispatch({
 				type: GET_AMIIBOS_SUCCESS,
 				payload: {
 					amiiboList: formattedAmiibos,
+					collectedAmiibos: collectedAmiibos,
+					wishlistedAmiibos: wishlistedAmiibos,
 					numOfPages: Math.ceil(
 						formattedAmiibos.length / state.limit
 					),
@@ -211,6 +227,10 @@ const AppProvider = ({ children }) => {
 		}
 	};
 
+	const setCurrentCollection = (collection) => {
+		dispatch({ type: SET_COLLECTION, payload: { collection } });
+	};
+
 	const filterAmiiboType = async ({ type }) => {
 		dispatch({ type: FILTER_AMIIBOS_LOADING });
 		if (type === 'all') {
@@ -225,9 +245,11 @@ const AppProvider = ({ children }) => {
 			}
 		}
 
-		const filteredAmiibos = state.amiiboList.filter((amiibo) => {
+		const filteredAmiibos = state.modifiedList.filter((amiibo) => {
 			return amiibo.type.toLowerCase() === type.toLowerCase();
 		});
+
+		console.log(filteredAmiibos);
 
 		dispatch({
 			type: FILTER_AMIIBOS_SUCCESS,
@@ -243,44 +265,52 @@ const AppProvider = ({ children }) => {
 		});
 	};
 
-	const sortAmiibos = (sort) => {
+	const sortAmiibos = (collection, sort) => {
 		dispatch({
 			type: SORT_AMIIBOS_LOADING,
 		});
 
-		state.modifiedList = state.amiiboList;
+		let amiiboCollection;
+
+		if (collection === state.currentCollection) {
+			amiiboCollection = state.amiiboList;
+		} else if (collection === state.currentCollection) {
+			amiiboCollection = state.collectedAmiibos;
+		} else if (collection === state.currentCollection) {
+			amiiboCollection = state.wishlistedAmiibos;
+		}
 
 		let sorted;
 		if (sort === 'default') {
-			sorted = state.modifiedList.sort((a, b) => {
+			sorted = state.amiiboCollection.sort((a, b) => {
 				let amiiboIdOne = a.head + a.tail;
 				let amiiboIdTwo = b.head + b.tail;
 				return amiiboIdOne > amiiboIdTwo ? 1 : -1;
 			});
 		} else if (sort === 'a-z') {
-			sorted = state.modifiedList.sort((a, b) =>
+			sorted = state.amiiboCollection.sort((a, b) =>
 				a.name > b.name ? 1 : -1
 			);
 		} else if (sort === 'series') {
-			sorted = state.modifiedList.sort((a, b) =>
+			sorted = state.amiiboCollection.sort((a, b) =>
 				a.gameSeries > b.gameSeries ? 1 : -1
 			);
 		} else if (sort === 'date') {
-			sorted = state.modifiedList.sort((a, b) =>
+			sorted = state.amiiboCollection.sort((a, b) =>
 				a.release > b.release ? 1 : -1
 			);
 		} else if (sort === 'collection') {
 			console.log('collection');
-			sorted = state.modifiedList.filter(
+			sorted = state.amiiboCollection.filter(
 				(amiibo) => amiibo.collected === true
 			);
 		} else if (sort === 'wishlist') {
 			console.log('wishlist');
-			sorted = state.modifiedList.filter(
+			sorted = state.amiiboCollection.filter(
 				(amiibo) => amiibo.wishlisted === true
 			);
 		} else if (sort === 'all') {
-			sorted = state.amiiboList;
+			sorted = amiiboCollection;
 		}
 
 		dispatch({
@@ -401,6 +431,7 @@ const AppProvider = ({ children }) => {
 		updateAmiiboList,
 		findAmiibo,
 		sortAmiibos,
+		setCurrentCollection,
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

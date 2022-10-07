@@ -22,6 +22,7 @@ import {
 	FIND_AMIIBO,
 	SORT_AMIIBOS_LOADING,
 	SORT_AMIIBOS_SUCCESS,
+	SET_COLLECTION,
 } from './actions';
 
 const reducer = (state, action) => {
@@ -76,6 +77,8 @@ const reducer = (state, action) => {
 				...state,
 				isLoading: false,
 				amiiboList: action.payload.amiiboList,
+				collectedAmmiibos: action.payload.collectedAmiibos,
+				wishlistedAmiibos: action.payload.wishlistedAmiibos, 
 				modifiedList: action.payload.amiiboList,
 				numOfPages: action.payload.numOfPages,
 				pageNumbers: action.payload.pageNumbers,
@@ -92,7 +95,7 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				isLoading: true,
-				modifiedList: state.amiiboList,
+				// modifiedList: state.amiiboList,
 			};
 		case FILTER_AMIIBOS_SUCCESS:
 			return {
@@ -173,6 +176,11 @@ const reducer = (state, action) => {
 				pageNumbers: action.payload.pageNumbers,
 				currentPage: 1,
 			};
+		case SET_COLLECTION:
+			return {
+				...state,
+				collectionType: action.payload.collection
+			}
 
 		default:
 			throw new Error(`no such action : ${action.type}`);
