@@ -179,7 +179,8 @@ const reducer = (state, action) => {
 		case SET_COLLECTION:
 			return {
 				...state,
-				collectionType: action.payload.collection
+				collectionType: action.payload.collection,
+				activeCollection: action.payload.activeCollection,
 			}
 
 		default:

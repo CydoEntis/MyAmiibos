@@ -44,6 +44,7 @@ const initialState = {
 	allAmiibos: [],
 	collectedAmiibos: [],
 	wishlistedAmiibos: [],
+	activeCollection: [],
 	collectedCount: 0,
 	wishlistCount: 0,
 	page: 1,
@@ -228,7 +229,20 @@ const AppProvider = ({ children }) => {
 	};
 
 	const setCurrentCollection = (collection) => {
-		dispatch({ type: SET_COLLECTION, payload: { collection } });
+		let activeCollection;
+
+		if (collection === 'all') {
+			activeCollection = state.allAmiibos;
+		} else if (collection === 'collection') {
+			activeCollection = state.collectedAmiibos;
+		} else if (collection === 'wishlist') {
+			activeCollection = state.wishlistedAmiibos;
+		}
+
+		dispatch({
+			type: SET_COLLECTION,
+			payload: { collection, activeCollection },
+		});
 	};
 
 	const filterAmiiboType = async ({ type }) => {
