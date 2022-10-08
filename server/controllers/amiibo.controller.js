@@ -90,9 +90,37 @@ const updateAmiibo = async (req, res) => {
 };
 
 
+const getWishlisted = async (req, res) => {
+	try {
+		const amiibos = await Amiibo.find({wishlisted: true})
+
+		res.status(StatusCodes.OK).json({
+			amiibos,
+		});
+	} catch (error) {
+		console.log(error);
+		throw new BadRequestError('You have no wishlisted Amiibos');
+	}
+}
+
+const getCollected = async (req, res) => {
+	try {
+		const amiibos = await Amiibo.find({collected: true})
+
+		res.status(StatusCodes.OK).json({
+			amiibos,
+		});
+	} catch (error) {
+		console.log(error);
+		throw new BadRequestError('You have no wishlisted Amiibos');
+	}
+}
+
 export {
 	getAmiibos,
 	getAmiibo,
 	saveAmiibo,
 	updateAmiibo,
+	getCollected,
+	getWishlisted
 };
