@@ -73,6 +73,7 @@ const reducer = (state, action) => {
 				isLoading: true,
 			};
 		case GET_AMIIBOS_SUCCESS:
+			console.log(action.payload.amiibos);
 			return {
 				...state,
 				isLoading: false,

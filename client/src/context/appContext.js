@@ -427,7 +427,11 @@ const AppProvider = ({ children }) => {
 	};
 
 	const getAmiibos = async (collection) => {
-		dispatch({ type: GET_AMIIBOS_LOADING });
+		let amiiboCollection = [];
+
+		dispatch({
+			type: GET_AMIIBOS_LOADING,
+		});
 
 		let endpoint = '/api/v1/amiibos/';
 
@@ -439,15 +443,11 @@ const AppProvider = ({ children }) => {
 			endpoint += 'wishlisted';
 		}
 
-
 		try {
-			let amiiboCollection = [];
-
 			const { data: dbAmiibos } = await axios.get(endpoint);
 
 			if (collection === 'all') {
 				const { data: apiAmiibos } = await amiiboFetch();
-
 
 				for (let amiibo of apiAmiibos.amiibo) {
 					let amiiboId = amiibo.head + amiibo.tail;
@@ -478,7 +478,7 @@ const AppProvider = ({ children }) => {
 					amiiboCollection.push(newAmiibo);
 				}
 			} else {
-				amiiboCollection = dbAmiibos;
+				amiiboCollection = dbAmiibos.amiibos;
 			}
 
 			dispatch({
@@ -523,7 +523,7 @@ const AppProvider = ({ children }) => {
 		findAmiibo,
 		sortAmiibos,
 		setCurrentCollection,
-		getAmiibos
+		getAmiibos,
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

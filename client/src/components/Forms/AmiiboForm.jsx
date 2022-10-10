@@ -59,7 +59,6 @@ const AmiiboForm = () => {
 	const { sortAmiibos, setCurrentCollection, getAmiibos, allAmiibos } = useAppContext();
 	const [sortControls, setSortControls] = useState(sortData);
 	const [collections, setCollections] = useState(collectionData);
-	console.log(allAmiibos);
 
 	const handleSort = (sortType, index, ) => {
 		const updatedControls = sortControls.map((control, controlIndex) => {
@@ -87,6 +86,8 @@ const AmiiboForm = () => {
 		setCollections(updatedCollections);
 		// sortAmiibos(collection);
 	};
+
+	console.log(allAmiibos);
 
 	return (
 		<div className={classes['form--container']}>
