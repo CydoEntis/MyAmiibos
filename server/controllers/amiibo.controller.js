@@ -104,12 +104,15 @@ const getWishlisted = async (req, res) => {
 }
 
 const getCollected = async (req, res) => {
+	console.log("Hello world");
 	try {
 		const amiibos = await Amiibo.find({collected: true})
+		console.log(amiibos);
 
 		res.status(StatusCodes.OK).json({
 			amiibos,
 		});
+
 	} catch (error) {
 		console.log(error);
 		throw new BadRequestError('You have no wishlisted Amiibos');

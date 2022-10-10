@@ -19,6 +19,7 @@ const Amiibos = () => {
 		limit,
 		numOfPages,
 		getAmiibos,
+		allAmiibos,
 	} = useAppContext();
 
 
@@ -28,7 +29,7 @@ const Amiibos = () => {
 
 	const indexOfLastAmiibo = currentPage * limit;
 	const indexOfFirstAmiibo = indexOfLastAmiibo - limit;
-	const currentAmiibos = modifiedList.slice(
+	const currentAmiibos = allAmiibos.slice(
 		indexOfFirstAmiibo,
 		indexOfLastAmiibo
 	);

@@ -12,9 +12,9 @@ import {
 const router = express.Router();
 
 router.route('/all').get(getAmiibos);
-router.route('/:id').get(getAmiibo);
 router.route('/collected').get(getCollected);
 router.route('/wishlisted').get(getWishlisted);
+router.route('/:id').get(getAmiibo);
 router.route('/save').post(saveAmiibo);
 router.route('/update').post(updateAmiibo);
 

@@ -39,12 +39,12 @@ const initialState = {
 	alertType: '',
 	user: user ? JSON.parse(user) : null,
 	token: token,
-	amiiboList: [],
-	modifiedList: [],
+	// amiiboList: [],
+	// modifiedList: [],
 	allAmiibos: [],
-	collectedAmiibos: [],
-	wishlistedAmiibos: [],
-	activeCollection: [],
+	// collectedAmiibos: [],
+	// wishlistedAmiibos: [],
+	// activeCollection: [],
 	collectedCount: 0,
 	wishlistCount: 0,
 	page: 1,
@@ -477,9 +477,9 @@ const AppProvider = ({ children }) => {
 
 					amiiboCollection.push(newAmiibo);
 				}
+			} else {
+				amiiboCollection = dbAmiibos;
 			}
-
-			console.log(amiiboCollection);
 
 			dispatch({
 				type: GET_AMIIBOS_SUCCESS,
@@ -498,7 +498,7 @@ const AppProvider = ({ children }) => {
 		} catch (error) {
 			dispatch({
 				type: GET_AMIIBOS_ERROR,
-				payload: { msg: error.response.amiiboList.msg },
+				// payload: { msg: error.response.amiiboList.msg },
 			});
 		}
 	};

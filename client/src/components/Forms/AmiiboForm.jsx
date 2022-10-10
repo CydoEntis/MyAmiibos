@@ -43,23 +43,23 @@ const collectionData = [
 	},
 	{
 		id: 2,
-		type: 'collection',
+		type: 'collected',
 		isActive: false,
 		text: 'My Collection',
 	},
 	{
 		id: 3,
-		type: 'wishlist',
+		type: 'wishlisted',
 		isActive: false,
 		text: 'My Wishlist',
 	},
 ];
 
 const AmiiboForm = () => {
-	const { sortAmiibos, setCurrentCollection } = useAppContext();
+	const { sortAmiibos, setCurrentCollection, getAmiibos, allAmiibos } = useAppContext();
 	const [sortControls, setSortControls] = useState(sortData);
 	const [collections, setCollections] = useState(collectionData);
-
+	console.log(allAmiibos);
 
 	const handleSort = (sortType, index, ) => {
 		const updatedControls = sortControls.map((control, controlIndex) => {
@@ -75,6 +75,7 @@ const AmiiboForm = () => {
 
 	const handleClick = (collection, index) => {
 		setCurrentCollection(collection)
+		getAmiibos(collection);
 		const updatedCollections = collections.map(
 			(collection, collectionIndex) => {
 				if (collectionIndex === index) collection.isActive = true;
@@ -83,7 +84,6 @@ const AmiiboForm = () => {
 				return collection;
 			}
 		);
-
 		setCollections(updatedCollections);
 		// sortAmiibos(collection);
 	};
