@@ -426,6 +426,83 @@ const AppProvider = ({ children }) => {
 		dispatch({ type: UPDATE_AMIIBO_LIST, payload: { updatedList } });
 	};
 
+	const getAmiibos = async (collection) => {
+		dispatch({ type: GET_AMIIBOS_LOADING });
+
+		let endpoint = '/api/v1/amiibos/';
+
+		if (collection === 'all') {
+			endpoint += 'all';
+		} else if (collection === 'collected') {
+			endpoint += 'collected';
+		} else if (collection === 'wishlisted') {
+			endpoint += 'wishlisted';
+		}
+
+
+		try {
+			let amiiboCollection = [];
+
+			const { data: dbAmiibos } = await axios.get(endpoint);
+
+			if (collection === 'all') {
+				const { data: apiAmiibos } = await amiiboFetch();
+
+
+				for (let amiibo of apiAmiibos.amiibo) {
+					let amiiboId = amiibo.head + amiibo.tail;
+					let newAmiibo = {
+						name: amiibo.name,
+						amiiboSeries: amiibo.amiiboSeries,
+						character: amiibo.character,
+						gameSeries: amiibo.gameSeries,
+						head: amiibo.head,
+						tail: amiibo.tail,
+						image: amiibo.image,
+						release: amiibo.release.na || 'N/A',
+						type: amiibo.type,
+						collected: false,
+						wishlisted: false,
+						amiiboId: amiiboId,
+						createdAt: null,
+					};
+
+					for (let amiibo of dbAmiibos.amiibos) {
+						if (amiiboId === amiibo.amiiboId) {
+							newAmiibo.collected = amiibo.collected;
+							newAmiibo.wishlisted = amiibo.wishlisted;
+							newAmiibo.createdAt = amiibo.createdAt;
+						}
+					}
+
+					amiiboCollection.push(newAmiibo);
+				}
+			}
+
+			console.log(amiiboCollection);
+
+			dispatch({
+				type: GET_AMIIBOS_SUCCESS,
+				payload: {
+					amiibos: amiiboCollection,
+					numOfPages: Math.ceil(
+						amiiboCollection.length / state.limit
+					),
+					pageNumbers: [
+						...Array(
+							Math.ceil(amiiboCollection.length / state.limit) + 1
+						).keys(),
+					].slice(1),
+				},
+			});
+		} catch (error) {
+			dispatch({
+				type: GET_AMIIBOS_ERROR,
+				payload: { msg: error.response.amiiboList.msg },
+			});
+		}
+	};
+
 	const values = {
 		...state,
 		displayAlert,
@@ -446,6 +523,7 @@ const AppProvider = ({ children }) => {
 		findAmiibo,
 		sortAmiibos,
 		setCurrentCollection,
+		getAmiibos
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
