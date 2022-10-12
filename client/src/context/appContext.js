@@ -39,12 +39,7 @@ const initialState = {
 	alertType: '',
 	user: user ? JSON.parse(user) : null,
 	token: token,
-	// amiiboList: [],
-	// modifiedList: [],
 	allAmiibos: [],
-	// collectedAmiibos: [],
-	// wishlistedAmiibos: [],
-	// activeCollection: [],
 	collectedCount: 0,
 	wishlistCount: 0,
 	page: 1,
@@ -55,7 +50,6 @@ const initialState = {
 	limit: 25,
 	showDetails: false,
 	selectedAmiibo: {},
-
 	collectionType: 'all',
 	sortType: 'default',
 };
@@ -279,53 +273,46 @@ const AppProvider = ({ children }) => {
 		});
 	};
 
-	const sortAmiibos = (collection, sort) => {
+	const sortAmiibos = (sort) => {
 		dispatch({
 			type: SORT_AMIIBOS_LOADING,
 		});
 
-		let amiiboCollection;
-
-		if (collection === state.currentCollection) {
-			amiiboCollection = state.amiiboList;
-		} else if (collection === state.currentCollection) {
-			amiiboCollection = state.collectedAmiibos;
-		} else if (collection === state.currentCollection) {
-			amiiboCollection = state.wishlistedAmiibos;
-		}
 
 		let sorted;
 		if (sort === 'default') {
-			sorted = state.amiiboCollection.sort((a, b) => {
+			sorted = state.allAmiibos.sort((a, b) => {
 				let amiiboIdOne = a.head + a.tail;
 				let amiiboIdTwo = b.head + b.tail;
 				return amiiboIdOne > amiiboIdTwo ? 1 : -1;
 			});
 		} else if (sort === 'a-z') {
-			sorted = state.amiiboCollection.sort((a, b) =>
+			sorted = state.allAmiibos.sort((a, b) =>
 				a.name > b.name ? 1 : -1
 			);
 		} else if (sort === 'series') {
-			sorted = state.amiiboCollection.sort((a, b) =>
+			sorted = state.allAmiibos.sort((a, b) =>
 				a.gameSeries > b.gameSeries ? 1 : -1
 			);
 		} else if (sort === 'date') {
-			sorted = state.amiiboCollection.sort((a, b) =>
+			sorted = state.allAmiibos.sort((a, b) =>
 				a.release > b.release ? 1 : -1
 			);
 		} else if (sort === 'collection') {
 			console.log('collection');
-			sorted = state.amiiboCollection.filter(
+			sorted = state.allAmiibos.filter(
 				(amiibo) => amiibo.collected === true
 			);
 		} else if (sort === 'wishlist') {
 			console.log('wishlist');
-			sorted = state.amiiboCollection.filter(
+			sorted = state.allAmiibos.filter(
 				(amiibo) => amiibo.wishlisted === true
 			);
 		} else if (sort === 'all') {
-			sorted = amiiboCollection;
+			sorted = state.allAmiibos;
 		}
+
+		console.log(sorted);
 
 		dispatch({
 			type: SORT_AMIIBOS_SUCCESS,
