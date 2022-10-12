@@ -18,6 +18,7 @@ const AmiiboDetail = () => {
 	const onClose = () => {
 		hideAmiiboDetails();
 	};
+    
 
 	if (!showDetails) return;
 

@@ -7,7 +7,7 @@ const AmiiboList = ({ currentAmiibos }) => {
 	return (
 		<section className={classes['amiibo--list']}>
 			{currentAmiibos.map((amiibo) => (
-				<AmiiboCard amiibo={amiibo} key={amiibo.head + amiibo.tail} />
+				<AmiiboCard amiibo={amiibo} key={amiibo.amiiboId} />
 			))}
 		</section>
 	);
