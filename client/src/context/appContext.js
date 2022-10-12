@@ -278,7 +278,6 @@ const AppProvider = ({ children }) => {
 			type: SORT_AMIIBOS_LOADING,
 		});
 
-
 		let sorted;
 		if (sort === 'default') {
 			sorted = state.allAmiibos.sort((a, b) => {
@@ -342,7 +341,7 @@ const AppProvider = ({ children }) => {
 	};
 
 	const getSelectedAmiibo = async (amiiboId) => {
-		const foundAmiibo = state.modifiedList.filter(
+		const foundAmiibo = state.allAmiibos.filter(
 			(amiibo) => amiibo.amiiboId === amiiboId
 		);
 

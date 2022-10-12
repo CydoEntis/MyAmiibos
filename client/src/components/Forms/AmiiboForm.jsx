@@ -87,8 +87,6 @@ const AmiiboForm = () => {
 		// sortAmiibos(collection);
 	};
 
-	console.log(allAmiibos);
-
 	return (
 		<div className={classes['form--container']}>
 			<div className={`${classes['form--row']}`}>

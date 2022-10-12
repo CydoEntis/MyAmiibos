@@ -73,18 +73,13 @@ const reducer = (state, action) => {
 				isLoading: true,
 			};
 		case GET_AMIIBOS_SUCCESS:
-			console.log(action.payload.amiibos);
 			return {
 				...state,
 				isLoading: false,
 				allAmiibos: action.payload.amiibos,
-				// collectedAmmiibos: action.payload.collectedAmiibos,
-				// wishlistedAmiibos: action.payload.wishlistedAmiibos, 
-				// modifiedList: action.payload.amiiboList,
 				numOfPages: action.payload.numOfPages,
 				pageNumbers: action.payload.pageNumbers,
 				currentPage: 1,
-				// Add collected amiibos
 			};
 		case GET_AMIIBOS_ERROR:
 			return {
