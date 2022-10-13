@@ -13,13 +13,11 @@ import AmiiboForm from '../../components/Forms/AmiiboForm';
 const Amiibos = () => {
 	const {
 		isLoading,
-		modifiedList,
-		fetchAmiibos,
 		currentPage,
 		limit,
 		numOfPages,
 		getAmiibos,
-		allAmiibos,
+		modifiedAmiibos
 	} = useAppContext();
 
 
@@ -29,7 +27,7 @@ const Amiibos = () => {
 
 	const indexOfLastAmiibo = currentPage * limit;
 	const indexOfFirstAmiibo = indexOfLastAmiibo - limit;
-	const currentAmiibos = allAmiibos.slice(
+	const currentAmiibos = modifiedAmiibos.slice(
 		indexOfFirstAmiibo,
 		indexOfLastAmiibo
 	);

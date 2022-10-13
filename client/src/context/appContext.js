@@ -26,6 +26,7 @@ import {
 	SORT_AMIIBOS_SUCCESS,
 	SET_COLLECTION,
 	UPDATE_COLLECTION,
+	SET_ACTIVE_COLLECTION,
 } from './actions';
 import reducer from './reducer';
 
@@ -41,6 +42,7 @@ const initialState = {
 	user: user ? JSON.parse(user) : null,
 	token: token,
 	allAmiibos: [],
+	modifiedAmiibos: [],
 	collectedCount: 0,
 	wishlistCount: 0,
 	page: 1,
@@ -51,7 +53,7 @@ const initialState = {
 	limit: 25,
 	showDetails: false,
 	selectedAmiibo: {},
-	collectionType: 'all',
+	activeCollection: 'all',
 	sortType: 'default',
 	sortData: [
 		{
@@ -192,39 +194,25 @@ const AppProvider = ({ children }) => {
 		removeUserFromLocalStorage();
 	};
 
-	const setCurrentCollection = (collection) => {
-		let activeCollection;
-
-		if (collection === 'all') {
-			activeCollection = state.allAmiibos;
-		} else if (collection === 'collection') {
-			activeCollection = state.collectedAmiibos;
-		} else if (collection === 'wishlist') {
-			activeCollection = state.wishlistedAmiibos;
-		}
-
-		dispatch({
-			type: SET_COLLECTION,
-			payload: { collection, activeCollection },
-		});
-	};
-
 	const filterAmiiboType = async ({ type }) => {
-		dispatch({ type: FILTER_AMIIBOS_LOADING });
-		if (type === 'all') {
-			try {
-				console.log('something');
-				// await fetchAmiibos();
-				return;
-			} catch (error) {
-				dispatch({
-					type: FILTER_AMIIBOS_ERROR,
-					payload: { msg: error.response.msg },
-				});
-			}
-		}
+		dispatch({
+			type: FILTER_AMIIBOS_LOADING,
+			payload: { amiibos: state.allAmiibos },
+		});
+		// if (type === 'all') {
+		// 	try {
+		// 		console.log('something');
+		// 		await getAmiibos();
+		// 		return;
+		// 	} catch (error) {
+		// 		dispatch({
+		// 			type: FILTER_AMIIBOS_ERROR,
+		// 			payload: { msg: error.response.msg },
+		// 		});
+		// 	}
+		// }
 
-		const filteredAmiibos = state.modifiedList.filter((amiibo) => {
+		const filteredAmiibos = state.allAmiibos.filter((amiibo) => {
 			return amiibo.type.toLowerCase() === type.toLowerCase();
 		});
 
@@ -233,7 +221,7 @@ const AppProvider = ({ children }) => {
 		dispatch({
 			type: FILTER_AMIIBOS_SUCCESS,
 			payload: {
-				modifiedList: filteredAmiibos,
+				amiibos: filteredAmiibos,
 				numOfPages: Math.ceil(filteredAmiibos.length / state.limit),
 				pageNumbers: [
 					...Array(
@@ -479,9 +467,37 @@ const AppProvider = ({ children }) => {
 				return collection;
 			}
 		);
+
+		const sortData = [
+			{
+				id: 1,
+				name: 'Id',
+				isActive: true,
+				sortType: 'default',
+			},
+			{
+				id: 2,
+				name: 'A-Z',
+				isActive: false,
+				sortType: 'a-z',
+			},
+			{
+				id: 3,
+				name: 'Series',
+				isActive: false,
+				sortType: 'series',
+			},
+			{
+				id: 4,
+				name: 'Date',
+				isActive: false,
+				sortType: 'date',
+			},
+		];
+
 		dispatch({
 			type: UPDATE_COLLECTION,
-			payload: { updatedCollections },
+			payload: { updatedCollections, collection, sortData },
 		});
 	};
 
@@ -503,7 +519,6 @@ const AppProvider = ({ children }) => {
 		updateAmiiboList,
 		findAmiibo,
 		sortAmiibos,
-		setCurrentCollection,
 		getAmiibos,
 		setCollection,
 	};

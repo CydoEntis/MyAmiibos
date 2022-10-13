@@ -5,55 +5,6 @@ import Button from '../UI/Buttons/Button';
 
 import classes from './AmiiboForm.module.css';
 import { useAppContext } from '../../context/appContext';
-import { useState } from 'react';
-
-const sortData = [
-	{
-		id: 1,
-		name: 'Id',
-		isActive: true,
-		sortType: 'default',
-	},
-	{
-		id: 2,
-		name: 'A-Z',
-		isActive: false,
-		sortType: 'a-z',
-	},
-	{
-		id: 3,
-		name: 'Series',
-		isActive: false,
-		sortType: 'series',
-	},
-	{
-		id: 4,
-		name: 'Date',
-		isActive: false,
-		sortType: 'date',
-	},
-];
-
-const collectionData = [
-	{
-		id: 1,
-		type: 'all',
-		isActive: true,
-		text: 'All Amiibos',
-	},
-	{
-		id: 2,
-		type: 'collected',
-		isActive: false,
-		text: 'My Collection',
-	},
-	{
-		id: 3,
-		type: 'wishlisted',
-		isActive: false,
-		text: 'My Wishlist',
-	},
-];
 
 const AmiiboForm = () => {
 	const { sortAmiibos, setCollection, collectionData, sortData} = useAppContext();

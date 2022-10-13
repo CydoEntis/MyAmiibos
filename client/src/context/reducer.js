@@ -23,7 +23,8 @@ import {
 	SORT_AMIIBOS_LOADING,
 	SORT_AMIIBOS_SUCCESS,
 	SET_COLLECTION,
-	UPDATE_COLLECTION
+	UPDATE_COLLECTION,
+	SET_ACTIVE_COLLECTION
 } from './actions';
 
 const reducer = (state, action) => {
@@ -78,6 +79,7 @@ const reducer = (state, action) => {
 				...state,
 				isLoading: false,
 				allAmiibos: action.payload.amiibos,
+				modifiedAmiibos: action.payload.amiibos,
 				numOfPages: action.payload.numOfPages,
 				pageNumbers: action.payload.pageNumbers,
 				currentPage: 1,
@@ -92,13 +94,13 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				isLoading: true,
-				// modifiedList: state.amiiboList,
+				allAmiibos: action.payload.amiibos,
 			};
 		case FILTER_AMIIBOS_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
-				modifiedList: action.payload.modifiedList,
+				modifiedAmiibos: action.payload.amiibos,
 				numOfPages: action.payload.numOfPages,
 				pageNumbers: action.payload.pageNumbers,
 				currentPage: 1,
@@ -162,14 +164,13 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				isLoading: true,
-				modifiedList: state.amiiboList
 			};
 		case SORT_AMIIBOS_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
 				sortData: action.payload.updatedSort,
-				modifiedList: action.payload.amiibos,
+				modifiedAmiibos: action.payload.amiibos,
 				numOfPages: action.payload.numOfPages,
 				pageNumbers: action.payload.pageNumbers,
 				currentPage: 1,
@@ -179,11 +180,14 @@ const reducer = (state, action) => {
 				...state,
 				collectionType: action.payload.collection,
 				activeCollection: action.payload.activeCollection,
+
 			}
 		case UPDATE_COLLECTION:
 			return {
 				...state,
-				collectionData: action.payload.updatedCollections
+				collectionData: action.payload.updatedCollections,
+				activeCollection: action.payload.collection,
+				sortData: action.payload.sortData
 			}
 		default:
 			throw new Error(`no such action : ${action.type}`);
