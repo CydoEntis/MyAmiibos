@@ -25,6 +25,7 @@ import {
 	SORT_AMIIBOS_LOADING,
 	SORT_AMIIBOS_SUCCESS,
 	SET_COLLECTION,
+	UPDATE_COLLECTION,
 } from './actions';
 import reducer from './reducer';
 
@@ -52,6 +53,52 @@ const initialState = {
 	selectedAmiibo: {},
 	collectionType: 'all',
 	sortType: 'default',
+	sortData: [
+		{
+			id: 1,
+			name: 'Id',
+			isActive: true,
+			sortType: 'default',
+		},
+		{
+			id: 2,
+			name: 'A-Z',
+			isActive: false,
+			sortType: 'a-z',
+		},
+		{
+			id: 3,
+			name: 'Series',
+			isActive: false,
+			sortType: 'series',
+		},
+		{
+			id: 4,
+			name: 'Date',
+			isActive: false,
+			sortType: 'date',
+		},
+	],
+	collectionData: [
+		{
+			id: 1,
+			type: 'all',
+			isActive: true,
+			text: 'All Amiibos',
+		},
+		{
+			id: 2,
+			type: 'collected',
+			isActive: false,
+			text: 'My Collection',
+		},
+		{
+			id: 3,
+			type: 'wishlisted',
+			isActive: false,
+			text: 'My Wishlist',
+		},
+	],
 };
 
 const AppContext = React.createContext();
@@ -145,83 +192,6 @@ const AppProvider = ({ children }) => {
 		removeUserFromLocalStorage();
 	};
 
-	const fetchAmiibos = async (value) => {
-		dispatch({ type: GET_AMIIBOS_LOADING });
-
-		try {
-			const { data: dbAmiibos } = await axios.get('/api/v1/amiibos/all');
-			let rawAmiibos;
-			if (value !== 'all') {
-				const { data } = await axios.get(
-					`https://www.amiiboapi.com/api/amiibo/?name=${value}`
-				);
-				rawAmiibos = data;
-			} else {
-				const { data } = await amiiboFetch();
-				rawAmiibos = data;
-			}
-
-			const formattedAmiibos = [];
-			for (let amiibo of rawAmiibos.amiibo) {
-				let amiiboId = amiibo.head + amiibo.tail;
-				let formattedAmiibo = {
-					name: amiibo.name,
-					amiiboSeries: amiibo.amiiboSeries,
-					character: amiibo.character,
-					gameSeries: amiibo.gameSeries,
-					head: amiibo.head,
-					tail: amiibo.tail,
-					image: amiibo.image,
-					release: amiibo.release.na || 'N/A',
-					type: amiibo.type,
-					collected: false,
-					wishlisted: false,
-					amiiboId: amiiboId,
-					createdAt: null,
-				};
-
-				for (let myAmiibo of dbAmiibos.amiibos) {
-					if (amiiboId === myAmiibo.amiiboId) {
-						formattedAmiibo.collected = myAmiibo.collected;
-						formattedAmiibo.wishlisted = myAmiibo.wishlisted;
-						formattedAmiibo.createdAt = myAmiibo.createdAt;
-					}
-				}
-
-				formattedAmiibos.push(formattedAmiibo);
-			}
-
-			const collectedAmiibos = formattedAmiibos.filter(
-				(amiibo) => amiibo.collected === true
-			);
-			const wishlistedAmiibos = formattedAmiibos.filter(
-				(amiibo) => amiibo.wishlisted === true
-			);
-
-			dispatch({
-				type: GET_AMIIBOS_SUCCESS,
-				payload: {
-					amiiboList: formattedAmiibos,
-					collectedAmiibos: collectedAmiibos,
-					wishlistedAmiibos: wishlistedAmiibos,
-					numOfPages: Math.ceil(
-						formattedAmiibos.length / state.limit
-					),
-					pageNumbers: [
-						...Array(
-							Math.ceil(formattedAmiibos.length / state.limit) + 1
-						).keys(),
-					].slice(1),
-				},
-			});
-		} catch (error) {
-			dispatch({
-				type: GET_AMIIBOS_ERROR,
-				payload: { msg: error.response.amiiboList.msg },
-			});
-		}
-	};
-
 	const setCurrentCollection = (collection) => {
 		let activeCollection;
 
@@ -243,7 +213,8 @@ const AppProvider = ({ children }) => {
 		dispatch({ type: FILTER_AMIIBOS_LOADING });
 		if (type === 'all') {
 			try {
-				await fetchAmiibos();
+				console.log('something');
+				// await fetchAmiibos();
 				return;
 			} catch (error) {
 				dispatch({
@@ -273,7 +244,7 @@ const AppProvider = ({ children }) => {
 		});
 	};
 
-	const sortAmiibos = (sort) => {
+	const sortAmiibos = (sort, index) => {
 		dispatch({
 			type: SORT_AMIIBOS_LOADING,
 		});
@@ -311,15 +282,23 @@ const AppProvider = ({ children }) => {
 			sorted = state.allAmiibos;
 		}
 
-		console.log(sorted);
+		const updatedSort = state.sortData.map((sort, sortIndex) => {
+			if (sortIndex === index) sort.isActive = true;
+			else sort.isActive = false;
+
+			return sort;
+		});
 
 		dispatch({
 			type: SORT_AMIIBOS_SUCCESS,
-			payload: { amiibos: sorted },
-			numOfPages: Math.ceil(sorted.length / state.limit),
-			pageNumbers: [
-				...Array(Math.ceil(sorted.length / state.limit) + 1).keys(),
-			].slice(1),
+			payload: {
+				amiibos: sorted,
+				updatedSort,
+				numOfPages: Math.ceil(sorted.length / state.limit),
+				pageNumbers: [
+					...Array(Math.ceil(sorted.length / state.limit) + 1).keys(),
+				].slice(1),
+			},
 		});
 	};
 
@@ -489,12 +468,28 @@ const AppProvider = ({ children }) => {
 		}
 	};
 
+	const setCollection = (collection, index) => {
+		getAmiibos(collection);
+
+		const updatedCollections = state.collectionData.map(
+			(collection, collectionIndex) => {
+				if (collectionIndex === index) collection.isActive = true;
+				else collection.isActive = false;
+
+				return collection;
+			}
+		);
+		dispatch({
+			type: UPDATE_COLLECTION,
+			payload: { updatedCollections },
+		});
+	};
+
 	const values = {
 		...state,
 		displayAlert,
 		userAuth,
 		logout,
-		fetchAmiibos,
 		filterAmiiboType,
 		goToPage,
 		nextPage,
@@ -510,6 +505,7 @@ const AppProvider = ({ children }) => {
 		sortAmiibos,
 		setCurrentCollection,
 		getAmiibos,
+		setCollection,
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

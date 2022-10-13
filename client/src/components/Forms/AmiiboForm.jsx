@@ -12,7 +12,7 @@ const sortData = [
 		id: 1,
 		name: 'Id',
 		isActive: true,
-		sortType: 'all',
+		sortType: 'default',
 	},
 	{
 		id: 2,
@@ -56,42 +56,13 @@ const collectionData = [
 ];
 
 const AmiiboForm = () => {
-	const { sortAmiibos, setCurrentCollection, getAmiibos, allAmiibos } = useAppContext();
-	const [sortControls, setSortControls] = useState(sortData);
-	const [collections, setCollections] = useState(collectionData);
-
-	const handleSort = (sortType, index, ) => {
-		const updatedControls = sortControls.map((control, controlIndex) => {
-			if (controlIndex === index) control.isActive = true;
-			else control.isActive = false;
-
-			return control;
-		});
-
-		setSortControls(updatedControls);
-		sortAmiibos(sortType);
-	};
-
-	const handleClick = (collection, index) => {
-		setCurrentCollection(collection)
-		getAmiibos(collection);
-		const updatedCollections = collections.map(
-			(collection, collectionIndex) => {
-				if (collectionIndex === index) collection.isActive = true;
-				else collection.isActive = false;
-
-				return collection;
-			}
-		);
-		setCollections(updatedCollections);
-		// sortAmiibos(collection);
-	};
+	const { sortAmiibos, setCollection, collectionData, sortData} = useAppContext();
 
 	return (
 		<div className={classes['form--container']}>
 			<div className={`${classes['form--row']}`}>
 				<h3>Collection: </h3>
-				{collections.map((collection, index) => (
+				{collectionData.map((collection, index) => (
 					<Button
 						key={collection.id}
 						className={`${
@@ -100,7 +71,7 @@ const AmiiboForm = () => {
 								: ''
 						} ${classes.btn} ${classes['form--button']}`}
 						onClick={() => {
-							handleClick(collection.type, index);
+							setCollection(collection.type, index);
 						}}
 					>
 						{collection.text}
@@ -116,7 +87,7 @@ const AmiiboForm = () => {
 					</div>
 					<div className={`${classes['form--row']} ${classes.sort}`}>
 						<h3>Sort By: </h3>
-						{sortControls.map((data, index) => (
+						{sortData.map((data, index) => (
 							<Button
 								key={data.id}
 								className={`${
@@ -124,7 +95,7 @@ const AmiiboForm = () => {
 										? classes['form--button-active']
 										: ''
 								} ${classes['form--button']}`}
-								onClick={() => handleSort(data.sortType, index)}
+								onClick={() => sortAmiibos(data.sortType, index)}
 							>
 								{data.name}
 							</Button>

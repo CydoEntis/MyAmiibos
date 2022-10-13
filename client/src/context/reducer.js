@@ -23,6 +23,7 @@ import {
 	SORT_AMIIBOS_LOADING,
 	SORT_AMIIBOS_SUCCESS,
 	SET_COLLECTION,
+	UPDATE_COLLECTION
 } from './actions';
 
 const reducer = (state, action) => {
@@ -167,6 +168,7 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				isLoading: false,
+				sortData: action.payload.updatedSort,
 				modifiedList: action.payload.amiibos,
 				numOfPages: action.payload.numOfPages,
 				pageNumbers: action.payload.pageNumbers,
@@ -178,7 +180,11 @@ const reducer = (state, action) => {
 				collectionType: action.payload.collection,
 				activeCollection: action.payload.activeCollection,
 			}
-
+		case UPDATE_COLLECTION:
+			return {
+				...state,
+				collectionData: action.payload.updatedCollections
+			}
 		default:
 			throw new Error(`no such action : ${action.type}`);
 	}
