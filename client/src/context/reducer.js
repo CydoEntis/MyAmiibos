@@ -24,7 +24,7 @@ import {
 	SORT_AMIIBOS_SUCCESS,
 	SET_COLLECTION,
 	UPDATE_COLLECTION,
-	SET_ACTIVE_COLLECTION
+	FOUND_AMIIBO_SUCCESS
 } from './actions';
 
 const reducer = (state, action) => {
@@ -189,6 +189,13 @@ const reducer = (state, action) => {
 				activeCollection: action.payload.collection,
 				sortData: action.payload.sortData
 			}
+		case FOUND_AMIIBO_SUCCESS: 
+		return {
+			...state,
+			modifiedAmiibos: action.payload.amiibos,
+			numOfPages: action.payload.numOfPages,
+			pageNumbers: action.payload.pageNumbers,
+		}
 		default:
 			throw new Error(`no such action : ${action.type}`);
 	}

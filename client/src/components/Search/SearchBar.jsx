@@ -6,24 +6,25 @@ import Button from '../UI/Buttons/Button';
 import classes from './SearchBar.module.css';
 
 const SearchBar = () => {
-	const { fetchAmiibos, findAmiibo} = useAppContext();
+	const { fetchAmiibos, findAmiibo, searchAmiibos} = useAppContext();
 	const [searchValue, setSearchValue] = useState('');
 
 	const handleChange = (e) => {
 		setSearchValue(e.target.value);
 	};
 
-	const getAmiibo = async (value) => {
-		if (value === '') {
-			await fetchAmiibos("all");
-		} else {
-			await fetchAmiibos(searchValue);
-		}
-	};
+	// const getAmiibo = async (value) => {
+	// 	if (value === '') {
+	// 		await getAmiibos("all");
+	// 	} else {
+	// 		await fetchAmiibos(searchValue);
+	// 	}
+	// };
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		getAmiibo(searchValue);
+		searchAmiibos(searchValue);
+		// getAmiibo(searchValue);
 	};
 
 	return (

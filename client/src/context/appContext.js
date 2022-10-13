@@ -12,7 +12,6 @@ import {
 	GET_AMIIBOS_ERROR,
 	FILTER_AMIIBOS_LOADING,
 	FILTER_AMIIBOS_SUCCESS,
-	FILTER_AMIIBOS_ERROR,
 	GO_TO_PAGE,
 	NEXT_PAGE,
 	PREV_PAGE,
@@ -24,9 +23,8 @@ import {
 	FIND_AMIIBO,
 	SORT_AMIIBOS_LOADING,
 	SORT_AMIIBOS_SUCCESS,
-	SET_COLLECTION,
 	UPDATE_COLLECTION,
-	SET_ACTIVE_COLLECTION,
+	FOUND_AMIIBO_SUCCESS
 } from './actions';
 import reducer from './reducer';
 
@@ -205,7 +203,7 @@ const AppProvider = ({ children }) => {
 		if (type === 'all') {
 			filteredAmiibos = state.allAmiibos;
 		} else {
-		filteredAmiibos = state.allAmiibos.filter((amiibo) => {
+			filteredAmiibos = state.allAmiibos.filter((amiibo) => {
 				return amiibo.type.toLowerCase() === type.toLowerCase();
 			});
 		}
@@ -249,12 +247,10 @@ const AppProvider = ({ children }) => {
 				a.release > b.release ? 1 : -1
 			);
 		} else if (sort === 'collection') {
-			console.log('collection');
 			sorted = state.allAmiibos.filter(
 				(amiibo) => amiibo.collected === true
 			);
 		} else if (sort === 'wishlist') {
-			console.log('wishlist');
 			sorted = state.allAmiibos.filter(
 				(amiibo) => amiibo.wishlisted === true
 			);
@@ -493,6 +489,35 @@ const AppProvider = ({ children }) => {
 		});
 	};
 
+	const searchAmiibos = (searchValue) => {
+		console.log(searchValue);
+
+		let foundAmiibos;
+
+		if (searchValue === '') {
+			foundAmiibos = state.allAmiibos;
+		} else {
+			foundAmiibos = state.allAmiibos.filter((amiibo) => {
+				return amiibo.name.toLowerCase() === searchValue.toLowerCase();
+			});
+		}
+
+		console.log(foundAmiibos);
+
+		dispatch({
+			type: FOUND_AMIIBO_SUCCESS,
+			payload: {
+				amiibos: foundAmiibos,
+				numOfPages: Math.ceil(foundAmiibos.length / state.limit),
+				pageNumbers: [
+					...Array(
+						Math.ceil(foundAmiibos.length / state.limit) + 1
+					).keys(),
+				].slice(1),
+			},
+		});
+	};
+
 	const values = {
 		...state,
 		displayAlert,
@@ -513,6 +538,7 @@ const AppProvider = ({ children }) => {
 		sortAmiibos,
 		getAmiibos,
 		setCollection,
+		searchAmiibos,
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
