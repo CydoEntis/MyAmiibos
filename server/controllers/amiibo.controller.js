@@ -68,7 +68,6 @@ const saveAmiibo = async (req, res) => {
 
 const updateAmiibo = async (req, res) => {
 	const { amiiboId, wishlisted, collected } = req.body;
-	console.log(req.body);
 	try {
 		const foundAmiibo = await Amiibo.findOne({ amiiboId });
 
@@ -89,7 +88,6 @@ const updateAmiibo = async (req, res) => {
 	}
 };
 
-
 const getWishlisted = async (req, res) => {
 	try {
 		const amiibos = await Amiibo.find({wishlisted: true})
@@ -104,10 +102,8 @@ const getWishlisted = async (req, res) => {
 }
 
 const getCollected = async (req, res) => {
-	console.log("Hello world");
 	try {
 		const amiibos = await Amiibo.find({collected: true})
-		console.log(amiibos);
 
 		res.status(StatusCodes.OK).json({
 			amiibos,
