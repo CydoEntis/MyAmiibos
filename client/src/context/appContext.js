@@ -199,24 +199,16 @@ const AppProvider = ({ children }) => {
 			type: FILTER_AMIIBOS_LOADING,
 			payload: { amiibos: state.allAmiibos },
 		});
-		// if (type === 'all') {
-		// 	try {
-		// 		console.log('something');
-		// 		await getAmiibos();
-		// 		return;
-		// 	} catch (error) {
-		// 		dispatch({
-		// 			type: FILTER_AMIIBOS_ERROR,
-		// 			payload: { msg: error.response.msg },
-		// 		});
-		// 	}
-		// }
 
-		const filteredAmiibos = state.allAmiibos.filter((amiibo) => {
-			return amiibo.type.toLowerCase() === type.toLowerCase();
-		});
+		let filteredAmiibos;
 
-		console.log(filteredAmiibos);
+		if (type === 'all') {
+			filteredAmiibos = state.allAmiibos;
+		} else {
+		filteredAmiibos = state.allAmiibos.filter((amiibo) => {
+				return amiibo.type.toLowerCase() === type.toLowerCase();
+			});
+		}
 
 		dispatch({
 			type: FILTER_AMIIBOS_SUCCESS,
