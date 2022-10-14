@@ -22,7 +22,7 @@ const AmiiboCard = ({ amiibo, index }) => {
 			</section>
 			<footer className={classes['card--footer']}>
 				<p className={classes['amiibo--series']}>{amiibo.gameSeries}</p>
-				<p className={classes['amiibo--index']}>#{amiibo.head + amiibo.tail}</p>
+				<p className={classes['amiibo--release']}>Released: {amiibo.release || "N/A"}</p>
 			</footer>
 		</button>
 	);

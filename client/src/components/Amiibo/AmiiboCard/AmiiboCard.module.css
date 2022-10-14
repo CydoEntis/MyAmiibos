@@ -62,6 +62,12 @@
 	font-style: italic;
 }
 
+.amiibo--release {
+	font-size: .85rem;
+	padding: .25rem 0;
+	color: #707070;
+}
+
 @media only screen and (min-width: 475px) {
 	.card {
 		width: 230px;
@@ -106,6 +112,10 @@
 
 	.amiibo--series {
 		font-size: 1.1rem;
+	}
+
+	.amiibo--release {
+		font-size: 1rem;
 	}
 }
 
