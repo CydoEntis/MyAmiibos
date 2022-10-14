@@ -27,6 +27,7 @@
 
 .tab {
   display: none;
+  cursor: pointer;
   transition: all ease-in-out 350ms;
 }
 
@@ -38,7 +39,6 @@
 .active {
   width: 150px;
   height: 65px;
-  background: red;
   margin: 0 .25rem;
   text-decoration: none;
   color: #fff;
@@ -62,7 +62,6 @@
   .tab {
     width: 150px;
     height: 65px;
-    background: red;
     margin: 0 .25rem;
     text-decoration: none;
     color: #fff;
@@ -73,5 +72,11 @@
     text-align: center;
     font-size: 1.25rem;
     background: rgb(98,191,90);
+  }
+
+  .tab--logout {
+    background: #fa603f;
+    border: none;
+    outline: none;
   }
 }

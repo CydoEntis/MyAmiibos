@@ -11,7 +11,7 @@ import { useAppContext } from '../../context/appContext';
 const Navbar = () => {
 	const [toggleMenu, setToggleMenu] = useState(false);
 
-	const { token } = useAppContext();
+	const { token, logout } = useAppContext();
 
 	const toggleMenuHandler = () => {
 		setToggleMenu((prevState) => !prevState);
@@ -38,6 +38,7 @@ const Navbar = () => {
 								>
 									Amiibos
 								</NavLink>
+							<button className={`${classes.tab} ${classes['tab--logout']}`} onClick={logout}>Logout</button>
 							</>
 						)}
 						{!token && (
