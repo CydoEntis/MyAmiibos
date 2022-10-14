@@ -11,18 +11,19 @@ const DetailControls = () => {
 		saveAmiibo,
 		updateAmiibo,
 		selectedAmiibo,
-		modifiedList,
+		modifiedAmiibos,
 		updateAmiiboList,
+		user
 	} = useAppContext();
 
 	const handleAmiibo = (action) => {
 		const { amiiboId } = selectedAmiibo;
 
-		const currentSelectedAmiibo = modifiedList.filter(
+		const currentSelectedAmiibo = modifiedAmiibos.filter(
 			(amiibo) => amiibo.amiiboId === amiiboId
 		);
 
-		const index = modifiedList.findIndex(
+		const index = modifiedAmiibos.findIndex(
 			(amiibo) => amiibo.amiiboId === amiiboId
 		);
 
@@ -37,6 +38,8 @@ const DetailControls = () => {
 				amiibo.collected = false;
 				amiibo.createdAt = Date.now();
 			}
+
+			amiibo.userId = user._id;
 			saveAmiibo(amiibo);
 		} else {
 			if (action === 'collect') {
@@ -54,6 +57,7 @@ const DetailControls = () => {
 			}
 			updateAmiibo(amiibo);
 		}
+		console.log(amiibo);
 		updateAmiiboList(index, amiibo);
 		// hideAmiiboDetails();
 	};

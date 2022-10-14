@@ -3,8 +3,10 @@ import { BadRequestError } from '../errors/index.js';
 import Amiibo from '../models/amiibo.model.js';
 
 const getAmiibos = async (req, res) => {
+	console.log(req.query);
+
 	try {
-		const amiibos = await Amiibo.find({});
+		const amiibos = await Amiibo.find({ userId: req.query.userId});
 
 		res.status(StatusCodes.OK).json({
 			amiibos,
@@ -41,7 +43,8 @@ const saveAmiibo = async (req, res) => {
 		type,
 		amiiboId,
 		collected,
-		wishlisted
+		wishlisted,
+		userId
 	} = req.body;
 	try {
 		const newAmiibo = await Amiibo.create({
@@ -54,7 +57,8 @@ const saveAmiibo = async (req, res) => {
 			type,
 			amiiboId,
 			collected,
-			wishlisted
+			wishlisted,
+			userId
 		});
 
 		res.status(StatusCodes.CREATED).json({

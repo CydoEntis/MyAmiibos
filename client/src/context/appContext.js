@@ -24,7 +24,7 @@ import {
 	SORT_AMIIBOS_LOADING,
 	SORT_AMIIBOS_SUCCESS,
 	UPDATE_COLLECTION,
-	FOUND_AMIIBO_SUCCESS
+	FOUND_AMIIBO_SUCCESS,
 } from './actions';
 import reducer from './reducer';
 
@@ -357,7 +357,7 @@ const AppProvider = ({ children }) => {
 	};
 
 	const updateAmiiboList = (index, amiiboData) => {
-		const updatedList = state.modifiedList;
+		const updatedList = state.modifiedAmiibos;
 		for (let i = 0; i < updatedList.length; i++) {
 			if (i === index) {
 				updatedList[index] = amiiboData;
@@ -368,6 +368,7 @@ const AppProvider = ({ children }) => {
 	};
 
 	const getAmiibos = async (collection) => {
+		console.log(state);
 		let amiiboCollection = [];
 
 		dispatch({
@@ -385,7 +386,10 @@ const AppProvider = ({ children }) => {
 		}
 
 		try {
-			const { data: dbAmiibos } = await axios.get(endpoint);
+			console.log(state.user)
+			const { data: dbAmiibos } = await axios.get(
+				endpoint + `?userId=${state.user._id}`
+			);
 
 			if (collection === 'all') {
 				const { data: apiAmiibos } = await amiiboFetch();
