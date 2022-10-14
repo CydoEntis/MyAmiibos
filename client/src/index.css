@@ -20,12 +20,12 @@ body {
 }
 
 .alert-danger {
-  color: #E60012;
-  background: #f6d3d6;
+  color: #fff;
+  background: #fa603f;
 }
 .alert-success {
-  color: rgb(10, 151, 10);
-  background: rgb(168, 254, 168);
+  color: #fff;
+  background:#12c7b7;
 }
 
 /* .active {
