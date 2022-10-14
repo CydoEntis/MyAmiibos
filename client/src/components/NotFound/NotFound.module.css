@@ -1,0 +1,18 @@
+.not-found {
+  text-align: center;
+  position: relative;
+}
+
+.not-found--image {
+  opacity: .15;
+}
+
+.not-found--text {
+  width: 100%;
+  color: #333;
+  font-size: 2.25rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

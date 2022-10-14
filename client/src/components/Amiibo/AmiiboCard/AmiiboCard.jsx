@@ -11,7 +11,7 @@ const AmiiboCard = ({ amiibo, index }) => {
 	};
 
 	return (
-		<button className={classes.card} onClick={handleClick}>
+		<button className={classes.card} onClick={handleClick}> 
 			<header className={classes['card--header']}>
 				<h3 className={classes['amiibo--name']}>{amiibo.name}</h3>
 			</header>
@@ -22,6 +22,7 @@ const AmiiboCard = ({ amiibo, index }) => {
 			</section>
 			<footer className={classes['card--footer']}>
 				<p className={classes['amiibo--series']}>{amiibo.gameSeries}</p>
+				<p className={classes['amiibo--index']}>#{amiibo.head + amiibo.tail}</p>
 			</footer>
 		</button>
 	);
