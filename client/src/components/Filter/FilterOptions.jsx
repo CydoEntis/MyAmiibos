@@ -1,24 +1,29 @@
-import React, {useRef, useEffect} from 'react';
+import React, { useRef, useEffect } from 'react';
 import FilterItem from './FilterItem';
 import { useAppContext } from '../../context/appContext';
 
 import classes from './FilterOptions.module.css';
 
-const FilterOptions = ({ setIsOpen, setFilter }) => {
+const FilterOptions = ({ setIsOpen, setFilter, isOpen }) => {
 	const { filterAmiiboType } = useAppContext();
 	const filterListRef = useRef(null);
 
-  // useEffect(() => {
-  //   function handleClickOutside(event) {
-  //     if (filterListRef.current && !filterListRef.current.contains(event.target)) {
-	// 				setIsOpen(false);
-	//       }
-  //   }
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, [filterListRef]);
+	useEffect(() => {
+		function handleClickOutside(event) {
+			if (
+				filterListRef.current &&
+				!filterListRef.current.contains(event.target)
+			) {
+				setIsOpen((prevState) => !prevState);
+			} else {
+				setIsOpen((prevState) => !prevState);
+			}
+		}
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [filterListRef, setIsOpen]);
 
 	const getAllAmiibos = async () => {
 		setIsOpen(false);
