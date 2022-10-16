@@ -1,60 +1,42 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import FilterItem from './FilterItem';
 import { useAppContext } from '../../context/appContext';
 
 import classes from './FilterOptions.module.css';
 
-const FilterOptions = ({ setIsOpen, setFilter, isOpen }) => {
-	const { filterAmiiboType } = useAppContext();
-	const filterListRef = useRef(null);
-
-	useEffect(() => {
-		function handleClickOutside(event) {
-			if (
-				filterListRef.current &&
-				!filterListRef.current.contains(event.target)
-			) {
-				setIsOpen((prevState) => !prevState);
-			} else {
-				setIsOpen((prevState) => !prevState);
-			}
-		}
-		document.addEventListener('mousedown', handleClickOutside);
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-		};
-	}, [filterListRef, setIsOpen]);
+const FilterOptions = () => {
+	const { filterAmiiboType, toggleFilter, setFilter } = useAppContext();
 
 	const getAllAmiibos = async () => {
-		setIsOpen(false);
+		toggleFilter(false);
 		setFilter('All');
 
 		await filterAmiiboType({ type: 'all' });
 	};
 
 	const getAllFigures = async () => {
-		setIsOpen(false);
+		toggleFilter(false);
 		setFilter('Figure');
 
 		await filterAmiiboType({ type: 'figure' });
 	};
 
 	const getAllCards = async () => {
-		setIsOpen(false);
+		toggleFilter(false);
 		setFilter('Card');
 
 		await filterAmiiboType({ type: 'card' });
 	};
 
 	const getAllYarn = async () => {
-		setIsOpen(false);
+		toggleFilter(false);
 		setFilter('Yarn');
 
 		await filterAmiiboType({ type: 'yarn' });
 	};
 
 	return (
-		<div className={classes['filter--list']} ref={filterListRef}>
+		<div className={classes['filter--list']}>
 			<FilterItem text='All' onClick={getAllAmiibos} />
 			<FilterItem text='Figure' onClick={getAllFigures} />
 			<FilterItem text='Card' onClick={getAllCards} />

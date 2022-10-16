@@ -5,7 +5,7 @@ import Pagination from '../../components/Pagination/Pagination';
 import Footer from '../../components/Footer/Footer';
 import Loading from '../../components/Spinners/Loading';
 
-import MainWrapper from "../../components/Wrappers/MainWrapper"
+import MainWrapper from '../../components/Wrappers/MainWrapper';
 import { useAppContext } from '../../context/appContext';
 import AmiiboDetail from '../../components/Amiibo/AmiiboDetails/AmiiboDetail/AmiiboDetail';
 import AmiiboForm from '../../components/Forms/AmiiboForm';
@@ -17,12 +17,19 @@ const Amiibos = () => {
 		limit,
 		numOfPages,
 		getAmiibos,
-		modifiedAmiibos
+		modifiedAmiibos,
+		toggleFilter,
+		filterIsOpen,
 	} = useAppContext();
 
+	const closeDropdown = () => {
+		if (filterIsOpen) {
+			toggleFilter(false);
+		}
+	};
 
 	useEffect(() => {
-		getAmiibos("all");
+		getAmiibos('all');
 	}, []);
 
 	const indexOfLastAmiibo = currentPage * limit;
@@ -32,9 +39,8 @@ const Amiibos = () => {
 		indexOfLastAmiibo
 	);
 
-
 	return (
-		<>
+		<div onClick={closeDropdown}>
 			<AmiiboDetail />
 			<Navbar />
 			<MainWrapper>
@@ -48,7 +54,7 @@ const Amiibos = () => {
 				)}
 			</MainWrapper>
 			<Footer />
-		</>
+		</div>
 	);
 };
 

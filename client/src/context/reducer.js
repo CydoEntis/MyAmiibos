@@ -24,7 +24,9 @@ import {
 	SORT_AMIIBOS_SUCCESS,
 	SET_COLLECTION,
 	UPDATE_COLLECTION,
-	FOUND_AMIIBO_SUCCESS
+	FOUND_AMIIBO_SUCCESS,
+	SET_FILTER,
+	TOGGLE_FILTER
 } from './actions';
 
 const reducer = (state, action) => {
@@ -196,6 +198,16 @@ const reducer = (state, action) => {
 			numOfPages: action.payload.numOfPages,
 			pageNumbers: action.payload.pageNumbers,
 		}
+		case SET_FILTER:
+			return {
+				...state,
+				filterType: action.payload.filterType,
+			}
+		case TOGGLE_FILTER:
+				return {
+					...state,
+					filterIsOpen: action.payload.filterIsOpen
+				}
 		default:
 			throw new Error(`no such action : ${action.type}`);
 	}

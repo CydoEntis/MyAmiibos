@@ -1,34 +1,29 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
+import { useAppContext } from '../../context/appContext';
 
 import classes from './Filter.module.css';
 import DropdownList from './FilterOptions';
 
 const Filter = () => {
-	const [isOpen, setIsOpen] = useState(false);
-	const [filter, setFilter] = useState('All');
+	const { filterIsOpen, toggleFilter, setFilter, filterType } =
+		useAppContext();
 
-	const toggleFilter = () => {
-		setIsOpen((prevState) => !prevState);
+	const toggleDropdown = () => {
+		toggleFilter(!filterIsOpen);
+		console.log('Filter: ', filterIsOpen);
 	};
 
 	return (
 		<>
-			<div className={classes.filter} onClick={toggleFilter}>
-				<div className={classes['filter--text']}>{filter}</div>
+			<div className={classes.filter} onClick={toggleDropdown}>
+				<div className={classes['filter--text']}>{filterType}</div>
 				<div className={classes['filter--icon']}>
 					<FaChevronDown />
 				</div>
 			</div>
-			{isOpen && (
-				<DropdownList
-					setIsOpen={setIsOpen}
-					setFilter={setFilter}
-					isOpen={isOpen}
-				/>
-			)}
+			{filterIsOpen && <DropdownList />}
 		</>
 	);
 };

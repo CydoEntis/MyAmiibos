@@ -25,6 +25,8 @@ import {
 	SORT_AMIIBOS_SUCCESS,
 	UPDATE_COLLECTION,
 	FOUND_AMIIBO_SUCCESS,
+	SET_FILTER,
+	TOGGLE_FILTER,
 } from './actions';
 import reducer from './reducer';
 
@@ -99,6 +101,8 @@ const initialState = {
 			text: 'My Wishlist',
 		},
 	],
+	filterType: 'All',
+	filterIsOpen: false,
 };
 
 const AppContext = React.createContext();
@@ -368,7 +372,6 @@ const AppProvider = ({ children }) => {
 	};
 
 	const getAmiibos = async (collection) => {
-		console.log(state);
 		let amiiboCollection = [];
 
 		dispatch({
@@ -386,7 +389,6 @@ const AppProvider = ({ children }) => {
 		}
 
 		try {
-			console.log(state.user)
 			const { data: dbAmiibos } = await axios.get(
 				endpoint + `?userId=${state.user._id}`
 			);
@@ -494,7 +496,6 @@ const AppProvider = ({ children }) => {
 	};
 
 	const searchAmiibos = (searchValue) => {
-		console.log(searchValue);
 
 		let foundAmiibos;
 
@@ -505,8 +506,6 @@ const AppProvider = ({ children }) => {
 				return amiibo.name.toLowerCase() === searchValue.toLowerCase();
 			});
 		}
-
-		console.log(foundAmiibos);
 
 		dispatch({
 			type: FOUND_AMIIBO_SUCCESS,
@@ -519,6 +518,17 @@ const AppProvider = ({ children }) => {
 					).keys(),
 				].slice(1),
 			},
+		});
+	};
+
+	const setFilter = (filterType) => {
+		dispatch({ type: SET_FILTER, payload: { filterType } });
+	};
+
+	const toggleFilter = (filterIsOpen) => {
+		dispatch({
+			type: TOGGLE_FILTER,
+			payload: { filterIsOpen },
 		});
 	};
 
@@ -543,6 +553,8 @@ const AppProvider = ({ children }) => {
 		getAmiibos,
 		setCollection,
 		searchAmiibos,
+		setFilter,
+		toggleFilter
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

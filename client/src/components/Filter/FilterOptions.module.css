@@ -9,10 +9,26 @@
   
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 417px) {
+  .filter--list {
+    width: 150px;
+    top: 11.2rem;
+    left: 3.5rem;
+  }
+}
+
+@media only screen and (min-width: 461px) {
+  .filter--list {
+    width: 150px;
+    top: 10.75rem;
+    left: 3.5rem;
+  }
+}
+
+@media only screen and (min-width: 774px) {
   .filter--list {
     width: 125px;
-    top: 9.5rem;
-    left: 7rem;
+    top: 12.8rem;
+    left: 5.4rem;
   }
 }

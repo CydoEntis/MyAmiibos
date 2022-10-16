@@ -18,12 +18,23 @@ const Dashboard = () => {
 				<div className={classes['hero-section']}>
 					<h3>AmiiboParty is an Amiibo Collection App.</h3>
 					<h5>Keep track of your collected and wishlisted Amiibos</h5>
-					<Link to={user ? '/amiibos' : '/auth'} className={classes.btn}>
+					<Link
+						to={user ? '/amiibos' : '/auth'}
+						className={classes.btn}
+					>
 						Start Collecting
 					</Link>
 					<div className={classes['img-wrapper']}>
-						<img className={classes['mobile-img']} src={Mario} alt='mario' />
-						<img className={classes['desktop-img']} src={AmiiboList} alt='list of amiibos' />
+						<img
+							className={classes['mobile-img']}
+							src={Mario}
+							alt='mario'
+						/>
+						<img
+							className={classes['desktop-img']}
+							src={AmiiboList}
+							alt='list of amiibos'
+						/>
 					</div>
 				</div>
 			</div>
