@@ -233,29 +233,29 @@ const AppProvider = ({ children }) => {
 
 		let sorted;
 		if (sort === 'default') {
-			sorted = state.allAmiibos.sort((a, b) => {
+			sorted = state.modifiedAmiibos.sort((a, b) => {
 				let amiiboIdOne = a.head + a.tail;
 				let amiiboIdTwo = b.head + b.tail;
 				return amiiboIdOne > amiiboIdTwo ? 1 : -1;
 			});
 		} else if (sort === 'a-z') {
-			sorted = state.allAmiibos.sort((a, b) =>
+			sorted = state.modifiedAmiibos.sort((a, b) =>
 				a.name > b.name ? 1 : -1
 			);
 		} else if (sort === 'series') {
-			sorted = state.allAmiibos.sort((a, b) =>
+			sorted = state.modifiedAmiibos.sort((a, b) =>
 				a.gameSeries > b.gameSeries ? 1 : -1
 			);
 		} else if (sort === 'date') {
-			sorted = state.allAmiibos.sort((a, b) =>
+			sorted = state.modifiedAmiibos.sort((a, b) =>
 				a.release > b.release ? 1 : -1
 			);
 		} else if (sort === 'collection') {
-			sorted = state.allAmiibos.filter(
+			sorted = state.modifiedAmiibos.filter(
 				(amiibo) => amiibo.collected === true
 			);
 		} else if (sort === 'wishlist') {
-			sorted = state.allAmiibos.filter(
+			sorted = state.modifiedAmiibos.filter(
 				(amiibo) => amiibo.wishlisted === true
 			);
 		} else if (sort === 'all') {
@@ -452,6 +452,7 @@ const AppProvider = ({ children }) => {
 
 	const setCollection = (collection, index) => {
 		getAmiibos(collection);
+		setFilter("All");
 
 		const updatedCollections = state.collectionData.map(
 			(collection, collectionIndex) => {
@@ -496,7 +497,6 @@ const AppProvider = ({ children }) => {
 	};
 
 	const searchAmiibos = (searchValue) => {
-
 		let foundAmiibos;
 
 		if (searchValue === '') {
@@ -554,7 +554,7 @@ const AppProvider = ({ children }) => {
 		setCollection,
 		searchAmiibos,
 		setFilter,
-		toggleFilter
+		toggleFilter,
 	};
 
 	return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
