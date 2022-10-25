@@ -29,12 +29,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.use(express.static(path.resolve(__dirname, 'build')));
 
-app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/amiibos', amiiboRouter);
-
 app.get('/*', (req, res) => {
 	res.sendFile(path.join(__dirname, 'build', 'index.html'));
 })
+
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/amiibos', amiiboRouter);
+
+
 
 
 
