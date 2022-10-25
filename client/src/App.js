@@ -9,7 +9,6 @@ import './App.css';
 
 function App() {
 
-	console.log(process.env.REACT_APP_TEST);
 	return (
 		<BrowserRouter>
 			<Routes>
