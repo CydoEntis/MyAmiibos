@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.eeadf6ec.css",
+    "main.js": "/static/js/main.70ae8a3e.js",
+    "static/media/amiibo-list.png": "/static/media/amiibo-list.3d739a3c569ace979910.png",
+    "static/media/notfound.png": "/static/media/notfound.eb7e824d1a663042ebcc.png",
+    "static/media/mario-amiibo.jpg": "/static/media/mario-amiibo.eafc7bdf43e0c2fd0e68.jpg",
+    "static/media/silhouette.png": "/static/media/silhouette.30d8a2acd375dbd10601.png",
+    "index.html": "/index.html",
+    "main.eeadf6ec.css.map": "/static/css/main.eeadf6ec.css.map",
+    "main.70ae8a3e.js.map": "/static/js/main.70ae8a3e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eeadf6ec.css",
+    "static/js/main.70ae8a3e.js"
+  ]
+}

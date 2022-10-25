@@ -4,9 +4,9 @@ dotenv.config();
 import errors from 'express-async-errors';
 import cors from "cors";
 
-// import { dirname } from 'path';
-// import { fileURLToPath } from 'url';
-// import path from 'path';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 // Database connection
 import connectToDB from './db/connect.js';
@@ -25,10 +25,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// app.use(express.static(path.resolve(__dirname, './client/build')));
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+app.use(express.static(path.resolve(__dirname, 'build')));
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/amiibos', amiiboRouter);
+
+app.get('/*', (req, res) => {
+	res.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
+
+
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
