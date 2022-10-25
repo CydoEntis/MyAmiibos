@@ -33,6 +33,7 @@ import reducer from './reducer';
 const token = localStorage.getItem('token');
 const user = localStorage.getItem('user');
 
+
 const initialState = {
 	cancelled: false,
 	isLoading: false,
@@ -117,7 +118,7 @@ const AppProvider = ({ children }) => {
 	};
 
 	const authFetch = axios.create({
-		baseURL: '/api/v1',
+		baseURL: 'https://amiibo-party-api.onrender.com/api/v1',
 	});
 
 	authFetch.interceptors.request.use(
@@ -165,9 +166,10 @@ const AppProvider = ({ children }) => {
 		dispatch({ type: USER_AUTH_BEGIN });
 		try {
 			const { data } = await axios.post(
-				`/api/v1/auth/${endPoint}`,
+				process.env.REACT_APP_TEST + `auth/${endPoint}`,
 				currentUser
 			);
+			
 
 			const { user, token } = data;
 
@@ -342,7 +344,7 @@ const AppProvider = ({ children }) => {
 
 	const saveAmiibo = async (amiiboData) => {
 		try {
-			await axios.post('/api/v1/amiibos/save', amiiboData);
+			await axios.post(process.env.REACT_APP_TEST + 'amiibos/save', amiiboData);
 		} catch (error) {
 			console.log(error);
 		}
@@ -350,7 +352,7 @@ const AppProvider = ({ children }) => {
 
 	const updateAmiibo = async (amiiboData) => {
 		try {
-			await axios.post('/api/v1/amiibos/update', amiiboData);
+			await axios.post(process.env.REACT_APP_TEST + 'amiibos/update', amiiboData);
 
 			const amiibo = state.amiiboList.find(
 				(amiibo) => amiibo.amiiboId === amiiboData.amiiboId
@@ -378,7 +380,7 @@ const AppProvider = ({ children }) => {
 			type: GET_AMIIBOS_LOADING,
 		});
 
-		let endpoint = '/api/v1/amiibos/';
+		let endpoint = process.env.REACT_APP_TEST + 'amiibos/';
 
 		if (collection === 'all') {
 			endpoint += 'all';

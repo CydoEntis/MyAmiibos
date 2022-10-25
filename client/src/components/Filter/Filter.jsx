@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import { useAppContext } from '../../context/appContext';
 
@@ -7,12 +6,11 @@ import classes from './Filter.module.css';
 import DropdownList from './FilterOptions';
 
 const Filter = () => {
-	const { filterIsOpen, toggleFilter, setFilter, filterType } =
+	const { filterIsOpen, toggleFilter, filterType } =
 		useAppContext();
 
 	const toggleDropdown = () => {
 		toggleFilter(!filterIsOpen);
-		console.log('Filter: ', filterIsOpen);
 	};
 
 	return (

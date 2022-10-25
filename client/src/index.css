@@ -37,3 +37,8 @@ body {
 .main-nav {
   display: none;
 }
+
+.wrapper {
+  height: 100%;
+  position: relative;
+}

@@ -8,6 +8,8 @@ import Error from './pages/Error';
 import './App.css';
 
 function App() {
+
+	console.log(process.env.REACT_APP_TEST);
 	return (
 		<BrowserRouter>
 			<Routes>

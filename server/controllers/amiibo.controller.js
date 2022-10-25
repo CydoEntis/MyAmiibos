@@ -3,6 +3,7 @@ import { BadRequestError } from '../errors/index.js';
 import Amiibo from '../models/amiibo.model.js';
 
 const getAmiibos = async (req, res) => {
+	console.log(req.query.userId);
 	try {
 		const amiibos = await Amiibo.find({ userId: req.query.userId});
 

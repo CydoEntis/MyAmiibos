@@ -18,7 +18,7 @@ const initialState = {
 };
 
 const AuthForm = () => {
-	const { isLoading, showAlert, displayAlert, user, userAuth } =
+	const { showAlert, displayAlert, user, userAuth } =
 		useAppContext();
 	const [values, setValues] = useState(initialState);
 	const navigate = useNavigate();
@@ -37,8 +37,8 @@ const AuthForm = () => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		const { username, email, password, isMember } = values;
-		if (!email || !password || (!isMember && !username)) {
+		const { username, email, password } = values;
+		if (!email || !password) {
 			displayAlert();
 			return;
 		}
@@ -50,8 +50,6 @@ const AuthForm = () => {
 		};
 
 		if (values.isMember) {
-
-			console.log(currentUser);
 
 			userAuth({
 				currentUser,
@@ -70,7 +68,7 @@ const AuthForm = () => {
 	useEffect(() => {
 		setTimeout(() => {
 			if (user) {
-				navigate('/');
+				navigate('/amiibos');
 			}
 		}, 3000);
 	}, [user, navigate]);

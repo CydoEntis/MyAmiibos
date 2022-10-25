@@ -8,7 +8,7 @@ import Button from '../UI/Buttons/Button';
 import classes from './MobileNav.module.css';
 
 const MobileNav = ({ toggle, toggleMenu }) => {
-	const { user, logout, sortAmiibos } = useAppContext();
+	const { user, logout } = useAppContext();
 
 
 	const handleLogout = () => {
@@ -69,7 +69,7 @@ const MobileNav = ({ toggle, toggleMenu }) => {
 								to='/auth'
 								onClick={toggleMenu}
 							>
-								Login/Signup
+								Login/Sign up
 							</NavLink>
 						</li>
 					)}

@@ -12,7 +12,7 @@ import { useAppContext } from '../context/appContext';
 const Dashboard = () => {
 	const { user } = useAppContext();
 	return (
-		<>
+		<div className='wrapper'>
 			<Navbar />
 			<div className={classes.dashboard}>
 				<div className={classes['hero-section']}>
@@ -38,8 +38,7 @@ const Dashboard = () => {
 					</div>
 				</div>
 			</div>
-			<Footer />
-		</>
+		</div>
 	);
 };
 
